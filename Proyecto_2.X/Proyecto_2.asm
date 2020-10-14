@@ -39,6 +39,8 @@ GPR_VAR		UDATA
     DISPLAY1    RES	1
     DISPLAY2    RES	1
     DISPLAY3    RES	1
+    X		RES	1
+    Y		RES	1
 ;*******************************************************************************
 ; Reset Vector
 ;*******************************************************************************
@@ -188,6 +190,39 @@ SEP_NIBBLES:
     RETURN
     
 ;****************************CONFIGURACION**************************************
+CONFIGURACION_ADC_X:
+    BANKSEL ADCON1 ;
+    CLRF    ADCON1
+    BANKSEL TRISA ;
+    BSF	    TRISA,0 ;Set RA0 to input
+    BANKSEL ANSEL ;
+    BSF	    ANSEL,0 ;Set RA0 to analog
+    BANKSEL ADCON0 ;
+    MOVLW   B'10000011' ;ADC Frc clock,
+    MOVWF   ADCON0 ;AN0, On
+    BSF	    ADCON0, ADON
+    BSF	    ADCON0, GO
+    BANKSEL PORTA
+    BSF	    INTCON, GIE ; HABILITA LAS INTERRUPCIONES
+    BCF	    INTCON, T0IF; PARA ASEGURARSE DE QUE NO TENGA OVERFLOW AL INICI
+    RETURN 
+CONFIGURACION_ADC_Y:
+    BANKSEL ADCON1 ;
+    CLRF    ADCON1
+    BANKSEL TRISA ;
+    BSF	    TRISA,0 ;Set RA0 to input
+    BANKSEL ANSEL ;
+    BSF	    ANSEL,0 ;Set RA0 to analog
+    BANKSEL ADCON0 ;
+    MOVLW   B'10010011' ;ADC Frc clock,
+    MOVWF   ADCON0 ;AN0, On
+    BSF	    ADCON0, ADON
+    BSF	    ADCON0, GO
+    BANKSEL PORTA
+    BSF	    INTCON, GIE ; HABILITA LAS INTERRUPCIONES
+    BCF	    INTCON, T0IF; PARA ASEGURARSE DE QUE NO TENGA OVERFLOW AL INICI
+    RETURN
+
 SETUP:
     BANKSEL PORTA  ; BANCO 0
     CLRF    PORTA  ; BORRA EL PUERTO A
@@ -236,22 +271,7 @@ SETUP:
     MOVLW   .196	; PARA TMR2 FUNCIONAR CON 50ms
     MOVWF   PR2
     
-    CONFIGURACION_ADC:
-    BANKSEL ADCON1 ;
-    CLRF    ADCON1
-    BANKSEL TRISA ;
-    BSF	    TRISA,0 ;Set RA0 to input
-    BANKSEL ANSEL ;
-    BSF	    ANSEL,0 ;Set RA0 to analog
-    BANKSEL ADCON0 ;
-    MOVLW   B'10000011' ;ADC Frc clock,
-    MOVWF   ADCON0 ;AN0, On
-    BSF	    ADCON0, ADON
-    BSF	    ADCON0, GO
-    BANKSEL PORTA
-    BSF	    INTCON, GIE ; HABILITA LAS INTERRUPCIONES
-    BCF	    INTCON, T0IF; PARA ASEGURARSE DE QUE NO TENGA OVERFLOW AL INICI
-    
+
     CONFIGURACION_TRANSMISOR:
     BANKSEL TRISA
     MOVLW   0x03
