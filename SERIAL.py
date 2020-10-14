@@ -6,7 +6,7 @@ import sys
 #COMUNICACION SERIAL DE PIC CON LA CUMPU
 
 # Configurar el puerto serial. Elejir el puerto en el que aparece en su computadora y la velocidad
-ser= serial.Serial(port='COM4',baudrate=9600, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE,bytesize=serial.EIGHTBITS, timeout=0)
+ser= serial.Serial(port='COM5',baudrate=9600, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE,bytesize=serial.EIGHTBITS, timeout=0)
 
 # loop infinito
 while 1:

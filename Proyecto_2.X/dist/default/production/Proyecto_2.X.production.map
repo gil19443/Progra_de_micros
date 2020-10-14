@@ -1,13 +1,13 @@
 MPLINK 5.08, LINKER
-Linker Map File - Created Tue Oct 13 11:32:49 2020
+Linker Map File - Created Tue Oct 13 12:52:35 2020
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
                 ---------  ---------  ---------  ---------  ---------
                  RES_VECT       code   0x000000    program   0x000002
                    .cinit    romdata   0x000001    program   0x000004
-                 ISR_VECT       code   0x000004    program   0x000066
-                MAIN_PROG       code   0x000100    program   0x0000cc
+                 ISR_VECT       code   0x000004    program   0x000080
+                MAIN_PROG       code   0x000100    program   0x00012c
 .config_2007_BUILD/DEFAULT/PRODUCTION/PROYECT       code   0x002007    program   0x000002
 .config_2008_BUILD/DEFAULT/PRODUCTION/PROYECT       code   0x002008    program   0x000002
                   GPR_VAR      udata   0x000020       data   0x000015
@@ -18,19 +18,21 @@ Linker Map File - Created Tue Oct 13 11:32:49 2020
                                Start         End      
                            ---------   ---------      
                             0x000000    0x000002      
-                            0x000004    0x000036      
-                            0x000100    0x000165      
+                            0x000004    0x000043      
+                            0x000100    0x000195      
                             0x002007    0x002008      
-            158 out of 8455 program addresses used, program memory utilization is 1%
+            219 out of 8455 program addresses used, program memory utilization is 2%
 
 
 
                               Symbols - Sorted by Name
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
-CONFIGURACION_INTERRUPCION   0x000144    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
-     CONFIGURACION_TIMER0   0x000141    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
-     CONFIGURACION_TIMER2   0x00012e    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
+        CONFIGURACION_ADC   0x000153    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
+CONFIGURACION_INTERRUPCION   0x00014b    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
+     CONFIGURACION_TIMER0   0x000148    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
+     CONFIGURACION_TIMER2   0x000133    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
+ CONFIGURACION_TRANSMISOR   0x000166    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
                 DISPLAY_0   0x00010b    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
               DISPLAY_0Y1   0x000108    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
                 DISPLAY_1   0x000111    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
@@ -38,16 +40,19 @@ CONFIGURACION_INTERRUPCION   0x000144    program     static C:\Users\Carlos Gil\
               DISPLAY_2Y3   0x000117    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
                 DISPLAY_3   0x000120    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
               DISPLAY_VAR   0x000102    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
-        INTERRUPCION_TMR1   0x000018    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
-        INTERRUPCION_TMR2   0x00001f    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
-        INTERRUPCION_TMRO   0x000013    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
+         INTERRUPCION_ADC   0x00002a    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
+        INTERRUPCION_TMR1   0x00001d    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
+        INTERRUPCION_TMR2   0x000024    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
+        INTERRUPCION_TMRO   0x000017    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
+          INTERRUPCION_TX   0x00002f    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
                       ISR   0x000008    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
                      LOOP   0x000101    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
-                      POP   0x00000e    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
+                      POP   0x000012    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
                      PUSH   0x000004    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
-                    SETUP   0x000126    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
+              SEP_NIBBLES   0x000126    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
+                    SETUP   0x00012b    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
                     START   0x000100    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
-                    TABLA   0x000025    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
+                    TABLA   0x000032    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
                    CONT10   0x000027       data     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
                    CONT11   0x000028       data     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
                    CONT12   0x000029       data     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
@@ -77,11 +82,13 @@ CONFIGURACION_INTERRUPCION   0x000144    program     static C:\Users\Carlos Gil\
                 ---------  ---------  ---------  --------- ---------                
                      PUSH   0x000004    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
                       ISR   0x000008    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
-                      POP   0x00000e    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
-        INTERRUPCION_TMRO   0x000013    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
-        INTERRUPCION_TMR1   0x000018    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
-        INTERRUPCION_TMR2   0x00001f    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
-                    TABLA   0x000025    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
+                      POP   0x000012    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
+        INTERRUPCION_TMRO   0x000017    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
+        INTERRUPCION_TMR1   0x00001d    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
+        INTERRUPCION_TMR2   0x000024    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
+         INTERRUPCION_ADC   0x00002a    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
+          INTERRUPCION_TX   0x00002f    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
+                    TABLA   0x000032    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
                     START   0x000100    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
                      LOOP   0x000101    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
               DISPLAY_VAR   0x000102    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
@@ -91,10 +98,13 @@ CONFIGURACION_INTERRUPCION   0x000144    program     static C:\Users\Carlos Gil\
               DISPLAY_2Y3   0x000117    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
                 DISPLAY_2   0x00011a    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
                 DISPLAY_3   0x000120    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
-                    SETUP   0x000126    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
-     CONFIGURACION_TIMER2   0x00012e    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
-     CONFIGURACION_TIMER0   0x000141    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
-CONFIGURACION_INTERRUPCION   0x000144    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
+              SEP_NIBBLES   0x000126    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
+                    SETUP   0x00012b    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
+     CONFIGURACION_TIMER2   0x000133    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
+     CONFIGURACION_TIMER0   0x000148    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
+CONFIGURACION_INTERRUPCION   0x00014b    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
+        CONFIGURACION_ADC   0x000153    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
+ CONFIGURACION_TRANSMISOR   0x000166    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
                     CONT2   0x000020       data     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
                     CONT3   0x000021       data     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
                     CONT4   0x000022       data     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Proyecto_2.X\Proyecto_2.asm
