@@ -11,18 +11,18 @@ ser.flushOutput()
 def conversiones():
     parte2 = ''
     verificacion = ''
-    while verificacion != 10: #me aseguro que los datos que voy a ordenar siempre sean leidos en el orden que los envio
+    while verificacion != 44: #me aseguro que siempre agrupe los 4 datos que envio en el mismo orden 
             time.sleep(.3)
-            varificacion = ord(ser.read())
+            verificacion = ord(ser.read())
     for i in range(4): #leer los primeros datos que se envian del  pic x,y enter
             time.sleep(.3)
             #leer dato serial
             parte1= ord(ser.read())
-            parte2 += ',' + str(x1)  #contruyo un sting con los cuatro datos separados por comas
+            parte2 += ',' + str(parte1)  #contruyo un sting con los cuatro datos separados por comas
     dato = parte2.split(',') #separo los datos por comas
     xf = dato[1] #x es la posicion 1 de mi string
     yf = dato[3] #y es la posicion 3 de mi string
-    print(dato)
+    #print(dato)
     return dato
 def envio():
     x = conversiones()[1]
