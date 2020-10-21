@@ -12,12 +12,12 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 
-        
+
 class MainWindow(QMainWindow):
 
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
-        
+
         # Título de la ventana
         self.setWindowTitle("Mi App")
         self.setWindowIcon(QIcon("animal-dog.png"))
@@ -36,7 +36,7 @@ class MainWindow(QMainWindow):
 
         # Segundo Icono
         toolbar.addSeparator()
-        
+
         button_action2 = QAction(QIcon("printer.png"), "Tooltip print", self)
         button_action2.setStatusTip("Status Print")
         button_action2.triggered.connect(self.onMyToolBarButtonClick_button2)
@@ -60,7 +60,7 @@ class MainWindow(QMainWindow):
         # etiqueta para mostrar texto
         self.label = QLabel("Press ->")
         layout1.addWidget(self.label)
-        
+
         #boton 1
         self.b1 = QPushButton("Paint")
         self.b1.clicked.connect(self.btn1)
@@ -69,33 +69,33 @@ class MainWindow(QMainWindow):
         # boton 2
         self.b2 = QPushButton("Ok")
         self.b2.clicked.connect(self.btn2)
-        layout2.addWidget(self.b2) 
+        layout2.addWidget(self.b2)
 
         self.labelDraw = QLabel()
         canvas = QPixmap(400, 300)
         canvas.fill(QColor("green"))
         self.labelDraw.setPixmap(canvas)
-        
+
         # agregar los layouts secundarios al principal
         layoutH.addLayout(layout1)
         layoutH.addLayout(layout2)
         layoutH.addWidget(self.labelDraw)
-        
+
         # agregar el layout al widget central
         widget = QWidget()
         widget.setLayout(layoutH)
-        
+
         # Set the central widget of the Window. Widget will expand
         # to take up all the space in the window by default.
         self.setCentralWidget(widget)
-        
 
-    # evento de click en el toolbar    
+
+    # evento de click en el toolbar
     def onMyToolBarButtonClick(self, s):
         print("click", s)
         self.label.setText(self.cbox.currentText())
 
-    # evento de click en el toolbar    
+    # evento de click en el toolbar
     def onMyToolBarButtonClick_button2(self, s):
         print("click", s)
         self.label.setText("2 " + self.cbox.currentText())
@@ -115,15 +115,17 @@ class MainWindow(QMainWindow):
         pen = QPen()
         pen.setWidth(40)
         pen.setColor(QColor('red'))
-        painter.setPen(pen)        
+        painter.setPen(pen)
         x = sr.conversiones()
+        envio = sr.envio()
         painter.drawPoint(int(x[1]), int(x[3]))
         print(int(x[1]), int(x[3]))
+        print(envio)
         painter.end()
         self.update()
         print("drawing")
 
-# crear la applicación        
+# crear la applicación
 app = QApplication(sys.argv)
 
 # crear la ventana y mostrarla

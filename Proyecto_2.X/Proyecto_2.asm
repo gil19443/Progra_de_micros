@@ -42,6 +42,8 @@ GPR_VAR		UDATA
     DISPLAY3    RES	1
     X		RES	1
     Y		RES	1
+    RECIBIDOX   RES	1
+    RECIBIDOY	RES	1
 ;*******************************************************************************
 ; Reset Vector
 ;*******************************************************************************
@@ -74,7 +76,7 @@ INTERRUPCION_TMRO:
     MOVWF   TMR0
     BCF	    INTCON, T0IF 
     CALL    DISPLAY_VAR	;rutina que muxea la se;al en los 4 display cada 2ms
-    ;CALL    SEP_NIBBLES 
+    CALL    SEP_NIBBLES 
     RETURN 
     
 INTERRUPCION_ADC:
@@ -98,8 +100,17 @@ INTERRUPCION_Y:
     RETURN
         
 INTERRUPCION_RECIBIR:
+    BTFSC   CONT13, 0
+    GOTO    RECIBIR_Y
+RECIBIR_X:
     MOVFW   RCREG
-    MOVWF   PORTB
+    MOVWF   RECIBIDOX
+    BSF	    CONT13, 0
+    RETURN 
+RECIBIR_Y:
+    MOVFW   RCREG
+    MOVWF   RECIBIDOY
+    BCF	    CONT13, 0
     RETURN 
     
 INTERRUPCION_TMR2:
@@ -186,13 +197,13 @@ DISPLAY_2Y3:
 	RETURN
 
 SEP_NIBBLES:
-    MOVFW   X
+    MOVFW   RECIBIDOX
     MOVWF   DISPLAY0
-    SWAPF   Y, W
+    SWAPF   RECIBIDOX, W
     MOVWF   DISPLAY1
-    MOVFW   Y 
+    MOVFW   RECIBIDOY
     MOVWF   DISPLAY2
-    SWAPF   Y, W
+    SWAPF   RECIBIDOY, W
     MOVWF   DISPLAY3
     RETURN
     
@@ -357,6 +368,8 @@ SETUP:
     CLRF    UNIDADES 
     CLRF    X
     CLRF    Y
+    CLRF    RECIBIDOX
+    CLRF    RECIBIDOY
     RETURN 
 ;*******************************************************************************
 
