@@ -5,6 +5,9 @@
 # https://www.learnpyqt.com/courses/custom-widgets/bitmap-graphics/
 #------------------------------------------------------
 import sys
+import serial
+import time
+import SERIAL as sr
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
@@ -58,7 +61,7 @@ class MainWindow(QMainWindow):
         self.label = QLabel("Press ->")
         layout1.addWidget(self.label)
         
-        # boton 1
+        #boton 1
         self.b1 = QPushButton("Paint")
         self.b1.clicked.connect(self.btn1)
         layout2.addWidget(self.b1)
@@ -99,8 +102,8 @@ class MainWindow(QMainWindow):
 
     # evento del boton 1
     def btn1(self):
-        self.b1.setText("Painted")
-        self.draw_something()
+          self.b1.setText("Painted")
+          self.draw_something()
 
     # evento del boton 2
     def btn2(self, b):
@@ -112,8 +115,10 @@ class MainWindow(QMainWindow):
         pen = QPen()
         pen.setWidth(40)
         pen.setColor(QColor('red'))
-        painter.setPen(pen)
-        painter.drawPoint(200, 150)
+        painter.setPen(pen)        
+        x = sr.conversiones()
+        painter.drawPoint(int(x[1]), int(x[3]))
+        print(int(x[1]), int(x[3]))
         painter.end()
         self.update()
         print("drawing")
