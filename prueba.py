@@ -11,7 +11,10 @@ dato = serial.Serial(port='COM5',baudrate=9600, parity=serial.PARITY_NONE, stopb
 dato.flushInput()
 dato.flushOutput()
 #def conversiones():
-while 1:                        #esperar un tiempo para recibir datos
+while 1:
+        dato.flushInput()
+                            #esperar un tiempo para recibir datos
         time.sleep(.3)
+        dato.readline()
         variable = dato.readline()
         print(variable)
