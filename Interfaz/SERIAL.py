@@ -15,6 +15,8 @@ def conversiones():
             time.sleep(.3)
             verificacion = ord(ser.read())
     for i in range(4): #leer los primeros datos que se envian del  pic x,y enter
+            ser.read()
+            ser.flushInput()
             time.sleep(.3)
             #leer dato serial
             parte1= ord(ser.read())
