@@ -9,14 +9,13 @@ ser.flushInput()
 ser.flushOutput()
 #funcion que vuelve el dato que lee el puerto serial
 def conversiones():
+    ser.flushInput()
     parte2 = ''
     verificacion = ''
-    while verificacion != 44: #me aseguro que siempre agrupe los 4 datos que envio en el mismo orden 
+    while verificacion != 44: #me aseguro que siempre agrupe los 4 datos que envio en el mismo orden
             time.sleep(.3)
             verificacion = ord(ser.read())
     for i in range(4): #leer los primeros datos que se envian del  pic x,y enter
-            ser.read()
-            ser.flushInput()
             time.sleep(.3)
             #leer dato serial
             parte1= ord(ser.read())
@@ -24,7 +23,6 @@ def conversiones():
     dato = parte2.split(',') #separo los datos por comas
     xf = dato[1] #x es la posicion 1 de mi string
     yf = dato[3] #y es la posicion 3 de mi string
-    #print(dato)
     return dato
 def envio():
     x = conversiones()[1]
@@ -33,5 +31,6 @@ def envio():
     y1 = math.floor(5*int(y)/13)
     ser.write(str(x1).encode('utf-8'))
     ser.write(str(y1).encode('utf-8'))
+    fin1 = [x1,y1]
     fin = [str(x1).encode('utf-8'), str(y1).encode('utf-8')]
-    return fin
+    return fin1
