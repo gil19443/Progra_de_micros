@@ -1,4 +1,4 @@
-MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  11:51:02         PAGE  1
+MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  19:15:59         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ Warning[207]: Found label after column 1. (CONT10)
 0008                  00029     CONT10      RES     1
 Warning[207]: Found label after column 1. (CONT11)
 0009                  00030     CONT11      RES     1
-MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  11:51:02         PAGE  2
+MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  19:15:59         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -116,7 +116,7 @@ Warning[207]: Found label after column 1. (RECIBIDOY)
 000E   1A8C           00065     BTFSC   PIR1, RCIF
 000F   2???           00066     CALL    INTERRUPCION_RECIBIR
 0010                  00067 POP:
-MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  11:51:02         PAGE  3
+MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  19:15:59         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -175,7 +175,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0036   1A0C           00118     BTFSC   PIR1, TXIF 
 0037   2???           00119     CALL    INTERRUPCION_TX
 0038   0008           00120     RETURN
-MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  11:51:02         PAGE  4
+MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  19:15:59         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -234,7 +234,7 @@ Warning[207]: Found label after column 1. (DISPLAY_0)
 010C   2???           00168         CALL    TABLA
 010D   0088           00169         MOVWF   PORTD
 010E   1605           00170         BSF     PORTA, RA4
-MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  11:51:02         PAGE  5
+MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  19:15:59         PAGE  5
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -272,14 +272,14 @@ Warning[207]: Found label after column 1. (DISPLAY_3)
 0125   0008           00197         RETURN
                       00198 
 0126                  00199 SEP_NIBBLES:
-0126   08??           00200     MOVFW   RECIBIDOX
-0127   00??           00201     MOVWF   DISPLAY0
-0128   0E??           00202     SWAPF   RECIBIDOX, W
-0129   00??           00203     MOVWF   DISPLAY1
-012A   08??           00204     MOVFW   RECIBIDOY
-012B   00??           00205     MOVWF   DISPLAY2
-012C   0E??           00206     SWAPF   RECIBIDOY, W
-012D   00??           00207     MOVWF   DISPLAY3
+0126   08??           00200     MOVFW   RECIBIDOY
+0127   00??           00201     MOVWF   DISPLAY3
+0128   0E??           00202     SWAPF   RECIBIDOY, W
+0129   00??           00203     MOVWF   DISPLAY0
+012A   08??           00204     MOVFW   RECIBIDOX
+012B   00??           00205     MOVWF   DISPLAY1
+012C   0E??           00206     SWAPF   RECIBIDOX, W
+012D   00??           00207     MOVWF   DISPLAY2
 012E   0008           00208     RETURN
                       00209     
 012F                  00210 INTERRUPCION_TX:
@@ -293,7 +293,7 @@ Warning[207]: Found label after column 1. (DISPLAY_3)
 0136   2???           00218     GOTO    MANDAR_Y 
 0137   3001           00219     MOVLW   .1
 0138   02??           00220     SUBWF   CONT7, W
-MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  11:51:02         PAGE  6
+MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  19:15:59         PAGE  6
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -352,7 +352,7 @@ Warning[207]: Found label after column 1. (CONFIGURACION_TIMER2)
 015E   1410           00267     BSF        T1CON,0      ; HABILITAMOS EL TIMER 1 (TMR1ON=1)
 015F   1090           00268     BCF        T1CON,1      ; OSCILADOR INTERNO 
 0160   1190           00269     BCF        T1CON,3      ; NO HABILITA EL OSCILADOR DEL TIMER 1 (T1OSCEN=0)
-MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  11:51:02         PAGE  7
+MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  19:15:59         PAGE  7
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -411,7 +411,7 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
 017C   019F           00303     CLRF    ADCON1
 017D   1683 1303      00304     BANKSEL TRISA ;
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  11:51:02         PAGE  8
+MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  19:15:59         PAGE  8
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -470,7 +470,7 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
 01A7   178B           00343     BSF     INTCON, GIE ; HABILITA LAS INTERRUPCIONES
 01A8   110B           00344     BCF     INTCON, T0IF; PARA ASEGURARSE DE QUE NO TENGA OVERFLOW AL INICIO
 01A9   100C           00345     BCF     PIR1, TMR1IF
-MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  11:51:02         PAGE  9
+MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  19:15:59         PAGE  9
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -507,7 +507,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00374 ;*******************************************************************************
                       00375 
 20D4 3FFF             00376   END
-MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  11:51:02         PAGE 10
+MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  19:15:59         PAGE 10
 
 
 SYMBOL TABLE
@@ -566,7 +566,7 @@ BRG6                              00000006
 BRG7                              00000007
 BRG8                              00000000
 BRG9                              00000001
-MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  11:51:02         PAGE 11
+MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  19:15:59         PAGE 11
 
 
 SYMBOL TABLE
@@ -625,7 +625,7 @@ CHS0                              00000002
 CHS1                              00000003
 CHS2                              00000004
 CHS3                              00000005
-MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  11:51:02         PAGE 12
+MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  19:15:59         PAGE 12
 
 
 SYMBOL TABLE
@@ -684,7 +684,7 @@ ECCPAS2                           00000006
 ECCPASE                           00000007
 EEADR                             0000010D
 EEADRH                            0000010F
-MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  11:51:02         PAGE 13
+MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  19:15:59         PAGE 13
 
 
 SYMBOL TABLE
@@ -743,7 +743,7 @@ IRP                               00000007
 ISR                               00000008
 LOOP                              00000101
 LTS                               00000001
-MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  11:51:02         PAGE 14
+MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  19:15:59         PAGE 14
 
 
 SYMBOL TABLE
@@ -802,7 +802,7 @@ PEIE                              00000006
 PEN                               00000002
 PIE1                              0000008C
 PIE2                              0000008D
-MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  11:51:02         PAGE 15
+MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  19:15:59         PAGE 15
 
 
 SYMBOL TABLE
@@ -861,7 +861,7 @@ RC7                               00000007
 RC8_9                             00000006
 RC9                               00000006
 RCD8                              00000000
-MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  11:51:02         PAGE 16
+MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  19:15:59         PAGE 16
 
 
 SYMBOL TABLE
@@ -920,7 +920,7 @@ SSPCON                            00000014
 SSPCON2                           00000091
 SSPEN                             00000005
 SSPIE                             00000003
-MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  11:51:02         PAGE 17
+MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  19:15:59         PAGE 17
 
 
 SYMBOL TABLE
@@ -979,7 +979,7 @@ TMR2ON                            00000002
 TOUTPS0                           00000003
 TOUTPS1                           00000004
 TOUTPS2                           00000005
-MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  11:51:02         PAGE 18
+MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  19:15:59         PAGE 18
 
 
 SYMBOL TABLE
@@ -1038,7 +1038,7 @@ TX9                               00000006
 TX9D                              00000000
 TXD8                              00000000
 TXEN                              00000005
-MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  11:51:02         PAGE 19
+MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  19:15:59         PAGE 19
 
 
 SYMBOL TABLE
@@ -1097,7 +1097,7 @@ _BOREN_OFF                        00003CFF
 _BOREN_ON                         00003FFF
 _BOREN_SBODEN                     00003DFF
 _BOR_NSLEEP                       00003EFF
-MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  11:51:02         PAGE 20
+MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  19:15:59         PAGE 20
 
 
 SYMBOL TABLE
@@ -1156,7 +1156,7 @@ _WRT_1FOURTH                      00003BFF
 _WRT_256                          00003DFF
 _WRT_HALF                         000039FF
 _WRT_OFF                          00003FFF
-MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  11:51:02         PAGE 21
+MPASM 5.77                    PROYECTO_2.ASM   10-24-2020  19:15:59         PAGE 21
 
 
 SYMBOL TABLE

@@ -78,13 +78,13 @@ INTERRUPCION_TMRO:
     CALL    DISPLAY_VAR	;rutina que muxea la se;al en los 4 display cada 2ms
     CALL    SEP_NIBBLES 
     RETURN 
-    
+;mux de lectura del ADC, cada vez que entra a una interrupcion cambia de canal, lo lee y guarda el valor leido en una variable diferente  
 INTERRUPCION_ADC:
     BTFSC   CONT3, 0
     GOTO    INTERRUPCION_Y
 INTERRUPCION_X:
     CALL    CONFIGURACION_ADC_X
-    MOVF    ADRESH, W	;GUARDO ADRESH PORTB
+    MOVF    ADRESH, W	
     MOVWF   X
     BCF	    PIR1, ADIF
     BSF	    ADCON0, 1
@@ -92,13 +92,13 @@ INTERRUPCION_X:
     RETURN
 INTERRUPCION_Y:
     CALL    CONFIGURACION_ADC_Y
-    MOVF    ADRESH, W	;GUARDO ADRESH PORTB
+    MOVF    ADRESH, W	
     MOVWF   Y
     BCF	    PIR1, ADIF
     BSF	    ADCON0, 1
     BCF	    CONT3, 0
     RETURN
-        
+;mux encargado de que cada vez que entre a la interrupcion reciba un dato distinto y lo guarde en una variable diferente       
 INTERRUPCION_RECIBIR:
     BTFSC   CONT13, 0
     GOTO    RECIBIR_Y
@@ -112,7 +112,7 @@ RECIBIR_Y:
     MOVWF   RECIBIDOY
     BCF	    CONT13, 0
     RETURN 
-    
+;interrupcion encargada de llamar la funcino que envia datos cada 5ms   
 INTERRUPCION_TMR2:
     BCF	    PIR1, TMR2IF
     BTFSC   PIR1, TXIF 
@@ -195,18 +195,18 @@ DISPLAY_2Y3:
 	BSF	PORTA, RA3
 	BCF	INDICADOR, 0
 	RETURN
-
+;separa los nibbles de las variables que recibe le RCREG para mostrarlas en los dos displays
 SEP_NIBBLES:
-    MOVFW   RECIBIDOX
-    MOVWF   DISPLAY0
-    SWAPF   RECIBIDOX, W
-    MOVWF   DISPLAY1
     MOVFW   RECIBIDOY
-    MOVWF   DISPLAY2
-    SWAPF   RECIBIDOY, W
     MOVWF   DISPLAY3
+    SWAPF   RECIBIDOY, W
+    MOVWF   DISPLAY0
+    MOVFW   RECIBIDOX
+    MOVWF   DISPLAY1
+    SWAPF   RECIBIDOX, W
+    MOVWF   DISPLAY2
     RETURN
-    
+;rutina del tx encargada de enviar el valor de x, luego una coma, luego el valor de y y luego un enter  
 INTERRUPCION_TX:
     MOVLW   .3
     SUBWF   CONT7, W
@@ -241,6 +241,7 @@ ESPACIO:
     CLRF    CONT7
     RETURN 
 ;****************************CONFIGURACION**************************************
+;configuraciones para el cambio de canal****************************************
 CONFIGURACION_ADC_X:
     BANKSEL ADCON0 
     BCF	    ADCON0, 4
@@ -249,7 +250,7 @@ CONFIGURACION_ADC_Y:
     BANKSEL ADCON0 
     BSF	    ADCON0, 4
     RETURN
-
+;*******************************************************************************
 SETUP:
     BANKSEL PORTA  ; BANCO 0
     CLRF    PORTA  ; BORRA EL PUERTO A
@@ -286,7 +287,7 @@ SETUP:
     BSF	    PIE1, RCIE
     CONFIGURACION_TIMER0:
     CLRWDT		; CONFIGURACIÓN PARA EL FUNCIONAMIENTO DEL TIMER0
-    MOVLW   b'01010111'	; PARA LA CONFIGURACIÓN DEL TIMER0, EL BIT 7 NO IMPORTA. SIN EMBARGO, SE COLOCA EN 0 PARA NO ARRUINAR LA INSTRUCCIÓN DE LA LÍNEA 132 -PARA EL FUNCIONAMIENTO DE PULL UPS-
+    MOVLW   b'01010111'	
     MOVWF   OPTION_REG
        
     CONFIGURACION_INTERRUPCION:
@@ -295,7 +296,7 @@ SETUP:
     BSF	    PIE1, TMR2IE; HABILITA COMPARACION ENTRE PR2 Y TIMER2
     BSF	    INTCON, T0IE
     BSF	    INTCON, PEIE
-    MOVLW   .20	; PARA TMR2 FUNCIONAR CON 50ms
+    MOVLW   .20	; PARA TMR2 FUNCIONAR CON 5ms
     MOVWF   PR2
     
     CONFIGURACION_ADC:
@@ -314,10 +315,8 @@ SETUP:
     BCF	    ADCON0, 2
     BANKSEL ANSEL ;
     BSF	    ANSEL,0
-    BSF	    ANSEL, 5;Set RA0 to analog
-    BANKSEL PORTA
-    BSF	    INTCON, GIE ; HABILITA LAS INTERRUPCIONES
-    BCF	    INTCON, T0IF; PARA ASEGURARSE DE QUE NO TENGA OVERFLOW AL INICI
+    BSF	    ANSEL, 5
+
      
     CONFIGURACION_TRANSMISOR_Y_RECEPTOR:
     BANKSEL TRISA

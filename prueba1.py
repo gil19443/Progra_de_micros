@@ -18,6 +18,6 @@ for i in range (100):
         datos = str(variable).split("\,")
         #datos = dato.read_until(b'\n',3)
         #print(str(variable))
-        print(datos)
+        #print(datos)
         print(variable)
        
