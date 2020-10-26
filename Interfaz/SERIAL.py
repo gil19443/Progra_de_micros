@@ -24,18 +24,20 @@ def conversiones():
     xf = dato[1] #x es la posicion 1 de mi string
     yf = dato[3] #y es la posicion 3 de mi string
     return dato
-def envio():
-    x = conversiones()[1]
+def datos():
+    x = conversiones()[1] #llamo a mis valore x y y de la funcion anterior para mapealos de 0 a 99
     y = conversiones()[3]
-    x1 = math.floor(5*int(x)/13)
+    x1 = math.floor(5*int(x)/13) #uso math.floor para aproximar las operaciones a numeros enreros
     y1 = math.floor(5*int(y)/13)
-    try:
-        ser.write(bytes.fromhex(str(x1)))
-    except:
-        ser.write(bytes.fromhex('01'))
-    try:
-        ser.write(bytes.fromhex(str(y1)))
-    except:
-        ser.write(bytes.fromhex('01'))
     fin = [x1,y1]
-    return fin
+    return fin #devuelvo una lista con las componentes en entero mapeadas
+def envio (sendx,sendy): # funcion que envia datos al PIC, tiene como parametros lo que va a enviar
+    try:
+        ser.write(bytes.fromhex(str(sendx))) #por la funcion fromhex, suele dar error al tener valores de 00 como lectura, de modo que si da error se manda un 01 consntante 
+    except:
+        ser.write(bytes.fromhex('01'))
+    try:
+        ser.write(bytes.fromhex(str(sendy)))
+    except:
+        ser.write(bytes.fromhex('01'))
+    return

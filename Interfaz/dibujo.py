@@ -1,7 +1,7 @@
-from pantalla import *
+from pantalla import * #import mi archivo creado con el designer
 from PyQt5 import QtWidgets
 from PyQt5.QtGui import QPainter, QPen, QPixmap, QColor
-import SERIAL as sr
+import SERIAL as sr #importo mi archivo con las funciones que reciben, mapean y mandan datos
 import threading
 import serial
 import time
@@ -14,64 +14,64 @@ class dibujo (QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__ (self):
         super().__init__()
         self.setupUi(self)
-        self.mapa = QPixmap(700,700)
+        self.mapa = QPixmap(700,700) #selecciono mi area de dibujo de 700x700
         self.mapa.fill(QColor('#ffffff'))
         self.label.setPixmap(self.mapa)
         self.painter = QPainter(self.label.pixmap())
         pen = QPen()
-        pen.setWidth(4)
-        pen.setColor(QColor('Blue'))
+        pen.setWidth(4) #selecciono el ancho de pincel
+        pen.setColor(QColor('Blue')) #selecciono el color de im pincel
         self.painter.setRenderHint(QPainter.Antialiasing)
         self.painter.setPen(pen)
-        cordenada=threading.Thread(daemon=True,target=hilo_cordenadas)
-        cordenada.start()
-        self.limpiar.clicked.connect(self.clicked)
+        ubicacinoes=threading.Thread(daemon=True,target=grafica) #hago un hilo para llamar a mi funcion grafica para realacionar mi interfaz con los datos seriales
+        ubicaciones.start()
+        self.limpiar.clicked.connect(self.clicked) #llamo a mi funcion clicked cuando presiono el boton limpiar
 
-    def clicked(self):
+    def clicked(self): #funcion limpiar que borra todo de mi interfaz
         self.painter.eraseRect(0,0,700,700)
-        
-    def paint (self,x1,y1):
+
+    def paint (self,x1,y1): #funcino que hace que si dibujo fuera de pantalla, ingrese al otro lado
         global x,y
-        try:
+        try: #no utilizo valores minimos como 0 ya que por la forma en la que envio los datos, necesito que sean de dos digitos
             self.painter.drawLine(x, y, x+x1 , y+y1)
             self.update()
             x=x1+x
             if x >= 700:
-                x=0
-            elif x<0:
+                x=10
+            elif x<10:
                 x= 700
             y=y1+y
             if y >= 700:
-                y=0
-            elif y<0:
+                y=10
+            elif y<10:
                 y= 700
         except:
-            print('No se puede pintar en la pantalla')
-
-def hilo_cordenadas ():
-    global x1,y1,ventanamain
+            print('No se puede pintar en esa área de la pantalla ')
+#funcion que dibuja con cierta velocidad acorde con el valor del potenciometro que lee mis arichos
+def grafica ():
+    global x1,y1,dibujomain
     while 1:
-        par1 = sr.envio()
+        par1 = sr.datos() #importo mi funcion que lee datos, para utilizar los valores en lo que voy a graficar
         x1 = par1[0]
         y1 = par1[1]
         try:
-            dx=0
-            dy=0
-            if x1 >=29:
-                dx=1*(x1-29)
-            elif x1 <=23:
-                dx=-1*(23-x1)
+            Vx=0
+            Vy=0
+            if x1 >=50:
+                Vx=1*(x1-50)
+            elif x1 <=50:
+                Vx=-1*(50-x1)
 
-            if y1 >=29:
-                    dy=1*(y1-29)
-            elif y1 <=23:
-                    dy=-1*(23-y1)
-            ventanamain.paint(dx,dy)
-            print (x1,"x")
-            print (y1,"y")
+            if y1 >=50:
+                    Vy=1*(y1-50)
+            elif y1 <=50:
+                    Vy=-1*(50-y1)
+            dibujomain.paint(Vx,Vy) #dibujo los diferenciales de modo que entre mayor sea mi valor, dibujare con mas velocidad
+            sr.envio(99*x//700,99*y//700) #llamo a mi funcion que envia datos para que se muestre la ubicacion en la que dibujo, mapeada de 0 a 100
+            print ("El punto graficado es =",x1,y1)
         except:
-            print ("S")
+            print ("No se puede dibujar nada")
 aplication = QtWidgets.QApplication([])
-ventanamain=dibujo()
-ventanamain.show()
+dibujomain=dibujo()
+dibujomain.show()
 aplication.exec_()
