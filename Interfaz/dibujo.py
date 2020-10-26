@@ -6,8 +6,6 @@ import threading
 import serial
 import time
 import sys
-x1= 0
-y1= 0
 x=0
 y=0
 class dibujo (QtWidgets.QMainWindow, Ui_MainWindow):
@@ -23,7 +21,7 @@ class dibujo (QtWidgets.QMainWindow, Ui_MainWindow):
         pen.setColor(QColor('Blue')) #selecciono el color de im pincel
         self.painter.setRenderHint(QPainter.Antialiasing)
         self.painter.setPen(pen)
-        ubicacinoes=threading.Thread(daemon=True,target=grafica) #hago un hilo para llamar a mi funcion grafica para realacionar mi interfaz con los datos seriales
+        ubicaciones=threading.Thread(daemon=True,target=grafica) #hago un hilo para llamar a mi funcion grafica para realacionar mi interfaz con los datos seriales
         ubicaciones.start()
         self.limpiar.clicked.connect(self.clicked) #llamo a mi funcion clicked cuando presiono el boton limpiar
 
@@ -49,7 +47,7 @@ class dibujo (QtWidgets.QMainWindow, Ui_MainWindow):
             print('No se puede pintar en esa área de la pantalla ')
 #funcion que dibuja con cierta velocidad acorde con el valor del potenciometro que lee mis arichos
 def grafica ():
-    global x1,y1,dibujomain
+    global dibujomain
     while 1:
         par1 = sr.datos() #importo mi funcion que lee datos, para utilizar los valores en lo que voy a graficar
         x1 = par1[0]
@@ -59,13 +57,13 @@ def grafica ():
             Vy=0
             if x1 >=50:
                 Vx=1*(x1-50)
-            elif x1 <=50:
-                Vx=-1*(50-x1)
+            elif x1 <=40:
+                Vx=-1*(40-x1)
 
             if y1 >=50:
                     Vy=1*(y1-50)
-            elif y1 <=50:
-                    Vy=-1*(50-y1)
+            elif y1 <=40:
+                    Vy=-1*(40-y1)
             dibujomain.paint(Vx,Vy) #dibujo los diferenciales de modo que entre mayor sea mi valor, dibujare con mas velocidad
             sr.envio(99*x//700,99*y//700) #llamo a mi funcion que envia datos para que se muestre la ubicacion en la que dibujo, mapeada de 0 a 100
             print ("El punto graficado es =",x1,y1)

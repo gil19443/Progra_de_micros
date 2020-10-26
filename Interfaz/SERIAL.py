@@ -13,10 +13,10 @@ def conversiones():
     parte2 = ''
     verificacion = ''
     while verificacion != 44: #me aseguro que siempre agrupe los 4 datos que envio en el mismo orden
-            time.sleep(.03)
+            #time.sleep(.03)
             verificacion = ord(ser.read())
     for i in range(4): #leer los primeros datos que se envian del  pic x,y enter
-            time.sleep(.03)
+            #time.sleep(.03)
             #leer dato serial
             parte1= ord(ser.read())
             parte2 += ',' + str(parte1)  #contruyo un sting con los cuatro datos separados por comas
@@ -33,7 +33,7 @@ def datos():
     return fin #devuelvo una lista con las componentes en entero mapeadas
 def envio (sendx,sendy): # funcion que envia datos al PIC, tiene como parametros lo que va a enviar
     try:
-        ser.write(bytes.fromhex(str(sendx))) #por la funcion fromhex, suele dar error al tener valores de 00 como lectura, de modo que si da error se manda un 01 consntante 
+        ser.write(bytes.fromhex(str(sendx))) #por la funcion fromhex, suele dar error al tener valores de 00 como lectura, de modo que si da error se manda un 01 consntante
     except:
         ser.write(bytes.fromhex('01'))
     try:
