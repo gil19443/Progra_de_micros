@@ -28,19 +28,19 @@ class dibujo (QtWidgets.QMainWindow, Ui_MainWindow):
     def clicked(self): #funcion limpiar que borra todo de mi interfaz
         self.painter.eraseRect(0,0,700,700)
 
-    def paint (self,x1,y1): #funcino que hace que si dibujo fuera de pantalla, ingrese al otro lado
+    def pintar (self,x1,y1): #funcino que hace que si dibujo fuera de pantalla, ingrese al otro lado
         global x,y
         try: #no utilizo valores minimos como 0 ya que por la forma en la que envio los datos, necesito que sean de dos digitos
             self.painter.drawLine(x, y, x+x1 , y+y1)
             self.update()
             x=x1+x
             if x >= 700:
-                x=10
+                x=77
             elif x<10:
                 x= 700
             y=y1+y
             if y >= 700:
-                y=10
+                y=77
             elif y<10:
                 y= 700
         except:
@@ -64,7 +64,7 @@ def grafica ():
                     Vy=1*(y1-50)
             elif y1 <=40:
                     Vy=-1*(40-y1)
-            dibujomain.paint(Vx,Vy) #dibujo los diferenciales de modo que entre mayor sea mi valor, dibujare con mas velocidad
+            dibujomain.pintar(Vx,Vy) #dibujo los diferenciales de modo que entre mayor sea mi valor, dibujare con mas velocidad
             sr.envio(99*x//700,99*y//700) #llamo a mi funcion que envia datos para que se muestre la ubicacion en la que dibujo, mapeada de 0 a 100
             print ("El punto graficado es =",x1,y1)
         except:

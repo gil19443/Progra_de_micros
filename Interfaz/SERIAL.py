@@ -13,10 +13,10 @@ def conversiones():
     parte2 = ''
     verificacion = ''
     while verificacion != 44: #me aseguro que siempre agrupe los 4 datos que envio en el mismo orden
-            #time.sleep(.03)
+            time.sleep(.03)
             verificacion = ord(ser.read())
     for i in range(4): #leer los primeros datos que se envian del  pic x,y enter
-            #time.sleep(.03)
+            time.sleep(.03)
             #leer dato serial
             parte1= ord(ser.read())
             parte2 += ',' + str(parte1)  #contruyo un sting con los cuatro datos separados por comas
