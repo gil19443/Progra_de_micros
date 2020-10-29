@@ -16,8 +16,8 @@ for i in range (500):
         dato.readline()
         variable = dato.readline()
         code = variable.decode("utf8")
-        
+
         #datos = dato.read_until(b'\n',3)
         #print(str(variable))
         #print(datos)
-        print(code[0]+code[1])
+        print(variable)

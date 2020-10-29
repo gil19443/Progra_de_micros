@@ -69,7 +69,7 @@ def grafica ():
                 Vy = 0
             dibujomain.pintar(Vx,Vy) #dibujo los diferenciales de modo que entre mayor sea mi valor, dibujare con mas velocidad
          #llamo a mi funcion que envia datos para que se muestre la ubicacion en la que dibujo, mapeada de 0 a 10
-            sr.envio(99*x//700,99*y//700)
+            sr.envio((99*x//700),(99*y//700))
             print ("El punto recibido es =",x1,y1)
             print(99*x//700,99*y//700)
         except:

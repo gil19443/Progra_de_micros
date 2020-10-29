@@ -91,8 +91,8 @@ INTERRUPCION_TMRO:
     MOVWF   TMR0
     BCF	    INTCON, T0IF 
     CALL    DISPLAY_VAR	;rutina que muxea la se;al en los 4 display cada 2ms
-    CALL    SEP_NIBBLES_Y
-    CALL    SEP_NIBBLES_X
+    CALL    SEP_NIBBLES_Y ;rutina que separa lo que recibe el adc del eje x
+    CALL    SEP_NIBBLES_X ;rutina que separa lo que recibe el adc del eje y
     RETURN 
 ;mux de lectura del ADC, cada vez que entra a una interrupcion cambia de canal, lo lee y guarda el valor leido en una variable diferente  
 INTERRUPCION_ADC:
@@ -113,16 +113,16 @@ INTERRUPCION_Y:
     CALL    CONFIGURACION_ADC_X
     BSF	    ADCON0, 1
     BCF	    CONT3, 0
-    RETURN
-;mux encargado de que cada vez que entre a la interrupcion reciba un dato distinto y lo guarde en una variable diferente       
+    RETURN      
 INTERRUPCION_TMR1:
     MOVLW   0x0B
     MOVWF   TMR1H
     MOVLW   0xDC
     MOVLW   TMR1L   ;valor para un ainterrupcion cada medio segundo 
     BCF	    PIR1, TMR1IF
-    CALL    SEPARACION
+    CALL    SEPARACION ;rutina que verifica el orden de displays y los convierte 
     RETURN
+;rutina que cada interrupcion guarda el RCREG en 6 variables diferentes y se reinicia al finalizar 
 INTERRUPCION_RECIBIR:
     MOVLW   .5
     SUBWF   ORDEN, W
@@ -182,7 +182,7 @@ INTERRUPCION_TMR2:
     CALL    INTERRUPCION_TX
     RETURN
 ;*******************************************************************************
-; TABLA
+; TABLAS
 ;*******************************************************************************
 TABLA_ASCII:
     ANDLW   B'00001111'	
@@ -231,50 +231,22 @@ CALL SETUP
 ;*******************************************************************************
 ; MAIN LOOP
 ;*******************************************************************************
- LOOP:
-;    BTFSC   CONT11, 0 
-;    GOTO    $+2
-;    GOTO    LOOP
-;    BCF	    CONT11, 0
-;    MOVLW   .44
-;    SUBWF   BYTE2, W
-;    BTFSS   STATUS, Z
-;    GOTO    LIMPIAR
-;    MOVFW   BYTE0
-;    SUBLW   .48
-;    MOVWF   DISPLAY0
-;    MOVFW   BYTE1
-;    SUBLW   .48
-;    MOVWF   DISPLAY1
-;    MOVFW   BYTE3
-;    SUBLW   .48
-;    MOVWF   DISPLAY2
-;    MOVFW   BYTE4
-;    SUBLW   .48
-;    MOVWF   DISPLAY3
-;    GOTO    LOOP
-;LIMPIAR:
-;    CLRF    BYTE0	
-;    CLRF    BYTE1	
-;    CLRF    BYTE2	
-;    CLRF    BYTE3	
-;    CLRF    BYTE4	
-;    CLRF    BYTE5		
+ LOOP:		
     GOTO    LOOP 
-;******************MUXEAR LOS 2 DISPLAY*****************************************
-SEP_NIBBLES_X:
+;******************RUTINAS AUXILIARES*******************************************
+SEP_NIBBLES_X: ;rutina que separa en nibbles el valor que recibe el adc para el ejex
     MOVFW   X
     MOVWF   NHX
     SWAPF   X, W
     MOVWF   NLX
     RETURN
-SEP_NIBBLES_Y:
+SEP_NIBBLES_Y:X: ;rutina que separa en nibbles el valor que recibe el adc para el ejey
     MOVFW   Y
     MOVWF   NHY
     SWAPF   Y, W
     MOVWF   NLY
     RETURN 
-    
+;rutina que manda datos en hexadecimal en orden XH XL , YH YL \n  
 INTERRUPCION_TX:
     MOVLW   .5
     SUBWF   CONT7, W
@@ -331,7 +303,7 @@ ESPACIO:
     CLRF    CONT7
     RETURN 
     
-    
+;rutina que muxea los valores que se muestran en los 4 displays    
 DISPLAY_VAR:
     BCF	    PORTA, RA1	    
     BCF	    PORTA, RA2
@@ -375,17 +347,18 @@ DISPLAY_2Y3:
 	BSF	PORTA, RA3
 	BCF	INDICADOR, 0
 	RETURN
+;rutina de verificadcoin 
 SEPARACION:
     BTFSC   CONT11, 0 
-    GOTO    $+2
+    GOTO    $+2 ;revisa si ya se realizaron las 6 lecturas en la interrupcion 
     RETURN
     BCF	    CONT11, 0
     MOVLW   .44
-    SUBWF   BYTE2, W
+    SUBWF   BYTE2, W ;revisa si el valor en la variable es 44 indicando que los datos se guardaron correctamente 
     BTFSS   STATUS, Z
-    GOTO    LIMPIAR
+    GOTO    LIMPIAR ; si no estan en orden, limpia las variables de recepcion para que se acomode 
     MOVLW   .48
-    SUBWF   BYTE0, W
+    SUBWF   BYTE0, W ;si los datos estan en orden, los convierte a binario y los guarda en los displays 
     MOVWF   DISPLAY0
     MOVLW   .48
     SUBWF   BYTE1, W
