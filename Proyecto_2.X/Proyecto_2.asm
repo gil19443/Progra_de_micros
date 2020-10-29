@@ -18,6 +18,7 @@
  ; variables
  ;******************************************************************************
 GPR_VAR		UDATA
+    CONT1	RES	1
     UNIDADES	RES	1
     CONT2	RES	1
     CONT3	RES	1
@@ -44,6 +45,18 @@ GPR_VAR		UDATA
     Y		RES	1
     RECIBIDOX   RES	1
     RECIBIDOY	RES	1
+    NHX		RES	1
+    NLX		RES	1
+    NHY		RES	1
+    NLY		RES	1
+    BYTE0	RES	1
+    BYTE1	RES	1
+    BYTE2	RES	1
+    BYTE3	RES	1
+    BYTE4	RES	1
+    BYTE5	RES	1
+    BYTE6	RES	1
+    ORDEN	RES	1
 ;*******************************************************************************
 ; Reset Vector
 ;*******************************************************************************
@@ -64,6 +77,8 @@ ISR:
     CALL    INTERRUPCION_TMR2
     BTFSC   PIR1, RCIF
     CALL    INTERRUPCION_RECIBIR
+    BTFSC   PIR1, TMR1IF
+    CALL    INTERRUPCION_TMR1
 POP:
     SWAPF   STATUS_TEMP, W
     MOVWF   STATUS 
@@ -76,51 +91,118 @@ INTERRUPCION_TMRO:
     MOVWF   TMR0
     BCF	    INTCON, T0IF 
     CALL    DISPLAY_VAR	;rutina que muxea la se;al en los 4 display cada 2ms
-    CALL    SEP_NIBBLES 
+    CALL    SEP_NIBBLES_Y
+    CALL    SEP_NIBBLES_X
     RETURN 
 ;mux de lectura del ADC, cada vez que entra a una interrupcion cambia de canal, lo lee y guarda el valor leido en una variable diferente  
 INTERRUPCION_ADC:
     BTFSC   CONT3, 0
     GOTO    INTERRUPCION_Y
 INTERRUPCION_X:
-    CALL    CONFIGURACION_ADC_X
     MOVF    ADRESH, W	
     MOVWF   X
     BCF	    PIR1, ADIF
+    CALL    CONFIGURACION_ADC_Y
     BSF	    ADCON0, 1
     BSF	    CONT3, 0
     RETURN
 INTERRUPCION_Y:
-    CALL    CONFIGURACION_ADC_Y
     MOVF    ADRESH, W	
     MOVWF   Y
     BCF	    PIR1, ADIF
+    CALL    CONFIGURACION_ADC_X
     BSF	    ADCON0, 1
     BCF	    CONT3, 0
     RETURN
 ;mux encargado de que cada vez que entre a la interrupcion reciba un dato distinto y lo guarde en una variable diferente       
+INTERRUPCION_TMR1:
+    MOVLW   0x0B
+    MOVWF   TMR1H
+    MOVLW   0xDC
+    MOVLW   TMR1L   ;valor para un ainterrupcion cada medio segundo 
+    BCF	    PIR1, TMR1IF
+    CALL    SEPARACION
+    RETURN
 INTERRUPCION_RECIBIR:
-    BTFSC   CONT13, 0
-    GOTO    RECIBIR_Y
-RECIBIR_X:
+    MOVLW   .5
+    SUBWF   ORDEN, W
+    BTFSC   STATUS, Z
+    GOTO    BYTE_5
+    MOVLW   .4
+    SUBWF   ORDEN, W
+    BTFSC   STATUS, Z
+    GOTO    BYTE_4
+    MOVLW   .3
+    SUBWF   ORDEN, W
+    BTFSC   STATUS, Z
+    GOTO    BYTE_3
+    MOVLW   .2
+    SUBWF   ORDEN, W
+    BTFSC   STATUS, Z 
+    GOTO    BYTE_2
+    MOVLW   .1
+    SUBWF   ORDEN, W
+    BTFSC   STATUS,Z 
+    GOTO    BYTE_1
+BYTE_0:
     MOVFW   RCREG
-    MOVWF   RECIBIDOX
-    BSF	    CONT13, 0
+    MOVWF   BYTE0
+    INCF    ORDEN
     RETURN 
-RECIBIR_Y:
+BYTE_1:
     MOVFW   RCREG
-    MOVWF   RECIBIDOY
-    BCF	    CONT13, 0
+    MOVWF   BYTE1
+    INCF    ORDEN
+    RETURN 
+BYTE_2:
+    MOVFW   RCREG
+    MOVWF   BYTE2
+    INCF    ORDEN
+    RETURN 
+BYTE_3:
+    MOVFW   RCREG
+    MOVWF   BYTE3
+    INCF    ORDEN
+    RETURN 
+BYTE_4:
+    MOVFW   RCREG
+    MOVWF   BYTE4
+    INCF    ORDEN
+    RETURN 
+BYTE_5:
+    MOVFW   RCREG
+    MOVWF   BYTE5
+    CLRF    ORDEN
+    BSF	    CONT11, 0
     RETURN 
 ;interrupcion encargada de llamar la funcino que envia datos cada 5ms   
 INTERRUPCION_TMR2:
     BCF	    PIR1, TMR2IF
-    BTFSC   PIR1, TXIF 
+    BTFSC   PIR1, TXIF
     CALL    INTERRUPCION_TX
     RETURN
 ;*******************************************************************************
 ; TABLA
 ;*******************************************************************************
+TABLA_ASCII:
+    ANDLW   B'00001111'	
+    ADDWF   PCL, F
+    RETLW   .48	;0 = ascii(48)
+    RETLW   .49	;1 = ascii(49)
+    RETLW   .50	;2 = ascii(50)
+    RETLW   .51	;3 = ascii(51)
+    RETLW   .52	;4 = ascii(52)
+    RETLW   .53	;5 = ascii(53)
+    RETLW   .54	;6 = ascii(54)
+    RETLW   .55	;7 = ascii(55)
+    RETLW   .56	;8 = ascii(56)
+    RETLW   .57	;9 = ascii(57)
+    RETLW   .65	;A = ascii(65)  
+    RETLW   .66	;B = ascii(66)  
+    RETLW   .67	;C = ascii(67)  
+    RETLW   .68	;D = ascii(68)  
+    RETLW   .69	;E = ascii(69)  
+    RETLW   .70	;F = ascii(70)
 TABLA:
     ANDLW   b'00001111' ; mascara
     ADDWF   PCL, F
@@ -150,8 +232,106 @@ CALL SETUP
 ; MAIN LOOP
 ;*******************************************************************************
  LOOP:
-    GOTO LOOP 
+;    BTFSC   CONT11, 0 
+;    GOTO    $+2
+;    GOTO    LOOP
+;    BCF	    CONT11, 0
+;    MOVLW   .44
+;    SUBWF   BYTE2, W
+;    BTFSS   STATUS, Z
+;    GOTO    LIMPIAR
+;    MOVFW   BYTE0
+;    SUBLW   .48
+;    MOVWF   DISPLAY0
+;    MOVFW   BYTE1
+;    SUBLW   .48
+;    MOVWF   DISPLAY1
+;    MOVFW   BYTE3
+;    SUBLW   .48
+;    MOVWF   DISPLAY2
+;    MOVFW   BYTE4
+;    SUBLW   .48
+;    MOVWF   DISPLAY3
+;    GOTO    LOOP
+;LIMPIAR:
+;    CLRF    BYTE0	
+;    CLRF    BYTE1	
+;    CLRF    BYTE2	
+;    CLRF    BYTE3	
+;    CLRF    BYTE4	
+;    CLRF    BYTE5		
+    GOTO    LOOP 
 ;******************MUXEAR LOS 2 DISPLAY*****************************************
+SEP_NIBBLES_X:
+    MOVFW   X
+    MOVWF   NHX
+    SWAPF   X, W
+    MOVWF   NLX
+    RETURN
+SEP_NIBBLES_Y:
+    MOVFW   Y
+    MOVWF   NHY
+    SWAPF   Y, W
+    MOVWF   NLY
+    RETURN 
+    
+INTERRUPCION_TX:
+    MOVLW   .5
+    SUBWF   CONT7, W
+    BTFSC   STATUS, Z 
+    GOTO    ESPACIO 
+    MOVLW   .4
+    SUBWF   CONT7, W
+    BTFSC   STATUS, Z 
+    GOTO    MANDAR_NHY
+    MOVLW   .3
+    SUBWF   CONT7, W
+    BTFSC   STATUS, Z 
+    GOTO    MANDAR_NLY
+    MOVLW   .2
+    SUBWF   CONT7, W
+    BTFSC   STATUS, Z 
+    GOTO    COMA 
+    MOVLW   .1
+    SUBWF   CONT7, W
+    BTFSC   STATUS, Z 
+    GOTO    MANDAR_NHX
+MANDAR_NLX:
+    MOVFW   NLX
+    CALL    TABLA_ASCII
+    MOVWF   TXREG
+    INCF    CONT7
+    RETURN
+MANDAR_NHX:
+    MOVFW   NHX
+    CALL    TABLA_ASCII
+    MOVWF   TXREG
+    INCF    CONT7
+    RETURN 
+COMA:
+    MOVLW   .44
+    MOVWF   TXREG
+    INCF    CONT7
+    RETURN
+MANDAR_NHY:
+    MOVFW   NHY
+    CALL    TABLA_ASCII
+    MOVWF   TXREG
+    INCF    CONT7
+    RETURN 
+MANDAR_NLY:
+    MOVFW   NLY
+    CALL    TABLA_ASCII
+    MOVWF   TXREG
+    INCF    CONT7
+    RETURN
+ESPACIO:
+    MOVLW   .10
+    MOVWF   TXREG
+    CLRF    CONT7
+    RETURN 
+    
+    
 DISPLAY_VAR:
     BCF	    PORTA, RA1	    
     BCF	    PORTA, RA2
@@ -195,51 +375,36 @@ DISPLAY_2Y3:
 	BSF	PORTA, RA3
 	BCF	INDICADOR, 0
 	RETURN
-;separa los nibbles de las variables que recibe le RCREG para mostrarlas en los dos displays
-SEP_NIBBLES:
-    MOVFW   RECIBIDOY
-    MOVWF   DISPLAY3
-    SWAPF   RECIBIDOY, W
-    MOVWF   DISPLAY0
-    MOVFW   RECIBIDOX
-    MOVWF   DISPLAY1
-    SWAPF   RECIBIDOX, W
-    MOVWF   DISPLAY2
+SEPARACION:
+    BTFSC   CONT11, 0 
+    GOTO    $+2
     RETURN
-;rutina del tx encargada de enviar el valor de x, luego una coma, luego el valor de y y luego un enter  
-INTERRUPCION_TX:
-    MOVLW   .3
-    SUBWF   CONT7, W
-    BTFSC   STATUS, Z 
-    GOTO    ESPACIO 
-    MOVLW   .2
-    SUBWF   CONT7, W
-    BTFSC   STATUS, Z 
-    GOTO    MANDAR_Y 
-    MOVLW   .1
-    SUBWF   CONT7, W
-    BTFSC   STATUS, Z 
-    GOTO    COMA
-MANDAR_X:
-    MOVFW   X
-    MOVWF   TXREG
-    INCF    CONT7
-    RETURN
-MANDAR_Y:
-    MOVFW   Y
-    MOVWF   TXREG
-    INCF    CONT7
-    RETURN 
-COMA:
+    BCF	    CONT11, 0
     MOVLW   .44
-    MOVWF   TXREG
-    INCF    CONT7
-    RETURN 
-ESPACIO:
-    MOVLW   .10
-    MOVWF   TXREG
-    CLRF    CONT7
-    RETURN 
+    SUBWF   BYTE2, W
+    BTFSS   STATUS, Z
+    GOTO    LIMPIAR
+    MOVLW   .48
+    SUBWF   BYTE0, W
+    MOVWF   DISPLAY0
+    MOVLW   .48
+    SUBWF   BYTE1, W
+    MOVWF   DISPLAY3
+    MOVLW   .48
+    SUBWF   BYTE3, W
+    MOVWF   DISPLAY2
+    MOVLW   .48
+    SUBWF   BYTE4, W
+    MOVWF   DISPLAY1
+    RETURN
+LIMPIAR:
+    CLRF    BYTE0	
+    CLRF    BYTE1	
+    CLRF    BYTE2	
+    CLRF    BYTE3	
+    CLRF    BYTE4	
+    CLRF    BYTE5
+    RETURN
 ;****************************CONFIGURACION**************************************
 ;configuraciones para el cambio de canal****************************************
 CONFIGURACION_ADC_X:
@@ -349,6 +514,7 @@ SETUP:
     CLRF    PORTD
     CLRF    PORTE
   ;****************SE DECLARAN LOS VALORES INICIALES DE LAS VARIABLES *********  
+    CLRF    CONT1
     CLRF    CONT2
     CLRF    CONT3
     CLRF    CONT4
@@ -369,6 +535,18 @@ SETUP:
     CLRF    Y
     CLRF    RECIBIDOX
     CLRF    RECIBIDOY
+    CLRF    NHX
+    CLRF    NLX
+    CLRF    NHY
+    CLRF    NLY
+    CLRF    BYTE0	
+    CLRF    BYTE1	
+    CLRF    BYTE2	
+    CLRF    BYTE3	
+    CLRF    BYTE4	
+    CLRF    BYTE5	
+    CLRF    BYTE6	
+    CLRF    ORDEN	
     RETURN 
 ;*******************************************************************************
 

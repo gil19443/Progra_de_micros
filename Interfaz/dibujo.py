@@ -36,12 +36,12 @@ class dibujo (QtWidgets.QMainWindow, Ui_MainWindow):
             x=x1+x
             if x >= 700:
                 x=77
-            elif x<10:
+            elif x<77:
                 x= 700
             y=y1+y
             if y >= 700:
                 y=77
-            elif y<10:
+            elif y<77:
                 y= 700
         except:
             print('No se puede pintar en esa área de la pantalla ')
@@ -57,18 +57,24 @@ def grafica ():
             Vy=0
             if x1 >=50:
                 Vx=1*(x1-50)
-            elif x1 <=40:
-                Vx=-1*(40-x1)
-
-            if y1 >=50:
-                    Vy=1*(y1-50)
-            elif y1 <=40:
-                    Vy=-1*(40-y1)
+            elif x1 <=30:
+                Vx=-1*(30-x1)
+            else:
+                Vx=0
+            if y1 >=60:
+                    Vy=1*(y1-60)
+            elif y1 <=20:
+                    Vy=-1*(20-y1)
+            else:
+                Vy = 0
             dibujomain.pintar(Vx,Vy) #dibujo los diferenciales de modo que entre mayor sea mi valor, dibujare con mas velocidad
-            sr.envio(99*x//700,99*y//700) #llamo a mi funcion que envia datos para que se muestre la ubicacion en la que dibujo, mapeada de 0 a 100
-            print ("El punto graficado es =",x1,y1)
+         #llamo a mi funcion que envia datos para que se muestre la ubicacion en la que dibujo, mapeada de 0 a 10
+            sr.envio(99*x//700,99*y//700)
+            print ("El punto recibido es =",x1,y1)
+            print(99*x//700,99*y//700)
         except:
             print ("No se puede dibujar nada")
+
 aplication = QtWidgets.QApplication([])
 dibujomain=dibujo()
 dibujomain.show()
