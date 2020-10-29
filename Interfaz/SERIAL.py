@@ -36,30 +36,30 @@ def envio (sendx1,sendy1): # funcion que envia datos al PIC, tiene como parametr
     sendy = str(sendy1)
     try:
         sendx2 = ord(sendx[0])
-        sendx1final = hex(sendx2)[2:]
-        ser.write(bytes.fromhex(sendx1final)) #por la funcion fromhex, suele dar error al tener valores de 00 como lectura, de modo que si da error se manda un 01 consntante
+        sendx1final = hex(sendx2)[2:] #convierto los valres en acsii a hex
+        ser.write(bytes.fromhex(sendx1final)) #envio el primer digito de x
     except:
-        ser.write(bytes.fromhex(hex(ord('0'))[2:]))
+        ser.write(bytes.fromhex(hex(ord('0'))[2:])) #si la funcion da error, escribo un 0
 
     try:
         sendx3 = ord(sendx[1])
-        sendx2final = hex(sendx3)[2:]
-        ser.write(bytes.fromhex(sendx2final))
-        ser.write(bytes.fromhex('2C'))
+        sendx2final = hex(sendx3)[2:] #convierto los valres en acsii a hex
+        ser.write(bytes.fromhex(sendx2final)) #envio el segundo digito de x
+        ser.write(bytes.fromhex('2C')) #envia una coma en hexadecimal
     except:
-        ser.write(bytes.fromhex(hex(ord('0'))[2:]))
-    try:#decimal ord(str(sendx))
+        ser.write(bytes.fromhex(hex(ord('0'))[2:])) #si la funcion da error, escribo un 0
+    try:
         sendy2 = ord(sendy[0])
-        sendy1final = hex(sendy2)[2:]
-        ser.write(bytes.fromhex(sendy1final))#por la funcion fromhex, suele dar error al tener valores de 00 como lectura, de modo que si da error se manda un 01 consntante
+        sendy1final = hex(sendy2)[2:] #convierto los valres en acsii a hex acsii
+        ser.write(bytes.fromhex(sendy1final))  #envio el primer digito de y
     except:
-        ser.write(bytes.fromhex(hex(ord('0'))[2:]))
+        ser.write(bytes.fromhex(hex(ord('0'))[2:]))  #si la funcion da error, escribo un 0
     try:#decimal ord(str(sendx))
         sendy3 = ord(sendy[1])
-        sendy2final = hex(sendy3)[2:]
-        ser.write(bytes.fromhex(sendy2final)) #por la funcion fromhex, suele dar error al tener valores de 00 como lectura, de modo que si da error se manda un 01 consntante
-        ser.write(bytes.fromhex('0A'))
+        sendy2final = hex(sendy3)[2:] #convierto los valres en acsii a hex acsii
+        ser.write(bytes.fromhex(sendy2final))  #envio el segundo digito de y
+        ser.write(bytes.fromhex('0A')) # envio un enter en hexadecimal
     except:
-        ser.write(bytes.fromhex(hex(ord('0'))[2:]))
+        ser.write(bytes.fromhex(hex(ord('0'))[2:])) #si la funcion da error, escribo un 0
 
     return
