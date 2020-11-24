@@ -1,13 +1,13 @@
 MPLINK 5.08, LINKER
-Linker Map File - Created Mon Nov 23 16:05:41 2020
+Linker Map File - Created Mon Nov 23 16:40:18 2020
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
                 ---------  ---------  ---------  ---------  ---------
                  RES_VECT       code   0x000000    program   0x000002
                    .cinit    romdata   0x000001    program   0x000004
-                 ISR_VECT       code   0x000004    program   0x000070
-                MAIN_PROG       code   0x000100    program   0x00017e
+                 ISR_VECT       code   0x000004    program   0x00007c
+                MAIN_PROG       code   0x000100    program   0x0001a6
 .config_2007_BUILD/DEFAULT/PRODUCTION/PROYECT       code   0x002007    program   0x000002
 .config_2008_BUILD/DEFAULT/PRODUCTION/PROYECT       code   0x002008    program   0x000002
                   GPR_VAR      udata   0x000020       data   0x000019
@@ -18,10 +18,10 @@ Linker Map File - Created Mon Nov 23 16:05:41 2020
                                Start         End      
                            ---------   ---------      
                             0x000000    0x000002      
-                            0x000004    0x00003b      
-                            0x000100    0x0001be      
+                            0x000004    0x000041      
+                            0x000100    0x0001d2      
                             0x002007    0x002008      
-            252 out of 8455 program addresses used, program memory utilization is 2%
+            278 out of 8455 program addresses used, program memory utilization is 3%
 
 
 
@@ -30,26 +30,28 @@ Linker Map File - Created Mon Nov 23 16:05:41 2020
                 ---------  ---------  ---------  --------- ---------                
        ACCION_ANTIRREBOTE   0x000174    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
               ANTIRREBOTE   0x00016b    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
-            APAGAR_19.3MS   0x000019    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
+            APAGAR_19.3MS   0x00001b    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
                CEROGRADOS   0x000109    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
                   CONFIG1   0x000167    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
-CONFIGURACION_INTERRUPCION   0x000198    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
-     CONFIGURACION_TIMER0   0x000195    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
+CONFIGURACION_INTERRUPCION   0x000199    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
+     CONFIGURACION_TIMER0   0x000196    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
      CONFIGURACION_TIMER2   0x000181    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
+CONFIGURACION_TRANSMISOR_Y_RECEP   0x0001a0    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
            CUARTA_CARRERA   0x000156    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
                  DEBOUNCE   0x000171    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
                 DELAY_BIG   0x000165    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
               DELAY_SMALL   0x00012a    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
-           ENCENDER_0.7MS   0x000013    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
+           ENCENDER_0.7MS   0x000015    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
            ENCENDER_LUCES   0x00012f    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
      INCREMENTAR_CONTADOR   0x00013a    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
           INICIAR_CARRERA   0x00015f    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
-        INTERRUPCION_TMR1   0x00001f    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
-        INTERRUPCION_TMRO   0x000011    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
+     INTERRUPCION_RECIBIR   0x000021    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
+        INTERRUPCION_TMR1   0x000024    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
+        INTERRUPCION_TMRO   0x000013    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
                       ISR   0x000008    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
                      LOOP   0x000101    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
             NOVENTAGRADOS   0x000104    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
-                      POP   0x00000c    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
+                      POP   0x00000e    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
           PRIMERA_CARRERA   0x00014a    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
                      PUSH   0x000004    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
            QUINTA_CARRERA   0x00015a    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
@@ -57,10 +59,10 @@ CONFIGURACION_INTERRUPCION   0x000198    program     static C:\Users\Carlos Gil\
                 SELECCION   0x00010e    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
                     SETUP   0x000179    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
                     START   0x000100    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
-              TABLA_ASCII   0x00002a    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
+              TABLA_ASCII   0x000030    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
           TERCERA_CARRERA   0x000152    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
          TERMINAR_CARRERA   0x000162    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
-           _ISR_VECT_0026   0x000026    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
+           _ISR_VECT_002C   0x00002c    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
           _MAIN_PROG_012D   0x00012d    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
                    ACCION   0x000035       data     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
                    CAMBIO   0x000032       data     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
@@ -95,13 +97,14 @@ CONFIGURACION_INTERRUPCION   0x000198    program     static C:\Users\Carlos Gil\
                 ---------  ---------  ---------  --------- ---------                
                      PUSH   0x000004    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
                       ISR   0x000008    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
-                      POP   0x00000c    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
-        INTERRUPCION_TMRO   0x000011    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
-           ENCENDER_0.7MS   0x000013    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
-            APAGAR_19.3MS   0x000019    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
-        INTERRUPCION_TMR1   0x00001f    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
-           _ISR_VECT_0026   0x000026    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
-              TABLA_ASCII   0x00002a    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
+                      POP   0x00000e    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
+        INTERRUPCION_TMRO   0x000013    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
+           ENCENDER_0.7MS   0x000015    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
+            APAGAR_19.3MS   0x00001b    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
+     INTERRUPCION_RECIBIR   0x000021    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
+        INTERRUPCION_TMR1   0x000024    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
+           _ISR_VECT_002C   0x00002c    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
+              TABLA_ASCII   0x000030    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
                     START   0x000100    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
                      LOOP   0x000101    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
             NOVENTAGRADOS   0x000104    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
@@ -125,8 +128,9 @@ CONFIGURACION_INTERRUPCION   0x000198    program     static C:\Users\Carlos Gil\
        ACCION_ANTIRREBOTE   0x000174    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
                     SETUP   0x000179    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
      CONFIGURACION_TIMER2   0x000181    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
-     CONFIGURACION_TIMER0   0x000195    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
-CONFIGURACION_INTERRUPCION   0x000198    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
+     CONFIGURACION_TIMER0   0x000196    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
+CONFIGURACION_INTERRUPCION   0x000199    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
+CONFIGURACION_TRANSMISOR_Y_RECEP   0x0001a0    program     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
                     CONT1   0x000020       data     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
                  UNIDADES   0x000021       data     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm
                     CONT2   0x000022       data     static C:\Users\Carlos Gil\Desktop\Universidad\4to semestre\Programación de microcontroladores\Progra_de_micros\Progra_de_micros\Carro_proyecto_final\PROYECTO_3.X\PROYECTO_3.asm

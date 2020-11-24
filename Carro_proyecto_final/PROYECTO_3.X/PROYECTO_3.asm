@@ -59,8 +59,8 @@ ISR:
     CALL    INTERRUPCION_TMRO
     BTFSC   PIR1, TMR1IF
     CALL    INTERRUPCION_TMR1
-    ;BTFSC   PIR1, RCIF
-    ;CALL    INTERRUPCION_RECIBIR
+    BTFSC   PIR1, RCIF
+    CALL    INTERRUPCION_RECIBIR
 POP:
     SWAPF   STATUS_TEMP, W
     MOVWF   STATUS 
@@ -85,17 +85,17 @@ APAGAR_19.3MS:
     BCF	    SERVO, 0
     BCF	    INTCON, T0IF 
     RETURN 
-;INTERRUPCION_RECIBIR:
-;    MOVFW   RCREG
-;    MOVWF   ACCION
-;    RETURN
+INTERRUPCION_RECIBIR:
+    MOVFW   RCREG
+    MOVWF   ACCION
+    RETURN
 INTERRUPCION_TMR1:
     MOVLW   0x0B
     MOVWF   TMR1H
     MOVLW   0xDC
     MOVLW   TMR1L  
     BCF	    PIR1, TMR1IF
-    ;CALL    SELECCION ;rutina que verifica el orden de displays y los convierte 
+    CALL    SELECCION ;rutina que verifica el orden de displays y los convierte 
     CALL    ANTIRREBOTE
     BTFSS   CHECK, 1
     GOTO    $+2
@@ -312,7 +312,7 @@ SETUP:
     CLRF    TRISD
     CLRF    TRISE
     ;BSF	    PIE1, TXIE
-    ;BSF	    PIE1, RCIE
+    BSF	    PIE1, RCIE
     CONFIGURACION_TIMER0:
     CLRWDT		; CONFIGURACIÓN PARA EL FUNCIONAMIENTO DEL TIMER0
     MOVLW   b'11010111'	
@@ -327,25 +327,25 @@ SETUP:
     MOVWF   PR2
     
      
-;    CONFIGURACION_TRANSMISOR_Y_RECEPTOR:
-;    BANKSEL TRISA
-;    BCF	    TXSTA, TX9    
-;    BCF	    TXSTA, SYNC	    
-;    BSF	    TXSTA, BRGH	     
-;
-;    BANKSEL ANSEL
-;    BCF	    BAUDCTL, BRG16  
-;    
-;    BANKSEL TRISA
-;    MOVLW   .25
-;    MOVWF   SPBRG	    
-;    CLRF    SPBRGH	    
-;    BSF	    TXSTA, TXEN
-;
-;    BANKSEL PORTA
-;    BSF	    RCSTA, SPEN
-;    BCF	    RCSTA, RX9
-;    BSF	    RCSTA, CREN
+    CONFIGURACION_TRANSMISOR_Y_RECEPTOR:
+    BANKSEL TRISA
+    BCF	    TXSTA, TX9    
+    BCF	    TXSTA, SYNC	    
+    BSF	    TXSTA, BRGH	     
+
+    BANKSEL ANSEL
+    BCF	    BAUDCTL, BRG16  
+    
+    BANKSEL TRISA
+    MOVLW   .25
+    MOVWF   SPBRG	    
+    CLRF    SPBRGH	    
+    BSF	    TXSTA, TXEN
+
+    BANKSEL PORTA
+    BSF	    RCSTA, SPEN
+    BCF	    RCSTA, RX9
+    BSF	    RCSTA, CREN
     
     BANKSEL PORTA
     BSF	    INTCON, GIE ; HABILITA LAS INTERRUPCIONES

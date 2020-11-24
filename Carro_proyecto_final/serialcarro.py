@@ -35,53 +35,55 @@ def iniciar_carrera (): # funcion que envia datos al PIC, tiene como parametros 
     sendx = "0"
     try:
         sendx2 = ord(sendx)
-        sendx1final = hex(sendx2) #convierto los valres en acsii a hex
+        sendx1final = hex(sendx2)[2:] #convierto los valres en acsii a hex
         ser.write(bytes.fromhex(sendx1final)) #envio el primer digito de x
+        regreso = bytes.fromhex(sendx1final)
+        return regreso
     except:
-        ser.write(bytes.fromhex(hex(ord('0'))[2:])) #si la funcion da error, escribo un 0
-    return
+        pass
+        return
 def terminar_carrera (): # funcion que envia datos al PIC, tiene como parametros lo que va a enviars
     sendx = "1"
     try:
-        sendx2 = ord(sendx)
+        sendx2 = ord(sendx)[2:]
         sendx1final = hex(sendx2) #convierto los valres en acsii a hex
         ser.write(bytes.fromhex(sendx1final)) #envio el primer digito de x
     except:
-        ser.write(bytes.fromhex(hex(ord('0'))[2:])) #si la funcion da error, escribo un 0
+        pass
     return
 def cerrar_puerta (): # funcion que envia datos al PIC, tiene como parametros lo que va a enviars
     sendx = "2"
     try:
         sendx2 = ord(sendx)
-        sendx1final = hex(sendx2) #convierto los valres en acsii a hex
+        sendx1final = hex(sendx2)[2:] #convierto los valres en acsii a hex
         ser.write(bytes.fromhex(sendx1final)) #envio el primer digito de x
     except:
-        ser.write(bytes.fromhex(hex(ord('0'))[2:])) #si la funcion da error, escribo un 0
+        pass
     return
 def abrir_puerta (): # funcion que envia datos al PIC, tiene como parametros lo que va a enviars
     sendx = "3"
     try:
         sendx2 = ord(sendx)
-        sendx1final = hex(sendx2) #convierto los valres en acsii a hex
+        sendx1final = hex(sendx2)[2:] #convierto los valres en acsii a hex
         ser.write(bytes.fromhex(sendx1final)) #envio el primer digito de x
     except:
-        ser.write(bytes.fromhex(hex(ord('0'))[2:])) #si la funcion da error, escribo un 0
+        pass
     return
 def encender_luces (): # funcion que envia datos al PIC, tiene como parametros lo que va a enviars
     sendx = "4"
     try:
         sendx2 = ord(sendx)
         sendx1final = hex(sendx2) #convierto los valres en acsii a hex
-        ser.write(bytes.fromhex(sendx1final)) #envio el primer digito de x
+        ser.write(bytes.fromhex(sendx1final))[2:] #envio el primer digito de x
     except:
-        ser.write(bytes.fromhex(hex(ord('0'))[2:])) #si la funcion da error, escribo un 0
+        pass
     return
 def aumentar_contador (): # funcion que envia datos al PIC, tiene como parametros lo que va a enviars
     sendx = "5"
     try:
         sendx2 = ord(sendx)
-        sendx1final = hex(sendx2) #convierto los valres en acsii a hex
+        sendx1final = hex(sendx2)[2:] #convierto los valres en acsii a hex
         ser.write(bytes.fromhex(sendx1final)) #envio el primer digito de x
     except:
-        ser.write(bytes.fromhex(hex(ord('0'))[2:])) #si la funcion da error, escribo un 0
+        pass
     return
