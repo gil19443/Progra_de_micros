@@ -73,15 +73,15 @@ class Ui_mainWindow(object):
         mainWindow.setWindowTitle(_translate("mainWindow", "Proyecto 3 - Carlos Gil 19443"))
         self.pushButton.setText(_translate("mainWindow", "Iniciar carrera"))
         self.pushButton_2.setText(_translate("mainWindow", "Terminar carrera"))
-        self.pushButton_3.setText(_translate("mainWindow", "cerrar puerta "))
-        self.pushButton_4.setText(_translate("mainWindow", "encender luces "))
-        self.pushButton_5.setText(_translate("mainWindow", "aumentar contador "))
-        self.label.setText(_translate("mainWindow", "bienvenido a su centro de control "))
-        self.pushButton_6.setText(_translate("mainWindow", "abrir puerta "))
-        self.pushButton_7.setText(_translate("mainWindow", "iniciar cronometro "))
+        self.pushButton_3.setText(_translate("mainWindow", "Cerrar puerta "))
+        self.pushButton_4.setText(_translate("mainWindow", "Encender luces "))
+        self.pushButton_5.setText(_translate("mainWindow", "Aumentar contador "))
+        self.label.setText(_translate("mainWindow", "Bienvenido a su centro de control "))
+        self.pushButton_6.setText(_translate("mainWindow", "Abrir puerta "))
+        self.pushButton_7.setText(_translate("mainWindow", "Iniciar cronometro "))
         self.pushButton_8.setText(_translate("mainWindow", "Reset "))
         self.menuInicio.setTitle(_translate("mainWindow", "Inicio "))
-        self.label_1.setText(_translate("mainWindow", "cronometro "))
+        self.label_1.setText(_translate("mainWindow", "Cronómetro "))
 
 
 if __name__ == "__main__":

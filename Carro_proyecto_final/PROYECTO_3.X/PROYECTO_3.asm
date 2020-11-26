@@ -46,7 +46,8 @@ GPR_VAR		UDATA
     ENTER	RES	1
     DECENAS	RES	1
     MINUTOS	RES	1
-    MINUTOS2	RES	1
+    MINUTOS2	RES	1   
+    EEPROM	RES	1
 ;*******************************************************************************
 ; Reset Vector
 ;*******************************************************************************
@@ -168,6 +169,10 @@ CALL SETUP
  LOOP:
     BTFSC   CHECK, 0
     CALL    ENCENDER_LUCES
+    BTFSC   EEPROM, 0
+    CALL    ESCRITURA_EEPROM
+    BTFSC   EEPROM, 1
+    CALL    LECTURA_EEPROM
     GOTO    LOOP
 
 ;******************RUTINAS AUXILIARES*******************************************
@@ -312,12 +317,14 @@ QUINTA_CARRERA:
     BCF	    CHECK, 2
     RETURN 
 INICIAR_CARRERA:
+    CLRF    LUCES
+    CLRF    PORTB
     BSF	    CHECK, 2
     BSF	    CHECK, 0
     CALL    NOVENTAGRADOS
     RETURN 
 TERMINAR_CARRERA:
-    CLRF    PORTB
+    BSF	    EEPROM, 0
     CALL    CEROGRADOS
     BCF	    CHECK, 2
     RETURN
@@ -416,6 +423,43 @@ CONTADOR:
     RETURN 
     CLRF    MINUTOS2
     RETURN
+LECTURA_EEPROM:
+    BCF	    EEPROM, 1
+    BCF	    INTCON,GIE    ; Todas las interrupciones deshabilitadas
+    MOVLW   0x00	 ; Mover la dirección al registro W
+    BANKSEL EEADR
+    MOVWF   EEADR      ; Escribir la dirección
+    BANKSEL EECON1
+    BCF	    EECON1,EEPGD ; Seleccionar la EEPROM
+    BSF	    EECON1,RD    ; Leer los datos
+    BANKSEL EEDATA
+    MOVFW   EEDATA   ; Dato se almacena en el registro W
+    BANKSEL PORTA
+    MOVWF   PORTB
+    BSF	    INTCON, GIE
+    RETURN
+ESCRITURA_EEPROM:
+    BCF	    EEPROM, 0
+    BANKSEL EEADR
+    MOVLW   0x00	; Mover la dirección a W
+    MOVWF   EEADR      ; Escribir la dirección
+    BANKSEL PORTA
+    MOVFW   PORTB      ; Mover los datos a W
+    BANKSEL EEDAT
+    MOVWF   EEDAT     ; Escribir los datos
+    BANKSEL EECON1
+    BCF	    EECON1,EEPGD ; Seleccionar la EEPROM
+    BSF	    EECON1,WREN  ; Escritura a la EEPROM habilitada
+    BCF	    INTCON,GIE    ; Todas las interrupciones deshabilitadas
+    MOVLW   0x55
+    MOVWF   EECON2
+    MOVLW   0xAA
+    MOVWF   EECON2
+    BSF	    EECON1,WR
+    BSF	    INTCON,GIE   ; Interrupciones habilitadas
+    BCF	    EECON1,WREN  ; Escritura a la EEPROM deshabilitada
+    BANKSEL PORTA
+    RETURN 
 ;antirebote********************************************************************    
 ANTIRREBOTE:
     BTFSC   PUSH_BUTTON, 0
@@ -539,6 +583,8 @@ SETUP:
     CLRF    DECENAS 
     CLRF    MINUTOS 
     CLRF    MINUTOS2
+    CLRF    EEPROM 
+    BSF	    EEPROM, 1
     RETURN 
 ;*******************************************************************************
 
