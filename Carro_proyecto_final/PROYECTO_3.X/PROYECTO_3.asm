@@ -43,6 +43,10 @@ GPR_VAR		UDATA
     CHECK	RES	1
     LUCES	RES	1
     PUSH_BUTTON	RES	1
+    ENTER	RES	1
+    DECENAS	RES	1
+    MINUTOS	RES	1
+    MINUTOS2	RES	1
 ;*******************************************************************************
 ; Reset Vector
 ;*******************************************************************************
@@ -61,6 +65,8 @@ ISR:
     CALL    INTERRUPCION_TMR1
     BTFSC   PIR1, RCIF
     CALL    INTERRUPCION_RECIBIR
+    BTFSC   PIR1, TMR2IF
+    CALL    INTERRUPCION_TMR2
 POP:
     SWAPF   STATUS_TEMP, W
     MOVWF   STATUS 
@@ -78,6 +84,7 @@ ENCENDER_0.7MS:
     BSF	    SERVO, 0
     BCF	    INTCON, T0IF 
     RETURN 
+    
 APAGAR_19.3MS:
     MOVFW   PARTEBAJA    ;valor para una interrupcion cada 2ms
     MOVWF   TMR0
@@ -85,24 +92,48 @@ APAGAR_19.3MS:
     BCF	    SERVO, 0
     BCF	    INTCON, T0IF 
     RETURN 
+    
 INTERRUPCION_RECIBIR:
+    BTFSC   CHECK, 4
+    GOTO    RECIBIR_ENTER
+RECIBIR_DATO:
     MOVFW   RCREG
     MOVWF   ACCION
+    BSF	    CHECK, 4
     RETURN
+RECIBIR_ENTER:
+    MOVFW   RCREG
+    MOVWF   ENTER
+    BSF	    CHECK, 5
+    BCF	    CHECK, 4
+    RETURN 
+    
 INTERRUPCION_TMR1:
     MOVLW   0x0B
     MOVWF   TMR1H
     MOVLW   0xDC
-    MOVLW   TMR1L  
+    MOVLW   TMR1L 
+    CALL    SELECCION
     BCF	    PIR1, TMR1IF
-    CALL    SELECCION ;rutina que verifica el orden de displays y los convierte 
-    CALL    ANTIRREBOTE
     BTFSS   CHECK, 1
-    GOTO    $+2
-    CALL    NOVENTAGRADOS 
+    GOTO    $+3
+    CALL    CEROGRADOS 
     BCF	    CHECK, 1
+    INCF    CONT2
+    MOVLW   .2
+    SUBWF   CONT2, W
+    BTFSS   STATUS, Z
+    GOTO    $+3
+    CALL    CONTADOR 
+    CLRF    CONT2
     RETURN 
-
+INTERRUPCION_TMR2:
+    BCF	    PIR1, TMR2IF
+    BTFSC   PIR1, TXIF
+     ;rutina que verifica el orden de displays y los convierte 
+    CALL    ANTIRREBOTE
+    CALL    INTERRUPCION_TX
+    RETURN
 ;*******************************************************************************
 ; TABLAS
 ;*******************************************************************************
@@ -154,6 +185,14 @@ CEROGRADOS:
     RETURN 
 ;rutina de verificadcoin 
 SELECCION:
+    BTFSC   CHECK, 5
+    GOTO    $+2
+    RETURN 
+    BCF	    CHECK, 5
+    MOVLW   .10
+    SUBWF   ENTER, W
+    BTFSS   STATUS, Z 
+    GOTO    CORREGIR
     MOVLW   .48
     SUBWF   ACCION, W 
     MOVWF   ACCION 
@@ -176,12 +215,37 @@ SELECCION:
     MOVLW   .4
     SUBWF   ACCION, W
     BTFSC   STATUS, Z 
-    BSF	    CHECK, 0
+    GOTO    ACTIVAR_LUCES 
     MOVLW   .5
     SUBWF   ACCION, W
     BTFSC   STATUS, Z 
     GOTO    INCREMENTAR_CONTADOR
+    MOVLW   .6
+    SUBWF   ACCION, W
+    BTFSC   STATUS, Z 
+    GOTO    HABILITAR_CONTADOR
+    MOVLW   .7
+    SUBWF   ACCION, W
+    BTFSC   STATUS, Z 
+    GOTO    RESETEAR_CONTADOR
     RETURN
+HABILITAR_CONTADOR:
+    BSF	    CHECK, 7
+    RETURN 
+RESETEAR_CONTADOR:
+    BCF	    CHECK, 7
+    CLRF    UNIDADES 
+    CLRF    DECENAS
+    CLRF    MINUTOS 
+    CLRF    MINUTOS2
+    RETURN 
+CORREGIR:
+    CLRF    ACCION
+    CLRF    ENTER
+    RETURN 
+ACTIVAR_LUCES:
+    BSF	    CHECK, 0
+    RETURN 
 DELAY_SMALL:
     MOVLW	.255
     MOVWF	CONT1
@@ -189,18 +253,21 @@ DELAY_SMALL:
     GOTO	$-1
     RETURN
 ENCENDER_LUCES:
-    BSF	    PORTD, RD7
+    BSF	    PORTD, RD5
     CALL    DELAY_BIG
-    BCF	    PORTD, RD7
     BSF	    PORTD, RD6
     CALL    DELAY_BIG
     BCF	    PORTD, RD6
-    BSF	    PORTD, RD5
-    CALL    DELAY_BIG
     BCF	    PORTD, RD5
+    CALL    DELAY_BIG
+    BSF	    PORTD, RD7
+    CALL    DELAY_BIG
+    BCF	    PORTD, RD7
     BCF	    CHECK, 0
     RETURN 
 INCREMENTAR_CONTADOR:
+    BTFSS   CHECK, 2
+    RETURN 
     MOVLW   .4
     SUBWF   LUCES, W
     BTFSC   STATUS,Z
@@ -242,14 +309,17 @@ QUINTA_CARRERA:
     MOVWF   PORTB
     CLRF    LUCES
     BSF	    CHECK, 1
+    BCF	    CHECK, 2
     RETURN 
 INICIAR_CARRERA:
+    BSF	    CHECK, 2
     BSF	    CHECK, 0
     CALL    NOVENTAGRADOS
     RETURN 
 TERMINAR_CARRERA:
     CLRF    PORTB
     CALL    CEROGRADOS
+    BCF	    CHECK, 2
     RETURN
     
 DELAY_BIG:
@@ -260,7 +330,93 @@ CONFIG1:
     DECFSZ  CONT2, F
     GOTO    CONFIG1
     RETURN
+INTERRUPCION_TX:
+    MOVLW   .5
+    SUBWF   CONT7, W
+    BTFSC   STATUS, Z 
+    GOTO    ESPACIO 
+    MOVLW   .4
+    SUBWF   CONT7, W
+    BTFSC   STATUS, Z 
+    GOTO    MANDAR_NHY
+    MOVLW   .3
+    SUBWF   CONT7, W
+    BTFSC   STATUS, Z 
+    GOTO    MANDAR_NLY
+    MOVLW   .2
+    SUBWF   CONT7, W
+    BTFSC   STATUS, Z 
+    GOTO    COMA 
+    MOVLW   .1
+    SUBWF   CONT7, W
+    BTFSC   STATUS, Z 
+    GOTO    MANDAR_NHX
+MANDAR_NLX:
+    MOVFW   MINUTOS2
+    CALL    TABLA_ASCII
+    MOVWF   TXREG
+    INCF    CONT7
+    RETURN
+MANDAR_NHX:
+    MOVFW   MINUTOS
+    CALL    TABLA_ASCII
+    MOVWF   TXREG
+    INCF    CONT7
+    RETURN 
+COMA:
+    MOVLW   .44
+    MOVWF   TXREG
+    INCF    CONT7
+    RETURN
+MANDAR_NHY:
+    MOVFW   UNIDADES
+    CALL    TABLA_ASCII
+    MOVWF   TXREG
+    INCF    CONT7
+    RETURN 
+MANDAR_NLY:
+    MOVFW   DECENAS
+    CALL    TABLA_ASCII
+    MOVWF   TXREG
+    INCF    CONT7
+    RETURN
+ESPACIO:
+    MOVLW   .10
+    MOVWF   TXREG
+    CLRF    CONT7
+    RETURN 
     
+CONTADOR:
+    BTFSS   CHECK, 7
+    RETURN 
+    INCF    UNIDADES
+    MOVLW   .10		    ;incrementa la variable unidades, cuando esta llega a 9
+    SUBWF   UNIDADES, W
+    BTFSS   STATUS, Z   
+    RETURN
+				    
+    CLRF    UNIDADES	    ;cada 0 unidades, se limpia la variable y se incrementa las decenas 
+    INCF    DECENAS
+    MOVLW   .6
+    SUBWF   DECENAS, W	    ;contador automatico que hace que cada 59 minutos sea una hora 
+    BTFSS   STATUS, Z
+    RETURN 
+    
+    CLRF    DECENAS
+    INCF    MINUTOS
+    MOVLW   .10
+    SUBWF   MINUTOS, W
+    BTFSS   STATUS, Z
+    RETURN 
+    CLRF    MINUTOS 
+    INCF    MINUTOS2
+    MOVLW   .10
+    SUBWF   MINUTOS2, W
+    BTFSS   STATUS, Z 
+    RETURN 
+    CLRF    MINUTOS2
+    RETURN
+;antirebote********************************************************************    
 ANTIRREBOTE:
     BTFSC   PUSH_BUTTON, 0
     GOTO    DEBOUNCE 
@@ -320,7 +476,7 @@ SETUP:
     CONFIGURACION_INTERRUPCION:
     BANKSEL TRISA
     BSF	    PIE1, TMR1IE; HABILITA INTERRUPCION DEL TIMER1
-    ;BSF	    PIE1, TMR2IE; HABILITA COMPARACION ENTRE PR2 Y TIMER2
+    BSF	    PIE1, TMR2IE; HABILITA COMPARACION ENTRE PR2 Y TIMER2
     BSF	    INTCON, T0IE
     BSF	    INTCON, PEIE
     MOVLW   .20	; PARA TMR2 FUNCIONAR CON 5ms
@@ -378,6 +534,11 @@ SETUP:
     CLRF    CHECK
     CLRF    LUCES
     CLRF    PUSH_BUTTON 
+    CLRF    ENTER
+    CLRF    UNIDADES 
+    CLRF    DECENAS 
+    CLRF    MINUTOS 
+    CLRF    MINUTOS2
     RETURN 
 ;*******************************************************************************
 

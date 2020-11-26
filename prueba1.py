@@ -12,7 +12,7 @@ dato.flushInput()
 dato.flushOutput()
 for i in range (500):
         dato.flushInput()
-        time.sleep(.3)
+        time.sleep(.1)
         dato.readline()
         variable = dato.readline()
         code = variable.decode("utf8")
