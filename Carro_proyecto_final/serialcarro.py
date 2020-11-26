@@ -35,14 +35,8 @@ def reloj():
     finaly2 = str(y2)
     final = finalx1+ finaly1+":"+finalx2+finaly2
     return final
-def datos():
-    x = conversiones()[0] #llamo a mis valore x y y de la funcion anterior para mapealos de 0 a 99
-    y = conversiones()[1]
-    x1 = math.floor(5*int(x)/13) #uso math.floor para aproximar las operaciones a numeros enreros
-    y1 = math.floor(5*int(y)/13)
-    fin = [x1,y1]
-    return fin #devuelvo una lista con las componentes en entero mapeadas
-def iniciar_carrera (): # funcion que envia datos al PIC, tiene como parametros lo que va a enviars
+
+def iniciar_carrera (): # funcion que envia datos al PIC
     ser.flushOutput()
     sendx = "0"
     try:
@@ -55,7 +49,7 @@ def iniciar_carrera (): # funcion que envia datos al PIC, tiene como parametros 
     except:
         pass
         return
-def terminar_carrera (): # funcion que envia datos al PIC, tiene como parametros lo que va a enviars
+def terminar_carrera (): # funcion que envia datos al PIC
     ser.flushOutput()
     sendx = "1"
     try:
@@ -68,7 +62,7 @@ def terminar_carrera (): # funcion que envia datos al PIC, tiene como parametros
     except:
         pass
         return
-def cerrar_puerta (): # funcion que envia datos al PIC, tiene como parametros lo que va a enviars
+def cerrar_puerta (): # funcion que envia datos al PIC
     ser.flushOutput()
     sendx = "2"
     try:
@@ -81,7 +75,7 @@ def cerrar_puerta (): # funcion que envia datos al PIC, tiene como parametros lo
     except:
         pass
         return
-def abrir_puerta (): # funcion que envia datos al PIC, tiene como parametros lo que va a enviars
+def abrir_puerta (): # funcion que envia datos al PIC
     ser.flushOutput()
     sendx = "3"
     try:
@@ -94,7 +88,7 @@ def abrir_puerta (): # funcion que envia datos al PIC, tiene como parametros lo 
     except:
         pass
         return
-def encender_luces (): # funcion que envia datos al PIC, tiene como parametros lo que va a enviars
+def encender_luces (): # funcion que envia datos al PIC
     ser.flushOutput()
     sendx = "4"
     try:
@@ -107,7 +101,7 @@ def encender_luces (): # funcion que envia datos al PIC, tiene como parametros l
     except:
         pass
         return
-def aumentar_contador (): # funcion que envia datos al PIC, tiene como parametros lo que va a enviars
+def aumentar_contador (): # funcion que envia datos al PIC
     ser.flushOutput()
     sendx = "5"
     try:
@@ -120,7 +114,7 @@ def aumentar_contador (): # funcion que envia datos al PIC, tiene como parametro
     except:
         pass
         return
-def habilitar_cronometro():
+def habilitar_cronometro(): # funcion que envia datos al PIC
     ser.flushOutput()
     sendx = "6"
     try:
@@ -133,7 +127,7 @@ def habilitar_cronometro():
     except:
         pass
         return
-def limpiar_cronometro():
+def limpiar_cronometro(): # funcion que envia datos al PIC
     ser.flushOutput()
     sendx = "7"
     try:
