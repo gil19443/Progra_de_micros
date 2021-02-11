@@ -1,0 +1,26 @@
+Warning[207] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_4.X\LABORATORIO_4.ASM 21 : Found label after column 1. (CONT1)
+Warning[207] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_4.X\LABORATORIO_4.ASM 22 : Found label after column 1. (CONT2)
+Warning[207] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_4.X\LABORATORIO_4.ASM 23 : Found label after column 1. (CONTA)
+Warning[207] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_4.X\LABORATORIO_4.ASM 24 : Found label after column 1. (CONT3)
+Warning[207] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_4.X\LABORATORIO_4.ASM 25 : Found label after column 1. (W_TEMP)
+Warning[207] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_4.X\LABORATORIO_4.ASM 26 : Found label after column 1. (STATUS_TEMP)
+Warning[207] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_4.X\LABORATORIO_4.ASM 27 : Found label after column 1. (INDICADOR)
+Warning[207] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_4.X\LABORATORIO_4.ASM 28 : Found label after column 1. (NIBBLE_H)
+Warning[207] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_4.X\LABORATORIO_4.ASM 29 : Found label after column 1. (NIBBLE_L)
+Warning[207] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_4.X\LABORATORIO_4.ASM 30 : Found label after column 1. (VAR_DISPLAY)
+Warning[203] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_4.X\LABORATORIO_4.ASM 82 : Found opcode in column 1. (CALL)
+Message[305] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_4.X\LABORATORIO_4.ASM 156 : Using default destination of 1 (file).
+Message[305] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_4.X\LABORATORIO_4.ASM 162 : Using default destination of 1 (file).
+Message[305] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_4.X\LABORATORIO_4.ASM 181 : Using default destination of 1 (file).
+Message[302] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_4.X\LABORATORIO_4.ASM 210 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_4.X\LABORATORIO_4.ASM 211 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_4.X\LABORATORIO_4.ASM 214 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_4.X\LABORATORIO_4.ASM 215 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_4.X\LABORATORIO_4.ASM 217 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_4.X\LABORATORIO_4.ASM 219 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_4.X\LABORATORIO_4.ASM 222 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_4.X\LABORATORIO_4.ASM 224 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_4.X\LABORATORIO_4.ASM 226 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_4.X\LABORATORIO_4.ASM 227 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_4.X\LABORATORIO_4.ASM 229 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_4.X\LABORATORIO_4.ASM 230 : Register in operand not in bank 0.  Ensure that bank bits are correct.

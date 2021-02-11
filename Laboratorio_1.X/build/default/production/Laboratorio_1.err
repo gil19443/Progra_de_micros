@@ -1,0 +1,9 @@
+Warning[207] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_1.X\LABORATORIO_1.ASM 18 : Found label after column 1. (CONT1)
+Warning[207] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_1.X\LABORATORIO_1.ASM 19 : Found label after column 1. (CONT2)
+Message[302] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_1.X\LABORATORIO_1.ASM 38 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_1.X\LABORATORIO_1.ASM 39 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_1.X\LABORATORIO_1.ASM 43 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_1.X\LABORATORIO_1.ASM 44 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_1.X\LABORATORIO_1.ASM 70 : Found opcode in column 1. (RETURN)
+Warning[207] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_1.X\LABORATORIO_1.ASM 71 : Found label after column 1. (DELAY_SMALL)
+Warning[203] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_1.X\LABORATORIO_1.ASM 76 : Found opcode in column 1. (RETURN)

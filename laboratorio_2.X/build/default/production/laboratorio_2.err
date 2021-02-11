@@ -1,0 +1,18 @@
+Warning[207] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_2.X\LABORATORIO_2.ASM 24 : Found label after column 1. (CONT1)
+Message[302] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_2.X\LABORATORIO_2.ASM 51 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_2.X\LABORATORIO_2.ASM 52 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_2.X\LABORATORIO_2.ASM 55 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_2.X\LABORATORIO_2.ASM 57 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_2.X\LABORATORIO_2.ASM 58 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_2.X\LABORATORIO_2.ASM 59 : Using default destination of 1 (file).
+Message[302] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_2.X\LABORATORIO_2.ASM 59 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_2.X\LABORATORIO_2.ASM 61 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_2.X\LABORATORIO_2.ASM 62 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_2.X\LABORATORIO_2.ASM 63 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_2.X\LABORATORIO_2.ASM 65 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_2.X\LABORATORIO_2.ASM 66 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_2.X\LABORATORIO_2.ASM 68 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_2.X\LABORATORIO_2.ASM 113 : Using default destination of 1 (file).
+Message[305] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_2.X\LABORATORIO_2.ASM 118 : Using default destination of 1 (file).
+Message[305] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_2.X\LABORATORIO_2.ASM 123 : Using default destination of 1 (file).
+Message[305] C:\USERS\CARLOS GIL\MPLABXPROJECTS\LABORATORIO_2.X\LABORATORIO_2.ASM 128 : Using default destination of 1 (file).

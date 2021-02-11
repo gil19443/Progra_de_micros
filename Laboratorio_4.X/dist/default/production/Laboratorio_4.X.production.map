@@ -1,0 +1,120 @@
+MPLINK 5.08, LINKER
+Linker Map File - Created Mon Aug 24 22:01:55 2020
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                 RES_VECT       code   0x000000    program   0x000002
+                   .cinit    romdata   0x000001    program   0x000004
+                 ISR_VECT       code   0x000004    program   0x000042
+                MAIN_PROG       code   0x000100    program   0x000114
+.config_2007_BUILD/DEFAULT/PRODUCTION/LABORAT       code   0x002007    program   0x000002
+.config_2008_BUILD/DEFAULT/PRODUCTION/LABORAT       code   0x002008    program   0x000002
+                  GPR_VAR      udata   0x000020       data   0x00000a
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000002      
+                            0x000004    0x000024      
+                            0x000100    0x000189      
+                            0x002007    0x002008      
+            176 out of 8455 program addresses used, program memory utilization is 2%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                   ALARMA   0x00011d    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                   BOTTON   0x000128    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+         CAMBIO_INDICADOR   0x000103    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                    CASO0   0x000136    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                  CONFIG1   0x000181    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                  CONFIG2   0x00017b    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+          CONTADOR_TIMER0   0x000144    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                DEC_PORTB   0x00012e    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                DELAY_BIG   0x00017f    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+              DELAY_FINAL   0x000179    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+              DELAY_SMALL   0x000185    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                DISPLAY_0   0x000111    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                DISPLAY_1   0x000117    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+              DISPLAY_VAR   0x00010e    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                    FASE0   0x000141    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                    Final   0x00013b    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                INC_PORTB   0x000132    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                     IN_0   0x000107    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                     IN_1   0x000105    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                      ISR   0x000007    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+             LED_ENCENDER   0x000122    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                     LOOP   0x000101    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                      POP   0x00000e    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                     PUSH   0x000004    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+              SEP_NIBBLES   0x000109    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                    SETUP   0x00014e    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                    START   0x000100    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                    TABLA   0x000013    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                  TIEMPO1   0x000146    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                  TIEMPO2   0x000149    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+          _MAIN_PROG_0188   0x000188    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                    CONT1   0x000020       data     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                    CONT2   0x000021       data     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                    CONT3   0x000023       data     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                    CONTA   0x000022       data     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                INDICADOR   0x000026       data     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                 NIBBLE_H   0x000027       data     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                 NIBBLE_L   0x000028       data     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+              STATUS_TEMP   0x000025       data     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+              VAR_DISPLAY   0x000029       data     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                   W_TEMP   0x000024       data     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                     PUSH   0x000004    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                      ISR   0x000007    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                      POP   0x00000e    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                    TABLA   0x000013    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                    START   0x000100    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                     LOOP   0x000101    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+         CAMBIO_INDICADOR   0x000103    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                     IN_1   0x000105    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                     IN_0   0x000107    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+              SEP_NIBBLES   0x000109    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+              DISPLAY_VAR   0x00010e    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                DISPLAY_0   0x000111    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                DISPLAY_1   0x000117    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                   ALARMA   0x00011d    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+             LED_ENCENDER   0x000122    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                   BOTTON   0x000128    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                DEC_PORTB   0x00012e    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                INC_PORTB   0x000132    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                    CASO0   0x000136    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                    Final   0x00013b    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                    FASE0   0x000141    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+          CONTADOR_TIMER0   0x000144    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                  TIEMPO1   0x000146    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                  TIEMPO2   0x000149    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                    SETUP   0x00014e    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+              DELAY_FINAL   0x000179    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                  CONFIG2   0x00017b    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                DELAY_BIG   0x00017f    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                  CONFIG1   0x000181    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+              DELAY_SMALL   0x000185    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+          _MAIN_PROG_0188   0x000188    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                    CONT1   0x000020       data     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                    CONT2   0x000021       data     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                    CONTA   0x000022       data     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                    CONT3   0x000023       data     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                   W_TEMP   0x000024       data     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+              STATUS_TEMP   0x000025       data     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                INDICADOR   0x000026       data     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                 NIBBLE_H   0x000027       data     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+                 NIBBLE_L   0x000028       data     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+              VAR_DISPLAY   0x000029       data     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_4.X\Laboratorio_4.asm
+
+

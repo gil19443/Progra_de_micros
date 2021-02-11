@@ -1,0 +1,2738 @@
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001 ;*******************************************************************************                        
+                                                                           *
+                      00002 ;    Filename:              Proyecto_1.0.asm                              *
+                      00003 ;    Date:                  08/09/2020                                         *
+                      00004 ;    File Version:          v.1                                                *
+                      00005 ;    Author:                Carlos Gil                      *
+                      00006 ;    Company:               UVG                                                *
+                      00007 ;    Description:           reloj con alarma                                                            
+                                                                            *
+                      00008 ;*******************************************************************************
+                      00009 #include "p16f887.inc"
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ; Build date : Nov 22 2017
+                      00005 ;  MPASM PIC16F887 processor include
+                      00006 ; 
+                      00007 ;  (c) Copyright 1999-2017 Microchip Technology, All rights reserved
+                      00008 ;==========================================================================
+                      00009 
+                      00810         LIST
+                      00010 
+                      00011 ; CONFIG1
+                      00012 ; __config 0x20D4
+2007   20D4           00013  __CONFIG _CONFIG1, _FOSC_INTRC_NOCLKOUT & _WDTE_OFF & _PWRTE_OFF & _MCLRE_OFF & _CP_OFF & _CPD_OFF & _B
+                            OREN_OFF & _IESO_OFF & _FCMEN_OFF & _LVP_OFF
+                      00014 ; CONFIG2
+                      00015 ; __config 0x3FFF
+2008   3FFF           00016  __CONFIG _CONFIG2, _BOR4V_BOR40V & _WRT_OFF
+                      00017  ;****************************************************************************** 
+                      00018  ; variables
+                      00019  ;******************************************************************************
+                      00020 GPR_VAR         UDATA
+Warning[207]: Found label after column 1. (UNIDADES)
+0000                  00021     UNIDADES    RES     1
+Warning[207]: Found label after column 1. (CONT2)
+0001                  00022     CONT2       RES     1
+Warning[207]: Found label after column 1. (CONT3)
+0002                  00023     CONT3       RES     1
+Warning[207]: Found label after column 1. (CONT4)
+0003                  00024     CONT4       RES     1
+Warning[207]: Found label after column 1. (DECENAS)
+0004                  00025     DECENAS     RES     1
+Warning[207]: Found label after column 1. (CONT6)
+0005                  00026     CONT6       RES     1
+Warning[207]: Found label after column 1. (CONT7)
+0006                  00027     CONT7       RES     1
+Warning[207]: Found label after column 1. (CONT8)
+0007                  00028     CONT8       RES     1
+Warning[207]: Found label after column 1. (CONT9)
+0008                  00029     CONT9       RES     1
+Warning[207]: Found label after column 1. (CONT10)
+0009                  00030     CONT10      RES     1
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[207]: Found label after column 1. (CONT11)
+000A                  00031     CONT11      RES     1
+Warning[207]: Found label after column 1. (CONT12)
+000B                  00032     CONT12      RES     1
+Warning[207]: Found label after column 1. (CONT13)
+000C                  00033     CONT13      RES     1
+Warning[207]: Found label after column 1. (W_TEMP)
+000D                  00034     W_TEMP      RES     1
+Warning[207]: Found label after column 1. (STATUS_TEMP)
+000E                  00035     STATUS_TEMP RES     1
+Warning[207]: Found label after column 1. (INDICADOR)
+000F                  00036     INDICADOR   RES     1
+Warning[207]: Found label after column 1. (INDICADOR2)
+0010                  00037     INDICADOR2  RES     1
+Warning[207]: Found label after column 1. (NIBBLE_H)
+0011                  00038     NIBBLE_H    RES     1
+Warning[207]: Found label after column 1. (NIBBLE_L)
+0012                  00039     NIBBLE_L    RES     1
+Warning[207]: Found label after column 1. (SEGUNDOS)
+0013                  00040     SEGUNDOS    RES     1
+Warning[207]: Found label after column 1. (HORAS)
+0014                  00041     HORAS       RES     1
+Warning[207]: Found label after column 1. (HORAS1)
+0015                  00042     HORAS1      RES     1
+Warning[207]: Found label after column 1. (HORAS2)
+0016                  00043     HORAS2      RES     1
+Warning[207]: Found label after column 1. (DIAS1)
+0017                  00044     DIAS1       RES     1
+Warning[207]: Found label after column 1. (DIAS2)
+0018                  00045     DIAS2       RES     1
+Warning[207]: Found label after column 1. (MESES1)
+0019                  00046     MESES1      RES     1
+Warning[207]: Found label after column 1. (MESES2)
+001A                  00047     MESES2      RES     1 
+Warning[207]: Found label after column 1. (ESTADO)
+001B                  00048     ESTADO      RES     1
+Warning[207]: Found label after column 1. (DISPLAY0)
+001C                  00049     DISPLAY0    RES     1
+Warning[207]: Found label after column 1. (DISPLAY1)
+001D                  00050     DISPLAY1    RES     1
+Warning[207]: Found label after column 1. (DISPLAY2)
+001E                  00051     DISPLAY2    RES     1
+Warning[207]: Found label after column 1. (DISPLAY3)
+001F                  00052     DISPLAY3    RES     1
+Warning[207]: Found label after column 1. (ESPECIAL)
+0020                  00053     ESPECIAL    RES     1
+Warning[207]: Found label after column 1. (PUSH_BOTTON)
+0021                  00054     PUSH_BOTTON RES     1
+Warning[207]: Found label after column 1. (TIMER1)
+0022                  00055     TIMER1      RES     1
+Warning[207]: Found label after column 1. (TIMER2)
+0023                  00056     TIMER2      RES     1
+Warning[207]: Found label after column 1. (TIMER3)
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0024                  00057     TIMER3      RES     1
+Warning[207]: Found label after column 1. (TIMER4)
+0025                  00058     TIMER4      RES     1
+Warning[207]: Found label after column 1. (CONTIMERS)
+0026                  00059     CONTIMERS   RES     1
+Warning[207]: Found label after column 1. (CONTIMERM)
+0027                  00060     CONTIMERM   RES     1
+Warning[207]: Found label after column 1. (ALARMA)
+0028                  00061     ALARMA      RES     1
+Warning[207]: Found label after column 1. (CONT1)
+0029                  00062     CONT1       RES     1
+                      00063 ;*******************************************************************************
+                      00064 ; Reset Vector
+                      00065 ;*******************************************************************************
+                      00066 RES_VECT  CODE    0x0000            ; processor reset vector
+0000   2???           00067     GOTO    START   
+                      00068 ISR_VECT  CODE    0x0004
+0004                  00069 PUSH:
+0004   138B           00070     BCF     INTCON, GIE
+0005   00??           00071     MOVWF   W_TEMP
+0006   0E03           00072     SWAPF   STATUS, W
+0007   00??           00073     MOVWF   STATUS_TEMP
+0008                  00074 ISR:
+0008   190B           00075     BTFSC   INTCON, T0IF
+0009   2???           00076     CALL    INTERRUPCION_TMRO
+000A   180C           00077     BTFSC   PIR1, TMR1IF
+000B   2???           00078     CALL    INTERRUPCION_TMR1
+000C   188C           00079     BTFSC   PIR1, TMR2IF
+000D   2???           00080     CALL    INTERRUPCION_TMR2
+000E                  00081 POP:
+000E   0E??           00082     SWAPF   STATUS_TEMP, W
+000F   0083           00083     MOVWF   STATUS 
+0010   0E??           00084     SWAPF   W_TEMP, F
+0011   0E??           00085     SWAPF   W_TEMP, W
+0012   0009           00086     RETFIE
+                      00087 
+0013                  00088 INTERRUPCION_TMRO:
+0013   30F8           00089     MOVLW   .248    ;valor para una interrupcion cada 2ms
+0014   0081           00090     MOVWF   TMR0
+0015   110B           00091     BCF     INTCON, T0IF 
+0016   2???           00092     CALL    DISPLAY_VAR ;rutina que muxea la se;al en los 4 display cada 2ms
+0017   0008           00093     RETURN 
+                      00094     
+0018                  00095 INTERRUPCION_TMR1:
+0018   300B           00096     MOVLW   0x0B
+0019   008F           00097     MOVWF   TMR1H
+001A   30DC           00098     MOVLW   0xDC
+001B   300E           00099     MOVLW   TMR1L   ;valor para un ainterrupcion cada medio segundo 
+001C   100C           00100     BCF     PIR1, TMR1IF
+Message[305]: Using default destination of 1 (file).
+001D   0A??           00101     INCF    CONT3   ;contador auxiliar para que se llame la rutina de incremento auotmatico cada 120 int
+                            errupciones  
+001E   3078           00102     MOVLW   .120
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+001F   02??           00103     SUBWF   CONT3, W
+0020   1D03           00104     BTFSS   STATUS, Z
+0021   0008           00105     RETURN 
+                      00106     
+0022   08??           00107     MOVFW   ESTADO
+0023   3C01           00108     SUBLW   .1              ;declara que cuando se esten realizando los estados 3-7 la rutina atomatica 
+                            debera parar 
+0024   1803           00109     BTFSC   STATUS, C
+0025   2???           00110     CALL    DISPLAY_UNIDADES
+0026   01??           00111     CLRF    CONT3
+0027   0008           00112     RETURN
+                      00113 
+0028                  00114 INTERRUPCION_TMR2:
+0028   108C           00115     BCF     PIR1, TMR2IF
+Message[305]: Using default destination of 1 (file).
+0029   0A??           00116     INCF    CONT7
+002A   3014           00117     MOVLW   .20
+002B   02??           00118     SUBWF   CONT7, W
+002C   1D03           00119     BTFSS   STATUS, Z
+002D   0008           00120     RETURN 
+002E   2???           00121     CALL    LEDS_INTERMITENTES      ;interrupcion para encender los leds cada segundo 
+002F   01??           00122     CLRF    CONT7
+0030   3007           00123     MOVLW   .7
+0031   02??           00124     SUBWF   ESTADO,W                ;indicadr para que al estar en el estado 7, se pueda usar la interru
+                            pcion para la funcion del timer 
+0032   1903           00125     BTFSC   STATUS,Z
+0033   2???           00126     CALL    DECREMENTAR_TIMER
+0034   0008           00127     RETURN
+                      00128     
+                      00129 
+                      00130 
+                      00131 ;*******************************************************************************
+                      00132 ; TABLA
+                      00133 ;*******************************************************************************
+0035                  00134 TABLA:
+0035   390F           00135     ANDLW   b'00001111' ; mascara
+0036   0782           00136     ADDWF   PCL, F
+0037   3488           00137     RETLW   b'10001000' ; 0
+0038   34EB           00138     RETLW   b'11101011' ; 1
+0039   344C           00139     RETLW   b'01001100' ; 2
+003A   3449           00140     RETLW   b'01001001' ; 3
+003B   342B           00141     RETLW   b'00101011' ; 4
+003C   3419           00142     RETLW   b'00011001' ; 5
+003D   3418           00143     RETLW   b'00011000' ; 6
+003E   34CB           00144     RETLW   b'11001011' ; 7
+003F   3408           00145     RETLW   b'00001000' ; 8
+0040   340B           00146     RETLW   b'00001011' ; 9
+0041   3402           00147     RETLW   b'00000010' ; A
+0042   3430           00148     RETLW   b'00110000' ; b
+0043   3494           00149     RETLW   b'10010100' ; C
+0044   3460           00150     RETLW   b'01100000' ; d
+0045   3414           00151     RETLW   b'00010100' ; E
+0046   3416           00152     RETLW   b'00010110' ; F
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00153 ;*******************************************************************************
+                      00154 ; MAIN PROGRAM
+                      00155 ;*******************************************************************************
+                      00156 MAIN_PROG   CODE     0x0100                 ; let linker place main program
+0100                  00157 START
+Warning[203]: Found opcode in column 1. (CALL)
+0100   2???           00158 CALL SETUP
+                      00159 ;*******************************************************************************
+                      00160 ; MAIN LOOP
+                      00161 ;*******************************************************************************
+Warning[207]: Found label after column 1. (LOOP)
+0101                  00162  LOOP:
+0101   1800           00163     BTFSC   PUSH_BOTTON, .0
+0102   2???           00164     GOTO    LOOP1
+0103   1B86           00165     BTFSC   PORTB, .7
+0104   2???           00166     GOTO    ESTADOS                     ;rutina de antirebote para evitar que se quede trabado en el loo
+                            p 
+0105   1400           00167     BSF     PUSH_BOTTON, .0             ;push encargado de incrementar una variable que indica el estado
+                             que se ejecutara 
+0106   2???           00168     GOTO    ESTADOS
+0107                  00169 LOOP1:
+0107   1800           00170     BTFSC   PUSH_BOTTON, .0
+0108   2???           00171     CALL    ACCIONI
+0109                  00172 ESTADOS:
+0109   3007           00173     MOVLW   .7
+010A   02??           00174     SUBWF   ESTADO, W
+010B   1903           00175     BTFSC   STATUS, Z                   ;menu de seleccion de estado que lleva a lo que realiza cada esa
+                            tado en espec[ifico 
+010C   2???           00176     GOTO    ESTADO8                     
+010D   3006           00177     MOVLW   .6
+010E   02??           00178     SUBWF   ESTADO, W
+010F   1903           00179     BTFSC   STATUS, Z
+0110   2???           00180     GOTO    ESTADO7
+0111   3005           00181     MOVLW   .5
+0112   02??           00182     SUBWF   ESTADO, W
+0113   1903           00183     BTFSC   STATUS, Z
+0114   2???           00184     GOTO    ESTADO6
+0115   3004           00185     MOVLW   .4
+0116   02??           00186     SUBWF   ESTADO, W
+0117   1903           00187     BTFSC   STATUS, Z
+0118   2???           00188     GOTO    ESTADO5
+0119   3003           00189     MOVLW   .3
+011A   02??           00190     SUBWF   ESTADO, W
+011B   1903           00191     BTFSC   STATUS, Z
+011C   2???           00192     GOTO    ESTADO4
+011D   3002           00193     MOVLW   .2
+011E   02??           00194     SUBWF   ESTADO, W
+011F   1903           00195     BTFSC   STATUS, Z
+0120   2???           00196     GOTO    ESTADO3
+0121   3001           00197     MOVLW   .1
+0122   02??           00198     SUBWF   ESTADO, W
+0123   1903           00199     BTFSC   STATUS, Z
+0124   2???           00200     GOTO    ESTADO2
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0125   2???           00201     GOTO    ESTADO1 
+                      00202 ;*******************************************************************************
+                      00203 ; SUB RUTINAS 
+                      00204 ;******************************************************************************* 
+                      00205 ;*************mux 4:1 para controlar los display con 1 puerto*******************
+0126                  00206 DISPLAY_VAR:
+0126   1008           00207     BCF     PORTD, RD0      
+0127   1088           00208     BCF     PORTD, RD1
+0128   1108           00209     BCF     PORTD, RD2
+0129   1188           00210     BCF     PORTD, RD3
+012A   1880           00211     BTFSC   INDICADOR, 1    
+012B   2???           00212     GOTO    DISPLAY_2Y3
+012C                  00213 DISPLAY_0Y1:
+012C   1800           00214     BTFSC   INDICADOR, 0
+012D   2???           00215     GOTO    DISPLAY_1
+012E   1480           00216     BSF     INDICADOR, 1
+Warning[207]: Found label after column 1. (DISPLAY_0)
+012F                  00217     DISPLAY_0:
+012F   08??           00218         MOVFW   DISPLAY0
+0130   2???           00219         CALL    TABLA
+0131   0087           00220         MOVWF   PORTC
+0132   1588           00221         BSF     PORTD, RD3
+0133   1400           00222         BSF     INDICADOR, 0
+0134   0008           00223         RETURN
+Warning[207]: Found label after column 1. (DISPLAY_1)
+0135                  00224     DISPLAY_1:
+0135   08??           00225         MOVFW   DISPLAY1
+0136   2???           00226         CALL    TABLA
+0137   0087           00227         MOVWF   PORTC
+0138   1408           00228         BSF     PORTD, RD0
+0139   1000           00229         BCF     INDICADOR, 0
+013A   0008           00230         RETURN
+013B                  00231 DISPLAY_2Y3:
+013B   1800           00232     BTFSC   INDICADOR, 0
+013C   2???           00233     GOTO    DISPLAY_3
+013D   1080           00234     BCF     INDICADOR, 1
+Warning[207]: Found label after column 1. (DISPLAY_2)
+013E                  00235     DISPLAY_2:
+013E   08??           00236         MOVFW   DISPLAY2
+013F   2???           00237         CALL    TABLA
+0140   0087           00238         MOVWF   PORTC
+0141   1508           00239         BSF     PORTD, RD2
+0142   1400           00240         BSF     INDICADOR, 0
+0143   0008           00241         RETURN
+Warning[207]: Found label after column 1. (DISPLAY_3)
+0144                  00242     DISPLAY_3:
+0144   08??           00243         MOVFW   DISPLAY3
+0145   2???           00244         CALL    TABLA
+0146   0087           00245         MOVWF   PORTC
+0147   1488           00246         BSF     PORTD, RD1
+0148   1000           00247         BCF     INDICADOR, 0
+0149   0008           00248         RETURN
+                      00249 ;*******************************************************************************
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00250 ;********************contador automatico para fecha y hora**********************
+014A                  00251 DISPLAY_UNIDADES:
+Message[305]: Using default destination of 1 (file).
+014A   0A??           00252     INCF    UNIDADES
+014B   300A           00253     MOVLW   .10             ;incrementa la variable unidades, cuando esta llega a 9
+014C   02??           00254     SUBWF   UNIDADES, W
+014D   1D03           00255     BTFSS   STATUS, Z   
+014E   0008           00256     RETURN
+                      00257                                     
+014F   01??           00258     CLRF    UNIDADES        ;cada 0 unidades, se limpia la variable y se incrementa las decenas 
+Message[305]: Using default destination of 1 (file).
+0150   0A??           00259     INCF    DECENAS
+0151   3006           00260     MOVLW   .6
+0152   02??           00261     SUBWF   DECENAS, W      ;contador automatico que hace que cada 59 minutos sea una hora 
+0153   1D03           00262     BTFSS   STATUS, Z
+0154   0008           00263     RETURN 
+                      00264     
+0155   01??           00265     CLRF    DECENAS 
+0156   3002           00266     MOVLW   .2              ;luego de una hora se revisa si la decenas de las horas llego a 2, para que 
+                            el limite de las unidades sea 3
+0157   02??           00267     SUBWF   HORAS2, W       ;o para que el limite de aumento sea 9
+0158   1D03           00268     BTFSS   STATUS, Z
+0159   2???           00269     GOTO    TFHORAS
+                      00270     
+015A                  00271 THORAS:
+Message[305]: Using default destination of 1 (file).
+015A   0A??           00272     INCF    HORAS1              ;rutina auxiliar encargada de poner el tope de las unidades de la hora e
+                            n 3, cuando las decenas de las horas
+015B   3004           00273     MOVLW   .4                  ;este en 2
+015C   02??           00274     SUBWF   HORAS1, W
+015D   1D03           00275     BTFSS   STATUS, Z
+015E   0008           00276     RETURN 
+015F   01??           00277     CLRF    HORAS1
+0160   01??           00278     CLRF    HORAS2
+0161   2???           00279     GOTO    MESES_DIAS 
+Warning[207]: Found label after column 1. (TFHORAS)
+0162                  00280  TFHORAS:
+Message[305]: Using default destination of 1 (file).
+0162   0A??           00281     INCF    HORAS1  ;rutina auxiliar que pone el tope de las horas en 9, cuando las decenas de las horas
+                             
+0163   300A           00282     MOVLW   .10     ;no ha llegado a 2 aun. 
+0164   02??           00283     SUBWF   HORAS1, W
+0165   1D03           00284     BTFSS   STATUS, Z
+0166   0008           00285     RETURN 
+0167   01??           00286     CLRF    HORAS1
+Message[305]: Using default destination of 1 (file).
+0168   0A??           00287     INCF    HORAS2
+0169   0008           00288     RETURN   
+                      00289 
+016A                  00290 MESES_DIAS:                     
+016A   3001           00291     MOVLW   .1              ;revisa si las deceneas de los meses estan en uno para que el tope sea 2 o a
+                            ntes de 1
+016B   02??           00292     SUBWF   MESES2, W       ;para que el tope sea 9
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+016C   1D03           00293     BTFSS   STATUS, Z 
+016D   2???           00294     GOTO    MESES_FINAL
+016E                  00295 MESES_NORMAL:
+016E   3003           00296     MOVLW   .3
+016F   02??           00297     SUBWF   MESES1, W       ;rutina auxiliar que pone el tope de las unidades de las horas en 2 cuando 
+0170   1D03           00298     BTFSS   STATUS, Z       ;cuando las decenas de los meses estan en 1
+0171   2???           00299     GOTO    CASO_MESES      ;subrutina que separa los dias acorde con el mes y aumenta el mes 
+0172   01??           00300     CLRF    MESES2
+0173   3001           00301     MOVLW   .1
+0174   00??           00302     MOVWF   MESES1
+0175   00??           00303     MOVWF   CONT8           ;contador encargado de incrementarse con el valor del mes, de modo que a tra
+                            ves de el se sepa en que mes se encuentra
+0176   0008           00304     RETURN                  ;para poder fijar los limites de los dias de acuerdo de eso 
+0177                  00305 MESES_FINAL:
+0177   300A           00306     MOVLW   .10             ;rutina quq fija el limite de las unidades en 9, cunado las decenas de los m
+                            eses es menor que 1
+0178   02??           00307     SUBWF   MESES1, W
+0179   1D03           00308     BTFSS   STATUS,Z 
+017A   2???           00309     GOTO    CASO_MESES
+017B   01??           00310     CLRF    MESES1
+Message[305]: Using default destination of 1 (file).
+017C   0A??           00311     INCF    MESES2
+017D   0008           00312     RETURN 
+                      00313     
+017E                  00314 CASO_MESES:                 ;un contador se incrementa acorde con el mes, fijando la cantidad de dias ma
+                            xima para cada mes 
+017E   300C           00315     MOVLW   .12
+017F   02??           00316     SUBWF   CONT8, W
+0180   1903           00317     BTFSC   STATUS, Z
+0181   2???           00318     GOTO    CASO1
+0182   300B           00319     MOVLW   .11
+0183   02??           00320     SUBWF   CONT8, W
+0184   1903           00321     BTFSC   STATUS, Z
+0185   2???           00322     GOTO    CASO3
+0186   300A           00323     MOVLW   .10
+0187   02??           00324     SUBWF   CONT8, W
+0188   1903           00325     BTFSC   STATUS, Z
+0189   2???           00326     GOTO    CASO1
+018A   3009           00327     MOVLW   .9
+018B   02??           00328     SUBWF   CONT8, W
+018C   1903           00329     BTFSC   STATUS, Z
+018D   2???           00330     GOTO    CASO3
+018E   3008           00331     MOVLW   .8
+018F   02??           00332     SUBWF   CONT8, W
+0190   1903           00333     BTFSC   STATUS, Z
+0191   2???           00334     GOTO    CASO1
+0192   3007           00335     MOVLW   .7
+0193   02??           00336     SUBWF   CONT8, W
+0194   1903           00337     BTFSC   STATUS, Z
+0195   2???           00338     GOTO    CASO1
+0196   3006           00339     MOVLW   .6
+0197   02??           00340     SUBWF   CONT8, W
+0198   1903           00341     BTFSC   STATUS, Z
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE  9
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0199   2???           00342     GOTO    CASO3
+019A   3005           00343     MOVLW   .5
+019B   02??           00344     SUBWF   CONT8, W
+019C   1903           00345     BTFSC   STATUS, Z
+019D   2???           00346     GOTO    CASO1
+019E   3004           00347     MOVLW   .4
+019F   02??           00348     SUBWF   CONT8, W
+01A0   1903           00349     BTFSC   STATUS, Z
+01A1   2???           00350     GOTO    CASO3
+01A2   3003           00351     MOVLW   .3
+01A3   02??           00352     SUBWF   CONT8, W
+01A4   1903           00353     BTFSC   STATUS, Z
+01A5   2???           00354     GOTO    CASO1
+01A6   3002           00355     MOVLW   .2
+01A7   02??           00356     SUBWF   CONT8, W
+01A8   1903           00357     BTFSC   STATUS, Z
+01A9   2???           00358     GOTO    CASO2
+01AA   3001           00359     MOVLW   .1
+01AB   02??           00360     SUBWF   CONT8, W
+01AC   1903           00361     BTFSC   STATUS, Z
+01AD   2???           00362     GOTO    CASO1
+01AE                  00363 CASO1:                  ;se revisa las decenas de los dias, si estan en 3 para poner el tope en 1
+01AE   3003           00364     MOVLW   .3          ;si es menor que 3 se fija el tope de las unidades en 9
+01AF   02??           00365     SUBWF   DIAS2, W
+01B0   1D03           00366     BTFSS   STATUS, Z
+01B1   2???           00367     GOTO    DIAMAX1
+01B2                  00368 DIAMIN1:
+Message[305]: Using default destination of 1 (file).
+01B2   0A??           00369     INCF    DIAS1
+01B3   3002           00370     MOVLW   .2          ;subrutina que fija el limite de las unidades de los dias en 1, cuando  
+01B4   02??           00371     SUBWF   DIAS1, W    ;las decenas de los dias es 3
+01B5   1D03           00372     BTFSS   STATUS, Z
+01B6   0008           00373     RETURN 
+                      00374     
+01B7   3001           00375     MOVLW   .1
+01B8   00??           00376     MOVWF   DIAS1
+01B9   01??           00377     CLRF    DIAS2
+Message[305]: Using default destination of 1 (file).
+01BA   0A??           00378     INCF    MESES1      ;luego de llegar al limite de los dias del mes, se incrementa el valor del mes y
+                             el contador 
+Message[305]: Using default destination of 1 (file).
+01BB   0A??           00379     INCF    CONT8       ;asociado a los meses para colocarse en los limites correctos 
+01BC   0008           00380     RETURN 
+                      00381   
+01BD                  00382 DIAMAX1:
+Message[305]: Using default destination of 1 (file).
+01BD   0A??           00383     INCF    DIAS1       ;subrutina en cargada de fijar el tope de las unidades de los dias en 9
+01BE   300A           00384     MOVLW   .10         ;cuando las decenas de los dias es menor que 3
+01BF   02??           00385     SUBWF   DIAS1,W
+01C0   1D03           00386     BTFSS   STATUS, Z 
+01C1   0008           00387     RETURN 
+01C2   01??           00388     CLRF    DIAS1
+Message[305]: Using default destination of 1 (file).
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 10
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+01C3   0A??           00389     INCF    DIAS2
+01C4   0008           00390     RETURN 
+                      00391     
+01C5                  00392 CASO2:                      ;revisa si las decenas de los meses estan en 2, para que el tope de las unid
+                            ades 
+01C5   3002           00393     MOVLW   .2              ;sea 8 (caso febrero)
+01C6   02??           00394     SUBWF   DIAS2, W
+01C7   1D03           00395     BTFSS   STATUS, Z
+01C8   2???           00396     GOTO    DIAMAX2
+01C9                  00397 DIAMIN2:                    ;subrutina encargada de fijar el limite de las unidades de los dias en 8 cua
+                            ndo 
+Message[305]: Using default destination of 1 (file).
+01C9   0A??           00398     INCF    DIAS1           ;las decenas de los dias es menor a 2
+01CA   3009           00399     MOVLW   .9
+01CB   02??           00400     SUBWF   DIAS1,W
+01CC   1D03           00401     BTFSS   STATUS, Z
+01CD   0008           00402     RETURN 
+                      00403     
+01CE   3001           00404     MOVLW   .1
+01CF   00??           00405     MOVWF   DIAS1
+01D0   01??           00406     CLRF    DIAS2
+Message[305]: Using default destination of 1 (file).
+01D1   0A??           00407     INCF    MESES1          ;luego de llegar al limite de los dias del mes, se incrementa el valor del m
+                            es y el contador 
+Message[305]: Using default destination of 1 (file).
+01D2   0A??           00408     INCF    CONT8           ;asociado a los meses para colocarse en los limites correctos 
+01D3   0008           00409     RETURN
+                      00410     
+01D4                  00411 DIAMAX2:
+Message[305]: Using default destination of 1 (file).
+01D4   0A??           00412     INCF    DIAS1           ;subrutina que fija el limite de las unidades de los dias en 9, cunando las 
+                            decenas 
+01D5   300A           00413     MOVLW   .10             ;de los dias es menor que 2
+01D6   02??           00414     SUBWF   DIAS1, W
+01D7   1D03           00415     BTFSS   STATUS, Z 
+01D8   0008           00416     RETURN 
+                      00417     
+01D9   01??           00418     CLRF    DIAS1
+Message[305]: Using default destination of 1 (file).
+01DA   0A??           00419     INCF    DIAS2
+01DB   0008           00420     RETURN 
+                      00421 
+01DC                  00422 CASO3:                      ;caso para los meses de 3 dias 
+01DC   3003           00423     MOVLW   .3
+01DD   02??           00424     SUBWF   DIAS2, W
+01DE   1D03           00425     BTFSS   STATUS, Z 
+01DF   2???           00426     GOTO    DIAMAX3
+01E0                  00427 DIAMIN:                 ;subrutina encargada de fijar el limite de las unidades de los dias en 0 cuando 
+                            las decenas son 3
+01E0   3001           00428     MOVLW   .1
+01E1   00??           00429     MOVWF   DIAS1
+01E2   01??           00430     CLRF    DIAS2
+Message[305]: Using default destination of 1 (file).
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 11
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+01E3   0A??           00431     INCF    MESES1      ;luego de llegar al limite de los dias del mes, se incrementa el valor del mes y
+                             el contador 
+Message[305]: Using default destination of 1 (file).
+01E4   0A??           00432     INCF    CONT8       ;asociado a los meses para colocarse en los limites correctos 
+01E5   0008           00433     RETURN 
+01E6                  00434 DIAMAX3:                ;subrutina encargada de fijar el limite de las unidades de los dias en 9 cuando 
+                            las decenas son menores que 3
+Message[305]: Using default destination of 1 (file).
+01E6   0A??           00435     INCF    DIAS1
+01E7   300A           00436     MOVLW   .10
+01E8   02??           00437     SUBWF   DIAS1, W
+01E9   1D03           00438     BTFSS   STATUS, Z 
+01EA   0008           00439     RETURN 
+Message[305]: Using default destination of 1 (file).
+01EB   0A??           00440     INCF    DIAS2
+01EC   01??           00441     CLRF    DIAS1
+01ED   0008           00442     RETURN 
+                      00443 
+                      00444 
+                      00445 ;********CONTADOR NO AUTOMATICO PARA AUMENTAR FECHA Y HORA**********************
+                      00446 ;aca se describen funciones como las mencioadas anteriormente, la diferencia es que estan aisladas en gr
+                            upos de 2 display para controlarlas mecanicamente
+01EE                  00447 DISPLAY_MINUTOS_N:      ;rutina para incrementar los dos display encargados de los minutos       
+Message[305]: Using default destination of 1 (file).
+01EE   0A??           00448     INCF    UNIDADES
+01EF   300A           00449     MOVLW   .10         ;luego de que las unidades lleguen a 9, se ponen en 0 y se incrementa en uno las
+                             decenas 
+01F0   02??           00450     SUBWF   UNIDADES, W
+01F1   1D03           00451     BTFSS   STATUS, Z 
+01F2   0008           00452     RETURN
+                      00453     
+01F3   01??           00454     CLRF    UNIDADES
+Message[305]: Using default destination of 1 (file).
+01F4   0A??           00455     INCF    DECENAS
+01F5   3006           00456     MOVLW   .6          ;luego que las decenas lleguen a 5 se pone en cero y se vuelve a comenzar todo e
+                            n 0
+01F6   02??           00457     SUBWF   DECENAS, W
+01F7   1903           00458     BTFSC   STATUS, Z
+01F8   01??           00459     CLRF    DECENAS 
+01F9   0008           00460     RETURN  
+                      00461 
+01FA                  00462 DISPLAY_HORAS_N:    ;rutina encargada de incrementar manualmente los display donde aparecen las horsa 
+01FA   3002           00463     MOVLW   .2      ;revisa si las decenas de las horas es igual a dos para ver que tope fijar en las un
+                            idades 
+01FB   02??           00464     SUBWF   HORAS2, W
+01FC   1D03           00465     BTFSS   STATUS, Z
+01FD   2???           00466     GOTO    TFHORAS_1  
+                      00467 
+Message[305]: Using default destination of 1 (file).
+01FE   0A??           00468     INCF    HORAS1  ;subrutina encargada de fijar el tope de las unidades de las horas en 3, cuando las 
+                            decenas son iguales a 2
+01FF   3004           00469     MOVLW   .4
+0200   02??           00470     SUBWF   HORAS1, W
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 12
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0201   1D03           00471     BTFSS   STATUS, Z
+0202   0008           00472     RETURN 
+0203   01??           00473     CLRF    HORAS1
+0204   01??           00474     CLRF    HORAS2
+0205   0008           00475     RETURN
+Warning[207]: Found label after column 1. (TFHORAS_1)
+0206                  00476  TFHORAS_1:         ;subrutina que fija el tope de las unidades en 9 cuando las decenas son menores a 2
+Message[305]: Using default destination of 1 (file).
+0206   0A??           00477     INCF    HORAS1
+0207   300A           00478     MOVLW   .10
+0208   02??           00479     SUBWF   HORAS1, W
+0209   1D03           00480     BTFSS   STATUS, Z
+020A   0008           00481     RETURN 
+020B   01??           00482     CLRF    HORAS1
+Message[305]: Using default destination of 1 (file).
+020C   0A??           00483     INCF    HORAS2
+020D   0008           00484     RETURN  
+                      00485 
+020E                  00486 CASO_DIAS_N:            ;con base en el valor del contador 8, determina si el tope de los dias es 30, 31
+                             o 28 acorde con el mes 
+020E   300C           00487     MOVLW   .12
+020F   02??           00488     SUBWF   CONT8, W
+0210   1903           00489     BTFSC   STATUS, Z
+0211   2???           00490     GOTO    CASO1_1
+0212   300B           00491     MOVLW   .11
+0213   02??           00492     SUBWF   CONT8, W
+0214   1903           00493     BTFSC   STATUS, Z
+0215   2???           00494     GOTO    CASO3_1
+0216   300A           00495     MOVLW   .10
+0217   02??           00496     SUBWF   CONT8, W
+0218   1903           00497     BTFSC   STATUS, Z
+0219   2???           00498     GOTO    CASO1_1
+021A   3009           00499     MOVLW   .9
+021B   02??           00500     SUBWF   CONT8, W
+021C   1903           00501     BTFSC   STATUS, Z
+021D   2???           00502     GOTO    CASO3_1
+021E   3008           00503     MOVLW   .8
+021F   02??           00504     SUBWF   CONT8, W
+0220   1903           00505     BTFSC   STATUS, Z
+0221   2???           00506     GOTO    CASO1_1
+0222   3007           00507     MOVLW   .7
+0223   02??           00508     SUBWF   CONT8, W
+0224   1903           00509     BTFSC   STATUS, Z
+0225   2???           00510     GOTO    CASO1_1
+0226   3006           00511     MOVLW   .6
+0227   02??           00512     SUBWF   CONT8, W
+0228   1903           00513     BTFSC   STATUS, Z
+0229   2???           00514     GOTO    CASO3_1
+022A   3005           00515     MOVLW   .5
+022B   02??           00516     SUBWF   CONT8, W
+022C   1903           00517     BTFSC   STATUS, Z
+022D   2???           00518     GOTO    CASO1_1
+022E   3004           00519     MOVLW   .4
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 13
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+022F   02??           00520     SUBWF   CONT8, W
+0230   1903           00521     BTFSC   STATUS, Z
+0231   2???           00522     GOTO    CASO3_1
+0232   3003           00523     MOVLW   .3
+0233   02??           00524     SUBWF   CONT8, W
+0234   1903           00525     BTFSC   STATUS, Z
+0235   2???           00526     GOTO    CASO1_1
+0236   3002           00527     MOVLW   .2
+0237   02??           00528     SUBWF   CONT8, W
+0238   1903           00529     BTFSC   STATUS, Z
+0239   2???           00530     GOTO    CASO2_1
+023A   3001           00531     MOVLW   .1
+023B   02??           00532     SUBWF   CONT8, W
+023C   1903           00533     BTFSC   STATUS, Z
+023D   2???           00534     GOTO    CASO1_1
+023E                  00535 CASO1_1:                ;revisa si las decenas de los dias es igual o menor a 3para asignar un tope a la
+                            s unidades 
+023E   3003           00536     MOVLW   .3
+023F   02??           00537     SUBWF   DIAS2, W
+0240   1D03           00538     BTFSS   STATUS, Z
+0241   2???           00539     GOTO    DIAMAX1_1
+0242                  00540 DIAMIN1_1:          ;si las decenas de los dias es igual a 3, asigna un tope de las unidades en 1
+Message[305]: Using default destination of 1 (file).
+0242   0A??           00541     INCF    DIAS1
+0243   3002           00542     MOVLW   .2
+0244   02??           00543     SUBWF   DIAS1, W
+0245   1D03           00544     BTFSS   STATUS, Z
+0246   0008           00545     RETURN 
+                      00546     
+0247   3001           00547     MOVLW   .1
+0248   00??           00548     MOVWF   DIAS1   
+0249   01??           00549     CLRF    DIAS2
+024A   0008           00550     RETURN 
+                      00551   
+024B                  00552 DIAMAX1_1:              ;revisa si las decenas son menores que 3 para fijar el tope de la sunidades en 9
+Message[305]: Using default destination of 1 (file).
+024B   0A??           00553     INCF    DIAS1
+024C   300A           00554     MOVLW   .10
+024D   02??           00555     SUBWF   DIAS1,W
+024E   1D03           00556     BTFSS   STATUS, Z 
+024F   0008           00557     RETURN 
+0250   01??           00558     CLRF    DIAS1
+Message[305]: Using default destination of 1 (file).
+0251   0A??           00559     INCF    DIAS2
+0252   0008           00560     RETURN
+                      00561     
+0253                  00562 FINAL_1:
+0253   1480           00563     BSF     CONT6, 1
+Message[305]: Using default destination of 1 (file).
+0254   0A??           00564     INCF    ESPECIAL
+0255   0008           00565     RETURN      
+                      00566     
+0256                  00567 CASO2_1:                ;revisa si las decenas de los dias para asignarle un tope a las unidades acorde 
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 14
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                            a ese valor 
+0256   3002           00568     MOVLW   .2
+0257   02??           00569     SUBWF   DIAS2, W
+0258   1D03           00570     BTFSS   STATUS, Z
+0259   2???           00571     GOTO    DIAMAX2_1
+025A                  00572 DIAMIN2_1:              ;si el valor de las decenas de los dias es igual a 2, pone el tope de las unidad
+                            es en 8
+Message[305]: Using default destination of 1 (file).
+025A   0A??           00573     INCF    DIAS1
+025B   3009           00574     MOVLW   .9
+025C   02??           00575     SUBWF   DIAS1,W
+025D   1D03           00576     BTFSS   STATUS, Z
+025E   0008           00577     RETURN 
+                      00578     
+025F   3001           00579     MOVLW   .1
+0260   00??           00580     MOVWF   DIAS1
+0261   01??           00581     CLRF    DIAS2
+0262   0008           00582     RETURN
+                      00583     
+0263                  00584 DIAMAX2_1:          ;si el valor de las decenas es menor que 2, fija el tope de las unidades en 9
+Message[305]: Using default destination of 1 (file).
+0263   0A??           00585     INCF    DIAS1
+0264   300A           00586     MOVLW   .10
+0265   02??           00587     SUBWF   DIAS1, W
+0266   1D03           00588     BTFSS   STATUS, Z 
+0267   0008           00589     RETURN 
+                      00590     
+0268   01??           00591     CLRF    DIAS1
+Message[305]: Using default destination of 1 (file).
+0269   0A??           00592     INCF    DIAS2
+026A   0008           00593     RETURN 
+                      00594 
+026B                  00595 CASO3_1:            ;;revisa si las decenas de los dias para asignarle un tope a las unidades acorde a e
+                            se valor 
+026B   3003           00596     MOVLW   .3
+026C   02??           00597     SUBWF   DIAS2, W
+026D   1D03           00598     BTFSS   STATUS, Z 
+026E   2???           00599     GOTO    DIAMAX3_1
+026F                  00600 DIAMIN3_1:          ;si las decenas de los dias es igual a 3, fija el tope de las unidades en 0
+026F   3001           00601     MOVLW   .1
+0270   00??           00602     MOVWF   DIAS1
+0271   01??           00603     CLRF    DIAS2 
+0272   0008           00604     RETURN 
+0273                  00605 DIAMAX3_1:          ;si las decenas de los dias es menor que tres, fija el tope de las unidades en 9
+Message[305]: Using default destination of 1 (file).
+0273   0A??           00606     INCF    DIAS1
+0274   300A           00607     MOVLW   .10
+0275   02??           00608     SUBWF   DIAS1, W
+0276   1D03           00609     BTFSS   STATUS, Z 
+0277   0008           00610     RETURN 
+Message[305]: Using default destination of 1 (file).
+0278   0A??           00611     INCF    DIAS2
+0279   01??           00612     CLRF    DIAS1
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 15
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+027A   0008           00613     RETURN 
+                      00614     
+                      00615 
+027B                  00616 CASO_MESES_N:       ;revisa el valor de las decenas de los meses para fijar el limite de las undiades 
+027B   3001           00617     MOVLW   .1
+027C   02??           00618     SUBWF   MESES2, W
+027D   1D03           00619     BTFSS   STATUS, Z 
+027E   2???           00620     GOTO    MESES_FINAL_1
+027F                  00621 MESES_NORMAL_1:     ;si el valor de las decenas es igual a 1, fija el tope de los meses en 2
+Message[305]: Using default destination of 1 (file).
+027F   0A??           00622     INCF    CONT8
+Message[305]: Using default destination of 1 (file).
+0280   0A??           00623     INCF    MESES1
+0281   3003           00624     MOVLW   .3
+0282   02??           00625     SUBWF   MESES1, W
+0283   1D03           00626     BTFSS   STATUS, Z 
+0284   0008           00627     RETURN
+0285   01??           00628     CLRF    MESES2
+0286   3001           00629     MOVLW   .1
+0287   00??           00630     MOVWF   MESES1
+0288   3001           00631     MOVLW   .1
+0289   00??           00632     MOVWF   CONT8
+028A   0008           00633     RETURN 
+028B                  00634 MESES_FINAL_1:  ;si el valor de las decenas es menor que 1, fija el tope de las unidades en 9
+Message[305]: Using default destination of 1 (file).
+028B   0A??           00635     INCF    CONT8
+Message[305]: Using default destination of 1 (file).
+028C   0A??           00636     INCF    MESES1
+028D   300A           00637     MOVLW   .10
+028E   02??           00638     SUBWF   MESES1, W
+028F   1D03           00639     BTFSS   STATUS,Z 
+0290   0008           00640     RETURN
+0291   01??           00641     CLRF    MESES1
+Message[305]: Using default destination of 1 (file).
+0292   0A??           00642     INCF    MESES2
+0293   0008           00643     RETURN
+                      00644     
+                      00645     
+                      00646 ;*******************************************************************************   
+                      00647 ;CONTADOR NO AUTOMATICO PARA DECREMENTAR FECHA Y HORA **************************
+0294                  00648 DECREMENTAR_MINUTOS:            ;aca se detallan todas las funciones de dectementar la hora y fecha 
+0294   3000           00649     MOVLW   .0                  ;se fijan los limites maximos y se decrementa hasta que en valor minimo,
+                             se vuelven a ingresar dichos limites 
+0295   02??           00650     SUBWF   UNIDADES, W
+0296   1903           00651     BTFSC   STATUS, Z
+0297   2???           00652     GOTO    $+3
+Message[305]: Using default destination of 1 (file).
+0298   03??           00653     DECF    UNIDADES
+0299   0008           00654     RETURN 
+029A   3009           00655     MOVLW   .9
+029B   00??           00656     MOVWF   UNIDADES
+029C   3000           00657     MOVLW   .0
+029D   02??           00658     SUBWF   DECENAS, W
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 16
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+029E   1903           00659     BTFSC   STATUS, Z
+029F   2???           00660     GOTO    $+3
+Message[305]: Using default destination of 1 (file).
+02A0   03??           00661     DECF    DECENAS
+02A1   0008           00662     RETURN
+02A2   3005           00663     MOVLW   .5
+02A3   00??           00664     MOVWF   DECENAS
+02A4   0008           00665     RETURN  
+02A5                  00666 DECREMENTAR_HORAS:
+02A5   3000           00667     MOVLW   .0              ;si las decenas de las horas es 0 al inicio, fija los limites en 23
+02A6   02??           00668     SUBWF   HORAS2, W
+02A7   1903           00669     BTFSC   STATUS, Z
+02A8   2???           00670     GOTO    $+18  
+02A9   3000           00671     MOVLW   .0              ;parte del codigo encargada de decrementar el valor de la hora cuando las de
+                            cenas son menores a 2
+02AA   02??           00672     SUBWF   HORAS1,W
+02AB   1903           00673     BTFSC   STATUS, Z 
+02AC   2???           00674     GOTO    $+3
+Message[305]: Using default destination of 1 (file).
+02AD   03??           00675     DECF    HORAS1
+02AE   0008           00676     RETURN 
+02AF   3009           00677     MOVLW   .9
+02B0   00??           00678     MOVWF   HORAS1
+02B1   3000           00679     MOVLW   .0
+02B2   02??           00680     SUBWF   HORAS2,W
+02B3   1903           00681     BTFSC   STATUS, Z 
+02B4   2???           00682     GOTO    $+4
+Message[305]: Using default destination of 1 (file).
+02B5   03??           00683     DECF    HORAS2
+Message[305]: Using default destination of 1 (file).
+02B6   03??           00684     DECF    CONT9
+02B7   0008           00685     RETURN
+02B8   3001           00686     MOVLW   .1
+02B9   00??           00687     MOVWF   HORAS2
+02BA   0008           00688     RETURN 
+02BB   3001           00689     MOVLW   .1          ;revisa que el con9 ya haya sido uno, indicando que ya paso por esta parte, 
+02BC   02??           00690     SUBWF   CONT9, W    ;para que cuando las decenas vuelvan a ser 0 cuando solo hayan unidades, no vuel
+                            va a fijar los limites en 23
+02BD   1903           00691     BTFSC   STATUS, Z 
+02BE   2???           00692     GOTO    $-20
+02BF   3000           00693     MOVLW   .0
+02C0   02??           00694     SUBWF   HORAS1,W
+02C1   1903           00695     BTFSC   STATUS, Z 
+02C2   2???           00696     GOTO    $+3
+Message[305]: Using default destination of 1 (file).
+02C3   03??           00697     DECF    HORAS1
+02C4   0008           00698     RETURN 
+02C5   3003           00699     MOVLW   .3
+02C6   00??           00700     MOVWF   HORAS1
+02C7   3000           00701     MOVLW   .0
+02C8   02??           00702     SUBWF   HORAS2,W
+02C9   1903           00703     BTFSC   STATUS, Z 
+02CA   2???           00704     GOTO    $+3
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 17
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Message[305]: Using default destination of 1 (file).
+02CB   03??           00705     DECF    HORAS2
+02CC   0008           00706     RETURN
+02CD   3002           00707     MOVLW   .2
+02CE   00??           00708     MOVWF   HORAS2
+Message[305]: Using default destination of 1 (file).
+02CF   0A??           00709     INCF    CONT9
+02D0   0008           00710     RETURN
+                      00711 
+02D1                  00712 DECREMENTAR_MESES:  ;rutina que decrementa, revisa si el contador que ubica los topes de los dias es 1
+02D1   3001           00713     MOVLW   .1      ;para que en vez de seguirse decrementando, se le asigne el valor de 12 
+02D2   02??           00714     SUBWF   CONT8, W
+02D3   1903           00715     BTFSC   STATUS, Z 
+02D4   2???           00716     GOTO    CONTADORMESES               
+02D5                  00717 PT1:
+02D5   3000           00718     MOVLW   .0      ;revisa de las decenas de los meses es igual a 0 al inicio para que al decrementar s
+                            e coloce el nummero m[aximo 
+02D6   02??           00719     SUBWF   MESES2, W
+02D7   1903           00720     BTFSC   STATUS, Z
+02D8   2???           00721     GOTO    $+19 
+                      00722     
+02D9   3000           00723     MOVLW   .0          ;parte de la subrutina encargada de decremetnar el valor de las unidades y decen
+                            as cuando las decenas son menors que 12
+02DA   02??           00724     SUBWF   MESES1, W
+02DB   1903           00725     BTFSC   STATUS, Z 
+02DC   2???           00726     GOTO    $+4
+Message[305]: Using default destination of 1 (file).
+02DD   03??           00727     DECF    CONT8
+Message[305]: Using default destination of 1 (file).
+02DE   03??           00728     DECF    MESES1
+02DF   0008           00729     RETURN 
+02E0   3009           00730     MOVLW   .9
+02E1   00??           00731     MOVWF   MESES1
+02E2   3000           00732     MOVLW   .0
+02E3   02??           00733     SUBWF   MESES2, W
+02E4   1903           00734     BTFSC   STATUS, Z 
+02E5   2???           00735     GOTO    $+4
+Message[305]: Using default destination of 1 (file).
+02E6   03??           00736     DECF    MESES2
+Message[305]: Using default destination of 1 (file).
+02E7   03??           00737     DECF    CONT10
+02E8   0008           00738     RETURN
+02E9   3000           00739     MOVLW   .0
+02EA   00??           00740     MOVWF   MESES2
+02EB   0008           00741     RETURN 
+                      00742     
+02EC   3001           00743     MOVLW   .1      ;revisa el valor del contador para que cuando las decenas vuelvan a ser 0 siga decre
+                            mentando normal y no vuelva a colocar los valores maximos 
+02ED   02??           00744     SUBWF   CONT10, W
+02EE   1903           00745     BTFSC   STATUS, Z 
+02EF   2???           00746     GOTO    $-21
+                      00747     
+02F0   3001           00748     MOVLW   .1
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 18
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+02F1   02??           00749     SUBWF   MESES1, W
+02F2   1903           00750     BTFSC   STATUS, Z
+02F3   2???           00751     GOTO    $+4
+Message[305]: Using default destination of 1 (file).
+02F4   03??           00752     DECF    CONT8
+Message[305]: Using default destination of 1 (file).
+02F5   0B??           00753     DECFSZ  MESES1
+02F6   0008           00754     RETURN 
+02F7   3002           00755     MOVLW   .2
+02F8   00??           00756     MOVWF   MESES1
+02F9   3000           00757     MOVLW   .0
+02FA   02??           00758     SUBWF   MESES2, W
+02FB   1903           00759     BTFSC   STATUS, Z 
+02FC   2???           00760     GOTO    $+3
+Message[305]: Using default destination of 1 (file).
+02FD   03??           00761     DECF    MESES2
+02FE   0008           00762     RETURN
+02FF   3001           00763     MOVLW   .1
+0300   00??           00764     MOVWF   MESES2
+Message[305]: Using default destination of 1 (file).
+0301   0A??           00765     INCF    CONT10
+0302   0008           00766     RETURN
+0303                  00767 CONTADORMESES:      ;asigna el valor maximo al cont8 cuando este llega al valor minimo
+0303   300C           00768     MOVLW   .12
+0304   00??           00769     MOVWF   CONT8
+0305   2???           00770     GOTO    PT1   
+0306                  00771 DECREMENTAR_DIAS:   ;dirige a la subrutina de los limites de los dias acorde con el valor que se increme
+                            nta con el valor del mes en que se encuentra 
+0306   300B           00772     MOVLW   .11
+0307   02??           00773     SUBWF   CONT8, W
+0308   1903           00774     BTFSC   STATUS, Z
+0309   2???           00775     GOTO    CASO1_2
+030A   300A           00776     MOVLW   .10
+030B   02??           00777     SUBWF   CONT8, W
+030C   1903           00778     BTFSC   STATUS, Z
+030D   2???           00779     GOTO    CASO3_2
+030E   3009           00780     MOVLW   .9
+030F   02??           00781     SUBWF   CONT8, W
+0310   1903           00782     BTFSC   STATUS, Z
+0311   2???           00783     GOTO    CASO3_2
+0312   3008           00784     MOVLW   .8
+0313   02??           00785     SUBWF   CONT8, W
+0314   1903           00786     BTFSC   STATUS, Z
+0315   2???           00787     GOTO    CASO1_2
+0316   3007           00788     MOVLW   .7
+0317   02??           00789     SUBWF   CONT8, W
+0318   1903           00790     BTFSC   STATUS, Z
+0319   2???           00791     GOTO    CASO1_2
+031A   3006           00792     MOVLW   .6
+031B   02??           00793     SUBWF   CONT8, W
+031C   1903           00794     BTFSC   STATUS, Z
+031D   2???           00795     GOTO    CASO3_2
+031E   3005           00796     MOVLW   .5
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 19
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+031F   02??           00797     SUBWF   CONT8, W
+0320   1903           00798     BTFSC   STATUS, Z
+0321   2???           00799     GOTO    CASO1_2
+0322   3004           00800     MOVLW   .4
+0323   02??           00801     SUBWF   CONT8, W
+0324   1903           00802     BTFSC   STATUS, Z
+0325   2???           00803     GOTO    CASO3_2
+0326   3003           00804     MOVLW   .3
+0327   02??           00805     SUBWF   CONT8, W
+0328   1903           00806     BTFSC   STATUS, Z
+0329   2???           00807     GOTO    CASO1_2
+032A   3002           00808     MOVLW   .2
+032B   02??           00809     SUBWF   CONT8, W
+032C   1903           00810     BTFSC   STATUS, Z
+032D   2???           00811     GOTO    CASO2_2
+032E   3001           00812     MOVLW   .1
+032F   02??           00813     SUBWF   CONT8, W
+0330   1903           00814     BTFSC   STATUS, Z
+0331   2???           00815     GOTO    CASO1_2
+0332                  00816 CASO1_2:            ;revisa si el valor de las decenas de los dias se encuentra en 0 al inicio para fija
+                            r el valor maximo 
+0332   3000           00817     MOVLW   .0
+0333   02??           00818     SUBWF   DIAS2, W
+0334   1903           00819     BTFSC   STATUS, Z
+0335   2???           00820     GOTO    $+18  
+0336   3000           00821     MOVLW   .0      ;parte del codigo que se encarga de decrementar el valor del las unidades y decenas 
+                            fijando los topes en para que sean 31 dias el maximo 
+0337   02??           00822     SUBWF   DIAS1,W
+0338   1903           00823     BTFSC   STATUS, Z 
+0339   2???           00824     GOTO    $+3
+Message[305]: Using default destination of 1 (file).
+033A   0B??           00825     DECFSZ  DIAS1   ;se utilizo esta instruccion para que nunca se decrementara hasta que llegara a 0, d
+                            e modo que el valor minimo fuera 1
+033B   0008           00826     RETURN 
+033C   3009           00827     MOVLW   .9
+033D   00??           00828     MOVWF   DIAS1
+033E   3000           00829     MOVLW   .0
+033F   02??           00830     SUBWF   DIAS2,W
+0340   1903           00831     BTFSC   STATUS, Z 
+0341   2???           00832     GOTO    $+4
+Message[305]: Using default destination of 1 (file).
+0342   03??           00833     DECF    DIAS2
+Message[305]: Using default destination of 1 (file).
+0343   03??           00834     DECF    CONT11
+0344   0008           00835     RETURN
+0345   3002           00836     MOVLW   .2
+0346   00??           00837     MOVWF   DIAS2
+0347   0008           00838     RETURN 
+0348   3001           00839     MOVLW   .1          ;revisa si se incremento el contador para evitar que los valores maximos se agre
+                            guen dos veces y ya no se decremente correctamente 
+0349   02??           00840     SUBWF   CONT11, W
+034A   1903           00841     BTFSC   STATUS, Z 
+034B   2???           00842     GOTO    $-20
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 20
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+034C   3000           00843     MOVLW   .0
+034D   02??           00844     SUBWF   DIAS1,W
+034E   1903           00845     BTFSC   STATUS, Z 
+034F   2???           00846     GOTO    $+3
+Message[305]: Using default destination of 1 (file).
+0350   0B??           00847     DECFSZ  DIAS1
+0351   0008           00848     RETURN 
+0352   3001           00849     MOVLW   .1
+0353   00??           00850     MOVWF   DIAS1
+0354   3000           00851     MOVLW   .0
+0355   02??           00852     SUBWF   DIAS2,W
+0356   1903           00853     BTFSC   STATUS, Z 
+0357   2???           00854     GOTO    $+3
+Message[305]: Using default destination of 1 (file).
+0358   03??           00855     DECF    DIAS2
+0359   0008           00856     RETURN
+035A   3003           00857     MOVLW   .3
+035B   00??           00858     MOVWF   DIAS2
+Message[305]: Using default destination of 1 (file).
+035C   0A??           00859     INCF    CONT11
+035D   0008           00860     RETURN
+035E                  00861 CASO2_2:            ;revisa si el valor de las decenas se encuentra en 0 para dirigirse a la parte del c
+                            odigo que le asigna el valor maximoa ambas bariables 
+035E   3000           00862     MOVLW   .0
+035F   02??           00863     SUBWF   DIAS2, W
+0360   1903           00864     BTFSC   STATUS, Z
+0361   2???           00865     GOTO    $+18  
+0362   3000           00866     MOVLW   .0      ;parte del codigo que se encarga de decrementar el valor del las unidades y decenas 
+                            fijando los topes en para que sean 28 dias el maximo 
+0363   02??           00867     SUBWF   DIAS1,W
+0364   1903           00868     BTFSC   STATUS, Z 
+0365   2???           00869     GOTO    $+3
+Message[305]: Using default destination of 1 (file).
+0366   0B??           00870     DECFSZ    DIAS1 ;se utilizo esta instruccion para que nunca se decrementara hasta que llegara a 0, d
+                            e modo que el valor minimo fuera 1
+0367   0008           00871     RETURN 
+0368   3009           00872     MOVLW   .9
+0369   00??           00873     MOVWF   DIAS1
+036A   3000           00874     MOVLW   .0
+036B   02??           00875     SUBWF   DIAS2,W
+036C   1903           00876     BTFSC   STATUS, Z 
+036D   2???           00877     GOTO    $+4
+Message[305]: Using default destination of 1 (file).
+036E   03??           00878     DECF    DIAS2
+Message[305]: Using default destination of 1 (file).
+036F   03??           00879     DECF    CONT12
+0370   0008           00880     RETURN
+0371   3001           00881     MOVLW   .1
+0372   00??           00882     MOVWF   DIAS2
+0373   0008           00883     RETURN 
+0374   3001           00884     MOVLW   .1  
+0375   02??           00885     SUBWF   CONT12, W
+0376   1903           00886     BTFSC   STATUS, Z 
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 21
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0377   2???           00887     GOTO    $-20
+0378   3000           00888     MOVLW   .0
+0379   02??           00889     SUBWF   DIAS1,W
+037A   1903           00890     BTFSC   STATUS, Z 
+037B   2???           00891     GOTO    $+3
+Message[305]: Using default destination of 1 (file).
+037C   0B??           00892     DECFSZ    DIAS1
+037D   0008           00893     RETURN 
+037E   3008           00894     MOVLW   .8
+037F   00??           00895     MOVWF   DIAS1
+0380   3000           00896     MOVLW   .0
+0381   02??           00897     SUBWF   DIAS2,W
+0382   1903           00898     BTFSC   STATUS, Z 
+0383   2???           00899     GOTO    $+3
+Message[305]: Using default destination of 1 (file).
+0384   03??           00900     DECF    DIAS2
+0385   0008           00901     RETURN
+0386   3002           00902     MOVLW   .2
+0387   00??           00903     MOVWF   DIAS2
+Message[305]: Using default destination of 1 (file).
+0388   0A??           00904     INCF    CONT12
+0389   0008           00905     RETURN
+038A                  00906 CASO3_2:
+038A   3000           00907     MOVLW   .0
+038B   02??           00908     SUBWF   DIAS2, W
+038C   1903           00909     BTFSC   STATUS, Z
+038D   2???           00910     GOTO    $+18  
+038E   3000           00911     MOVLW   .0
+038F   02??           00912     SUBWF   DIAS1,W
+0390   1903           00913     BTFSC   STATUS, Z 
+0391   2???           00914     GOTO    $+3
+Message[305]: Using default destination of 1 (file).
+0392   0B??           00915     DECFSZ    DIAS1
+0393   0008           00916     RETURN 
+0394   3009           00917     MOVLW   .9
+0395   00??           00918     MOVWF   DIAS1
+0396   3000           00919     MOVLW   .0
+0397   02??           00920     SUBWF   DIAS2,W
+0398   1903           00921     BTFSC   STATUS, Z 
+0399   2???           00922     GOTO    $+4
+Message[305]: Using default destination of 1 (file).
+039A   03??           00923     DECF    DIAS2
+Message[305]: Using default destination of 1 (file).
+039B   03??           00924     DECF    CONT13
+039C   0008           00925     RETURN
+039D   3002           00926     MOVLW   .2
+039E   00??           00927     MOVWF   DIAS2
+039F   0008           00928     RETURN 
+03A0   3001           00929     MOVLW   .1  ;revisa el valor del contador para que cuando las decenas vuelvan a ser 0 siga decrement
+                            ando normal y no vuelva a colocar los valores maximos 
+03A1   02??           00930     SUBWF   CONT13, W
+03A2   1903           00931     BTFSC   STATUS, Z 
+03A3   2???           00932     GOTO    $-20
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 22
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+03A4   3000           00933     MOVLW   .0
+03A5   02??           00934     SUBWF   DIAS1,W
+03A6   1903           00935     BTFSC   STATUS, Z 
+03A7   2???           00936     GOTO    $+3
+Message[305]: Using default destination of 1 (file).
+03A8   0B??           00937     DECFSZ    DIAS1
+03A9   0008           00938     RETURN 
+03AA   3000           00939     MOVLW   .0
+03AB   00??           00940     MOVWF   DIAS1
+03AC   3000           00941     MOVLW   .0
+03AD   02??           00942     SUBWF   DIAS2,W
+03AE   1903           00943     BTFSC   STATUS, Z 
+03AF   2???           00944     GOTO    $+3
+Message[305]: Using default destination of 1 (file).
+03B0   03??           00945     DECF    DIAS2
+03B1   0008           00946     RETURN
+03B2   3003           00947     MOVLW   .3
+03B3   00??           00948     MOVWF   DIAS2
+Message[305]: Using default destination of 1 (file).
+03B4   0A??           00949     INCF    CONT13
+03B5   0008           00950     RETURN
+                      00951 ;************************RUTINAS PARA TIMER************************************
+03B6                  00952 CONFIGURACION_TIMER_1:      ;aca se marcaron 2 rutinas automaticas con el fin de aumentar el contador pa
+                            ra la funcion del timer 
+03B6   303C           00953     MOVLW   .60 ;incrementa los display de los de los segundos del timer, de modo que llegue hasta 59
+03B7   00??           00954     MOVWF   ALARMA;fija el valor inicial de la variable alarma, de modo que siempre que se incremente se
+                             le asignara para que suene durante 1 minuto 
+Message[305]: Using default destination of 1 (file).
+03B8   0A??           00955     INCF    TIMER1
+03B9   300A           00956     MOVLW   .10
+03BA   02??           00957     SUBWF   TIMER1, W
+03BB   1D03           00958     BTFSS   STATUS, Z 
+03BC   0008           00959     RETURN
+03BD   01??           00960     CLRF    TIMER1
+Message[305]: Using default destination of 1 (file).
+03BE   0A??           00961     INCF    TIMER2
+03BF   3006           00962     MOVLW   .6
+03C0   02??           00963     SUBWF   TIMER2, W
+03C1   1D03           00964     BTFSS   STATUS, Z
+03C2   0008           00965     RETURN 
+03C3   01??           00966     CLRF    TIMER2
+03C4   3001           00967     MOVLW   .1
+03C5   00??           00968     MOVWF   TIMER1
+03C6   0008           00969     RETURN 
+03C7                  00970 CONFIGURACION_TIMER_2:;;rutnian encargada de incrementar los minutos del timer con tope en 9
+03C7   303C           00971     MOVLW   .60         
+03C8   00??           00972     MOVWF   ALARMA;fija el valor inicial de la variable alarma, de modo que siempre que se incremente se
+                             le asignara para que suene durante 1 minuto 
+Message[305]: Using default destination of 1 (file).
+03C9   0A??           00973     INCF    TIMER3
+03CA   300A           00974     MOVLW   .10
+03CB   02??           00975     SUBWF   TIMER3, W
+03CC   1D03           00976     BTFSS   STATUS, Z 
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 23
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+03CD   0008           00977     RETURN
+03CE   01??           00978     CLRF    TIMER3
+Message[305]: Using default destination of 1 (file).
+03CF   0A??           00979     INCF    TIMER4
+03D0   300A           00980     MOVLW   .10
+03D1   02??           00981     SUBWF   TIMER4, W
+03D2   1D03           00982     BTFSS   STATUS, Z
+03D3   0008           00983     RETURN
+03D4   01??           00984     CLRF    TIMER4
+03D5   0008           00985     RETURN 
+03D6                  00986 DECREMENTAR_TIMER:  ;esta funcion se encarga de decrementar el timer y asignar una alarma al momento en 
+                            el que este llegue a ser 0
+03D6   08??           00987     MOVFW   TIMER1
+03D7   07??           00988     ADDWF   TIMER2, W
+03D8   00??           00989     MOVWF   CONTIMERS
+03D9   08??           00990     MOVFW   TIMER3
+03DA   07??           00991     ADDWF   TIMER4, W
+03DB   00??           00992     MOVWF   CONTIMERM
+03DC   08??           00993     MOVFW   CONTIMERS
+03DD   07??           00994     ADDWF   CONTIMERM, W
+03DE   1903           00995     BTFSC   STATUS, Z   ;se agura que todos los display esten en 0 para saber que ese es el minimo y dir
+                            igirse a la rutina en la que se llama a la alarma 
+03DF   2???           00996     GOTO    ALARMAT
+03E0   3000           00997     MOVLW   .0      ;aca se decrementa el valor asignado en el timer, de modo que cada 59 segundos se de
+                            crementa 1 en los minutos hasta que todos llegan a ser 0
+03E1   02??           00998     SUBWF   TIMER1, W   
+03E2   1903           00999     BTFSC   STATUS, Z
+03E3   2???           01000     GOTO    $+3
+Message[305]: Using default destination of 1 (file).
+03E4   03??           01001     DECF    TIMER1
+03E5   0008           01002     RETURN 
+03E6   3009           01003     MOVLW   .9
+03E7   00??           01004     MOVWF   TIMER1
+03E8   3000           01005     MOVLW   .0
+03E9   02??           01006     SUBWF   TIMER2, W
+03EA   1903           01007     BTFSC   STATUS, Z
+03EB   2???           01008     GOTO    $+3
+Message[305]: Using default destination of 1 (file).
+03EC   03??           01009     DECF    TIMER2
+03ED   0008           01010     RETURN
+03EE   3005           01011     MOVLW   .5
+03EF   00??           01012     MOVWF   TIMER2
+03F0   3000           01013     MOVLW   .0
+03F1   02??           01014     SUBWF   TIMER3, W
+03F2   1903           01015     BTFSC   STATUS, Z
+03F3   2???           01016     GOTO    $+3
+Message[305]: Using default destination of 1 (file).
+03F4   03??           01017     DECF    TIMER3
+03F5   0008           01018     RETURN
+03F6   3009           01019     MOVLW   .9
+03F7   00??           01020     MOVWF   TIMER3
+03F8   3000           01021     MOVLW   .0
+03F9   02??           01022     SUBWF   TIMER4, W
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 24
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+03FA   1903           01023     BTFSC   STATUS, Z
+03FB   2???           01024     GOTO    $+3
+Message[305]: Using default destination of 1 (file).
+03FC   03??           01025     DECF    TIMER4
+03FD   0008           01026     RETURN
+03FE   3009           01027     MOVLW   .9
+03FF   00??           01028     MOVWF   TIMER4
+0400   0008           01029     RETURN 
+0401                  01030 ALARMAT:            ;debido a que el valor de la alarma es 60 y esta rutina se llama cada segundo, en es
+                            ta parte se ejecuta el codigo de los display cada 60 seg y cuando este llega a 0 se deja de ejec
+0401   3000           01031     MOVLW   .0
+0402   02??           01032     SUBWF   ALARMA, W
+0403   1903           01033     BTFSC   STATUS, Z 
+0404   2???           01034     GOTO    $+3
+Message[305]: Using default destination of 1 (file).
+0405   03??           01035     DECF    ALARMA
+0406   2???           01036     CALL    LEDS_ALARMA 
+0407   0008           01037     RETURN 
+                      01038 
+                      01039 ;*******************************ALARMA******************************************
+0408                  01040 LEDS_ALARMA:                    ;rutina que enciende y apaga los leds cada segundo 
+0408   1800           01041     BTFSC   CONT1, 0    ;enciende y apaga los leds acorde con el valor de bit 0 del cont1
+0409   2???           01042     GOTO    LED_0_A     ;rutina que se utiliza para la alarma 
+040A                  01043 LED_1_A:
+040A   1509           01044     BSF PORTE, RE2
+040B   1400           01045     BSF CONT1, 0
+040C   0008           01046     RETURN 
+040D                  01047 LED_0_A:
+040D   1109           01048     BCF PORTE, RE2
+040E   1000           01049     BCF CONT1, 0
+040F   0008           01050     RETURN 
+                      01051 ;************************rutina para leds intermitentes*************************
+0410                  01052 LEDS_INTERMITENTES:                 ;rutina para el indicador led de segundos 
+0410   1800           01053     BTFSC   INDICADOR2, 0   ;enciende y apaga los leds acorde con el valor de bit 0 del indicador2
+0411   2???           01054     GOTO    LED_0
+0412                  01055 LED_1:
+0412   1788           01056     BSF PORTD, RD7
+0413   1400           01057     BSF INDICADOR2, 0
+0414   0008           01058     RETURN 
+0415                  01059 LED_0:
+0415   1388           01060     BCF PORTD, RD7
+0416   1000           01061     BCF INDICADOR2, 0
+0417   0008           01062     RETURN  
+                      01063 ;*******************************************************************************
+                      01064 ;****************************INCREMENTAR EL PUSH DE OPCIONES********************
+                      01065 ;rutinas auxiliares de los antirebotes de los push de cada estado 
+                      01066 ;cada una de ellas esta asociada a una funcino en especifico 
+0418                  01067 ACCIONI:                    ;incrementa la variable estado y hace que al llegar al estado maximo, el sig
+                            uiente estado sea 0
+0418   1F86           01068     BTFSS   PORTB, .7
+0419   0008           01069     RETURN
+041A   1000           01070     BCF     PUSH_BOTTON, .0
+041B   3007           01071     MOVLW   .7
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 25
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+041C   02??           01072     SUBWF   ESTADO, W
+041D   1D03           01073     BTFSS   STATUS, Z
+041E   2???           01074     GOTO    NOLIMPIAR
+041F                  01075 LIMPIAR:
+041F   01??           01076     CLRF    ESTADO
+0420   0008           01077     RETURN 
+0421                  01078 NOLIMPIAR:
+Message[305]: Using default destination of 1 (file).
+0421   0A??           01079     INCF    ESTADO 
+0422   0008           01080     RETURN 
+                      01081     
+0423                  01082 ACCIOND:    ; incrementa los minutos manualmente 
+0423   1F06           01083     BTFSS   PORTB, .6
+0424   0008           01084     RETURN
+0425   1080           01085     BCF     PUSH_BOTTON, .1
+0426   2???           01086     CALL    DISPLAY_MINUTOS_N
+0427   0008           01087     RETURN 
+                      01088     
+0428                  01089 ACCIONU:    ;incrementa las horas manualmente 
+0428   1D06           01090     BTFSS   PORTB, .2
+0429   0008           01091     RETURN
+042A   1100           01092     BCF     PUSH_BOTTON, .2
+042B   2???           01093     CALL    DISPLAY_HORAS_N
+042C   0008           01094     RETURN 
+                      01095     
+042D                  01096 ACCIONDI:   ;incrementa los dias manualmente 
+042D   1F06           01097     BTFSS   PORTB, .6
+042E   0008           01098     RETURN
+042F   1180           01099     BCF     PUSH_BOTTON, .3
+0430   2???           01100     CALL    CASO_DIAS_N
+0431   0008           01101     RETURN
+                      01102     
+0432                  01103 ACCIONM:    ;incrementa los meses manualmente 
+0432   1D06           01104     BTFSS   PORTB, .2
+0433   0008           01105     RETURN
+0434   1200           01106     BCF     PUSH_BOTTON, .4
+0435   2???           01107     CALL    CASO_MESES_N
+0436   0008           01108     RETURN
+0437                  01109 ACCIONDM:   ;decrementa los minutos manualmente 
+0437   1F06           01110     BTFSS   PORTB, .6
+0438   0008           01111     RETURN
+0439   1180           01112     BCF     PUSH_BOTTON, .3
+043A   2???           01113     CALL    DECREMENTAR_MINUTOS
+043B   0008           01114     RETURN
+043C                  01115 ACCIONDH:   ;decrementa las horas manualmente 
+043C   1D06           01116     BTFSS   PORTB, .2
+043D   0008           01117     RETURN
+043E   1080           01118     BCF     PUSH_BOTTON, .1
+043F   2???           01119     CALL    DECREMENTAR_HORAS
+0440   0008           01120     RETURN
+0441                  01121 ACCIONDMS:  ;decremeta los meses manualmente 
+0441   1F06           01122     BTFSS   PORTB, .6
+0442   0008           01123     RETURN
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 26
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0443   1180           01124     BCF     PUSH_BOTTON, .3
+0444   2???           01125     CALL    DECREMENTAR_MESES
+0445   0008           01126     RETURN
+0446                  01127 ACCIONDD:   ;decrementa los dias manualmente 
+0446   1D06           01128     BTFSS   PORTB, .2
+0447   0008           01129     RETURN
+0448   1080           01130     BCF     PUSH_BOTTON, .1
+0449   2???           01131     CALL    DECREMENTAR_DIAS 
+044A   0008           01132     RETURN
+044B                  01133 ACCIONT1:   ;incrementa los segundos del timer 
+044B   1F06           01134     BTFSS   PORTB, .6
+044C   0008           01135     RETURN
+044D   1080           01136     BCF     PUSH_BOTTON, .1
+044E   2???           01137     CALL    CONFIGURACION_TIMER_1 
+044F   0008           01138     RETURN
+0450                  01139 ACCIONT2:   ;incrementa los minutos del timer 
+0450   1D06           01140     BTFSS   PORTB, .2
+0451   0008           01141     RETURN
+0452   1100           01142     BCF     PUSH_BOTTON, .2
+0453   2???           01143     CALL    CONFIGURACION_TIMER_2 
+0454   0008           01144     RETURN
+0455                  01145 ACCIONALARMA:   ;apaga manualmente la alarma 
+0455   1F06           01146     BTFSS   PORTB, .6
+0456   0008           01147     RETURN
+0457   1080           01148     BCF     PUSH_BOTTON, .1 ;pone en 0 la variable de la alarma de modo que al presionar el push se apag
+                            ue automaticamdente 
+0458   01??           01149     CLRF    ALARMA
+0459   0008           01150     RETURN
+                      01151 ;***************************RUTINAS DE CADA ESTADO******************************
+045A                  01152 ESTADO1:        ;en los estados 1 y 2 se muestran las variables que se incrementan automaricas para la f
+                            echa y hora 
+045A   3001           01153     MOVLW   .1
+045B   0085           01154     MOVWF   PORTA
+045C   08??           01155     MOVFW   DECENAS
+045D   00??           01156     MOVWF   DISPLAY0
+045E   08??           01157     MOVFW   UNIDADES
+045F   00??           01158     MOVWF   DISPLAY1
+0460   08??           01159     MOVFW   HORAS1
+0461   00??           01160     MOVWF   DISPLAY2
+0462   08??           01161     MOVFW   HORAS2
+0463   00??           01162     MOVWF   DISPLAY3
+0464   2???           01163     GOTO    LOOP 
+0465                  01164 ESTADO2:
+0465   3002           01165     MOVLW   .2
+0466   0085           01166     MOVWF   PORTA
+0467   08??           01167     MOVFW   DIAS2
+0468   00??           01168     MOVWF   DISPLAY0
+0469   08??           01169     MOVFW   DIAS1
+046A   00??           01170     MOVWF   DISPLAY1
+046B   08??           01171     MOVFW   MESES1
+046C   00??           01172     MOVWF   DISPLAY2
+046D   08??           01173     MOVFW   MESES2
+046E   00??           01174     MOVWF   DISPLAY3
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 27
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+046F   2???           01175     GOTO    LOOP 
+0470                  01176 ESTADO3:    ;en el estado 3 y 4 se muestran las variables no automaticas que incrementan la fecha y la h
+                            ora 
+0470   3003           01177     MOVLW   .3
+0471   0085           01178     MOVWF   PORTA   ;se mueven las variables que se incrementan manualmente a las que se muestran en los
+                             display 
+0472   08??           01179     MOVFW   DECENAS
+0473   00??           01180     MOVWF   DISPLAY0
+0474   08??           01181     MOVFW   UNIDADES
+0475   00??           01182     MOVWF   DISPLAY1
+0476   08??           01183     MOVFW   HORAS1
+0477   00??           01184     MOVWF   DISPLAY2
+0478   08??           01185     MOVFW   HORAS2
+0479   00??           01186     MOVWF   DISPLAY3
+                      01187     
+047A   1880           01188     BTFSC   PUSH_BOTTON, .1 
+047B   2???           01189     GOTO    ESTADO3_1
+047C   1B06           01190     BTFSC   PORTB, .6
+047D   2???           01191     GOTO    PUSH_2
+047E   1480           01192     BSF     PUSH_BOTTON, .1
+047F   2???           01193     GOTO    PUSH_2      ;rutina de antirebotes para los bottones        
+0480                  01194 ESTADO3_1:
+0480   1880           01195     BTFSC   PUSH_BOTTON, .1 
+0481   2???           01196     CALL    ACCIOND ;rutina auxiliar de los antirebotes 
+0482   2???           01197     GOTO    PUSH_2
+                      01198 ;si no sucede nada o luego de que suceda se va a revisr lo que sucede con el otro push 
+0483                  01199 PUSH_2:
+0483   1900           01200     BTFSC   PUSH_BOTTON, .2
+0484   2???           01201     GOTO    ESTADO3_2
+0485   1906           01202     BTFSC   PORTB, .2
+0486   2???           01203     GOTO    LOOP
+0487   1500           01204     BSF     PUSH_BOTTON, .2
+0488   2???           01205     GOTO    LOOP ;rutina de antirebotes para los bottones 
+0489                  01206 ESTADO3_2:
+0489   1900           01207     BTFSC   PUSH_BOTTON, .2
+048A   2???           01208     CALL    ACCIONU ;rutina auxiliar de los antirebotes 
+048B   2???           01209     GOTO    LOOP    
+                      01210 ;suceda o no suceda nada con el push 2 siempre regresa al loop para evitar que se quede trabado    
+048C                  01211 ESTADO4:
+048C   3004           01212     MOVLW   .4
+048D   0085           01213     MOVWF   PORTA
+048E   08??           01214     MOVFW   DIAS2
+048F   00??           01215     MOVWF   DISPLAY0
+0490   08??           01216     MOVFW   DIAS1
+0491   00??           01217     MOVWF   DISPLAY1
+0492   08??           01218     MOVFW   MESES1
+0493   00??           01219     MOVWF   DISPLAY2
+0494   08??           01220     MOVFW   MESES2
+0495   00??           01221     MOVWF   DISPLAY3 ;se mueven las variables que se incrementan manualmente a las que se muestran en lo
+                            s display 
+                      01222     
+0496   1980           01223     BTFSC   PUSH_BOTTON, .3
+0497   2???           01224     GOTO    ESTADO4_1
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 28
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0498   1B06           01225     BTFSC   PORTB, .6
+0499   2???           01226     GOTO    PUSH_2_1
+049A   1580           01227     BSF     PUSH_BOTTON, .3
+049B   2???           01228     GOTO    PUSH_2_1 ;rutina de antirebotes para los bottones
+049C                  01229 ESTADO4_1:
+049C   1980           01230     BTFSC   PUSH_BOTTON, .3
+049D   2???           01231     CALL    ACCIONDI ;rutina auxiliar de los antirebotes 
+049E   2???           01232     GOTO    PUSH_2_1
+                      01233  ;si no sucede nada o luego de que suceda se va a revisr lo que sucede con el otro push    
+049F                  01234 PUSH_2_1:
+049F   1A00           01235     BTFSC   PUSH_BOTTON, .4
+04A0   2???           01236     GOTO    ESTADO4_2
+04A1   1906           01237     BTFSC   PORTB, .2
+04A2   2???           01238     GOTO    LOOP
+04A3   1600           01239     BSF     PUSH_BOTTON, .4
+04A4   2???           01240     GOTO    LOOP ;rutina de antirebotes para los bottones
+04A5                  01241 ESTADO4_2:
+04A5   1A00           01242     BTFSC   PUSH_BOTTON, .4
+04A6   2???           01243     CALL    ACCIONM ;rutina auxiliar de los antirebotes 
+04A7   2???           01244     GOTO    LOOP 
+                      01245 ;suceda o no suceda nada con el push 2 siempre regresa al loop para evitar que se quede trabado 
+04A8                  01246 ESTADO5:    ;en el estado 5 y 6 se muestran las variables no automaicas que decrementan la fecha y la ho
+                            ra 
+04A8   3005           01247     MOVLW   .5
+04A9   0085           01248     MOVWF   PORTA
+04AA   08??           01249     MOVFW   DECENAS
+04AB   00??           01250     MOVWF   DISPLAY0
+04AC   08??           01251     MOVFW   UNIDADES
+04AD   00??           01252     MOVWF   DISPLAY1
+04AE   08??           01253     MOVFW   HORAS1
+04AF   00??           01254     MOVWF   DISPLAY2
+04B0   08??           01255     MOVFW   HORAS2 
+04B1   00??           01256     MOVWF   DISPLAY3 ;se mueven las variables que se decrementan manualmente a las que se muestran en lo
+                            s display 
+                      01257     
+04B2   1880           01258     BTFSC   PUSH_BOTTON, .1
+04B3   2???           01259     GOTO    ESTADO5_1
+04B4   1906           01260     BTFSC   PORTB, .2
+04B5   2???           01261     GOTO    PUSH_2_2
+04B6   1480           01262     BSF     PUSH_BOTTON, .1
+04B7   2???           01263     GOTO    PUSH_2_2  ;rutina de antirebotes para los bottones
+04B8                  01264 ESTADO5_1:
+04B8   1880           01265     BTFSC   PUSH_BOTTON, .1
+04B9   2???           01266     CALL    ACCIONDH ;rutina auxiliar de los antirebotes 
+04BA   2???           01267     GOTO    PUSH_2_2 
+                      01268  ;si no sucede nada o luego de que suceda se va a revisr lo que sucede con el otro push    
+04BB                  01269 PUSH_2_2:   
+04BB   1980           01270     BTFSC   PUSH_BOTTON, .3
+04BC   2???           01271     GOTO    ESTADO5_2
+04BD   1B06           01272     BTFSC   PORTB, .6
+04BE   2???           01273     GOTO    LOOP
+04BF   1580           01274     BSF     PUSH_BOTTON, .3
+04C0   2???           01275     GOTO    LOOP ;rutina de antirebotes para los bottones
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 29
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+04C1                  01276 ESTADO5_2:
+04C1   1980           01277     BTFSC   PUSH_BOTTON, .3
+04C2   2???           01278     CALL    ACCIONDM ;rutina auxiliar de los antirebotes 
+04C3   2???           01279     GOTO    LOOP    
+                      01280  ;suceda o no suceda nada con el push 2 siempre regresa al loop para evitar que se quede trabado 
+04C4                  01281 ESTADO6:
+04C4   3006           01282     MOVLW   .6
+04C5   0085           01283     MOVWF   PORTA
+04C6   08??           01284     MOVFW   DIAS2
+04C7   00??           01285     MOVWF   DISPLAY0
+04C8   08??           01286     MOVFW   DIAS1
+04C9   00??           01287     MOVWF   DISPLAY1
+04CA   08??           01288     MOVFW   MESES1
+04CB   00??           01289     MOVWF   DISPLAY2
+04CC   08??           01290     MOVFW   MESES2
+04CD   00??           01291     MOVWF   DISPLAY3 ;se mueven las variables que se decrementan manualmente a las que se muestran en lo
+                            s display 
+                      01292     
+04CE   1880           01293     BTFSC   PUSH_BOTTON, .1
+04CF   2???           01294     GOTO    ESTADO6_1
+04D0   1906           01295     BTFSC   PORTB, .2
+04D1   2???           01296     GOTO    PUSH_3_1
+04D2   1480           01297     BSF     PUSH_BOTTON, .1
+04D3   2???           01298     GOTO    PUSH_3_1  ;rutina de antirebotes para los bottones
+04D4                  01299 ESTADO6_1:
+04D4   1880           01300     BTFSC   PUSH_BOTTON, .1
+04D5   2???           01301     CALL    ACCIONDD ;rutina auxiliar de los antirebotes 
+04D6   2???           01302     GOTO    PUSH_3_1
+                      01303  ;si no sucede nada o luego de que suceda se va a revisr lo que sucede con el otro push    
+04D7                  01304 PUSH_3_1:   
+04D7   1980           01305     BTFSC   PUSH_BOTTON, .3
+04D8   2???           01306     GOTO    ESTADO6_2
+04D9   1B06           01307     BTFSC   PORTB, .6
+04DA   2???           01308     GOTO    LOOP
+04DB   1580           01309     BSF     PUSH_BOTTON, .3
+04DC   2???           01310     GOTO    LOOP   ;rutina de antirebotes para los bottones
+04DD                  01311 ESTADO6_2:
+04DD   1980           01312     BTFSC   PUSH_BOTTON, .3
+04DE   2???           01313     CALL    ACCIONDMS ;rutina auxiliar de los antirebotes 
+04DF   2???           01314     GOTO    LOOP
+                      01315  ;suceda o no suceda nada con el push 2 siempre regresa al loop para evitar que se quede trabado  
+04E0                  01316 ESTADO7:    ;en el estado 7 esta la funcino de incrementar los numeros del timer, el estado 8 decrementa
+                             automaticamente y tiene la opcion de apagar la alarma 
+04E0   3007           01317     MOVLW   .7
+04E1   0085           01318     MOVWF   PORTA
+04E2   08??           01319     MOVFW   TIMER2
+04E3   00??           01320     MOVWF   DISPLAY0
+04E4   08??           01321     MOVFW   TIMER1
+04E5   00??           01322     MOVWF   DISPLAY1
+04E6   08??           01323     MOVFW   TIMER3
+04E7   00??           01324     MOVWF   DISPLAY2
+04E8   08??           01325     MOVFW   TIMER4
+04E9   00??           01326     MOVWF   DISPLAY3 ;se mueven las variables que se incrementan manualmente a las que se muestran en lo
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 30
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                            s display 
+04EA   3000           01327     MOVLW   .0
+04EB   02??           01328     SUBWF   ALARMA, W   ;se asegura que el valor minimo del timer luego de llamar a la alarma y apagarse
+                             sea 1 segundo 
+04EC   1D03           01329     BTFSS   STATUS, Z 
+04ED   2???           01330     GOTO    $+3
+04EE   3001           01331     MOVLW   .1  
+04EF   00??           01332     MOVWF   TIMER1
+04F0   1900           01333     BTFSC   PUSH_BOTTON, .2
+04F1   2???           01334     GOTO    ESTADO7_2
+04F2   1906           01335     BTFSC   PORTB, .2
+04F3   2???           01336     GOTO    PUSH_3_2
+04F4   1500           01337     BSF     PUSH_BOTTON, .2
+04F5   2???           01338     GOTO    PUSH_3_2 ;rutina de antirebotes para los bottones
+04F6                  01339 ESTADO7_2:
+04F6   1900           01340     BTFSC   PUSH_BOTTON, .2
+04F7   2???           01341     CALL    ACCIONT2 ;rutina auxiliar de los antirebotes 
+04F8   2???           01342     GOTO    PUSH_3_2 
+                      01343   ;si no sucede nada o luego de que suceda se va a revisr lo que sucede con el otro push    
+04F9                  01344 PUSH_3_2:
+04F9   1880           01345     BTFSC   PUSH_BOTTON, .1
+04FA   2???           01346     GOTO    ESTADO7_1
+04FB   1B06           01347     BTFSC   PORTB, .6
+04FC   2???           01348     GOTO    LOOP
+04FD   1480           01349     BSF     PUSH_BOTTON, .1
+04FE   2???           01350     GOTO    LOOP ;rutina de antirebotes para los bottones
+04FF                  01351 ESTADO7_1:
+04FF   1880           01352     BTFSC   PUSH_BOTTON, .1
+0500   2???           01353     CALL    ACCIONT1 ;rutina auxiliar de los antirebotes 
+0501   2???           01354     GOTO    LOOP 
+                      01355  ;suceda o no suceda nada con el push 2 siempre regresa al loop para evitar que se quede trabado    
+0502                  01356 ESTADO8:    ;estado auxiliar del estado 7 encargado de decrementar los valores del timer y llamar la ala
+                            rma asi como de poder pararla con el push 
+0502   3007           01357     MOVLW   .7
+0503   0085           01358     MOVWF   PORTA
+0504   08??           01359     MOVFW   TIMER2
+0505   00??           01360     MOVWF   DISPLAY0
+0506   08??           01361     MOVFW   TIMER1
+0507   00??           01362     MOVWF   DISPLAY1
+0508   08??           01363     MOVFW   TIMER3
+0509   00??           01364     MOVWF   DISPLAY2
+050A   08??           01365     MOVFW   TIMER4
+050B   00??           01366     MOVWF   DISPLAY3    ;mueve las variables que se decrementan automaticamente a las que se muestran en
+                             el display
+                      01367     
+050C   1880           01368     BTFSC   PUSH_BOTTON, .1
+050D   2???           01369     GOTO    ESTADO8_1
+050E   1B06           01370     BTFSC   PORTB, .6
+050F   2???           01371     GOTO    LOOP
+0510   1480           01372     BSF     PUSH_BOTTON, .1
+0511   2???           01373     GOTO    LOOP ;rutina de antirebotes para los bottones
+0512                  01374 ESTADO8_1:
+0512   1880           01375     BTFSC   PUSH_BOTTON, .1
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 31
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0513   2???           01376     CALL    ACCIONALARMA ;rutina auxiliar de los antirebotes 
+0514   2???           01377     GOTO    LOOP 
+                      01378  ;suceda o no suceda nada con el push 2 siempre regresa al loop para evitar que se quede trabado     
+                      01379 ;configuracion******************************************************************
+0515                  01380 SETUP:
+0515   1283 1303      01381     BANKSEL PORTA  ; BANCO 0
+0517   0185           01382     CLRF    PORTA  ; BORRA EL PUERTO A
+0518   0186           01383     CLRF    PORTB  ; BORRA EL PUERTO B
+0519   0187           01384     CLRF    PORTC 
+051A   0188           01385     CLRF    PORTD  
+051B   0189           01386     CLRF    PORTE
+051C   1103           01387     BCF     STATUS, Z
+                      01388 ;***********************TMR2****************************************************
+Warning[207]: Found label after column 1. (CONFIGURACION_TIMER2)
+051D                  01389    CONFIGURACION_TIMER2:
+051D   30FF           01390     MOVLW   b'11111111'
+051E   0092           01391     MOVWF   T2CON
+                      01392  ;**************timer1**********************************************************   
+051F   0190           01393     CLRF    T1CON
+0520   1410           01394     BSF        T1CON,0      ; HABILITAMOS EL TIMER 1 (TMR1ON=1)
+0521   1090           01395     BCF        T1CON,1      ; OSCILADOR INTERNO 
+0522   1190           01396     BCF        T1CON,3      ; NO HABILITA EL OSCILADOR DEL TIMER 1 (T1OSCEN=0)
+0523   1610           01397     BSF        T1CON,4      ; PRE DIVISOR DE FRECUENCIA EN 8 (T1CKPS0=0)
+0524   1690           01398     BSF        T1CON,5  
+                      01399  ;******************************************************************************
+                      01400  
+                      01401     
+0525   1683 1703      01402     BANKSEL ANSEL   ; BANCO 3 
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0527   0188           01403     CLRF    ANSEL
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0528   0189           01404     CLRF    ANSELH  ; BORRA EL CONTROL DE ENTRADAS ANALÓGICAS
+                      01405     
+0529   1683 1303      01406     BANKSEL TRISA   ; BANCO 1
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+052B   0185           01407     CLRF    TRISA  
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+052C   0186           01408     CLRF    TRISB
+Message[305]: Using default destination of 1 (file).
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+052D   0986           01409     COMF    TRISB
+052E   30FF           01410     MOVLW   .255
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+052F   0095           01411     MOVWF   WPUB 
+0530   0064           01412     CLRWDT
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0531   0187           01413     CLRF    TRISC
+0532   3000           01414     MOVLW   b'00000000'
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0533   0087           01415     MOVWF   TRISC    
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0534   0188           01416     CLRF    TRISD
+0535   3000           01417     MOVLW   B'00000000'
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 32
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0536   0088           01418     MOVWF   TRISD
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0537   0189           01419     CLRF    TRISE
+                      01420     
+Warning[207]: Found label after column 1. (CONFIGURACION_TIMER0)
+0538                  01421     CONFIGURACION_TIMER0:
+0538   0064           01422     CLRWDT              ; CONFIGURACIÓN PARA EL FUNCIONAMIENTO DEL TIMER0
+0539   3057           01423     MOVLW   b'01010111' ; PARA LA CONFIGURACIÓN DEL TIMER0, EL BIT 7 NO IMPORTA. SIN EMBARGO, SE COLOCA 
+                            EN 0 PARA NO ARRUINAR LA INSTRUCCIÓN DE LA LÍNEA 132 -PARA EL FUNCIONAMIENTO DE PULL UPS-
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+053A   0081           01424     MOVWF   OPTION_REG
+                      01425        
+Warning[207]: Found label after column 1. (CONFIGURACION_INTERRUPCION)
+053B                  01426     CONFIGURACION_INTERRUPCION:
+053B   1683 1303      01427     BANKSEL TRISA
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+053D   140C           01428     BSF     PIE1, TMR1IE; HABILITA INTERRUPCION DEL TIMER1
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+053E   148C           01429     BSF     PIE1, TMR2IE; HABILITA COMPARACION ENTRE PR2 Y TIMER2
+053F   168B           01430     BSF     INTCON, T0IE
+0540   170B           01431     BSF     INTCON, PEIE
+                      01432     
+0541   30C4           01433     MOVLW   .196        ; PARA TMR2 FUNCIONAR CON 50ms
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0542   0092           01434     MOVWF   PR2
+                      01435     
+0543   1283 1303      01436     BANKSEL PORTA
+0545   178B           01437     BSF     INTCON, GIE ; HABILITA LAS INTERRUPCIONES
+0546   110B           01438     BCF     INTCON, T0IF; PARA ASEGURARSE DE QUE NO TENGA OVERFLOW AL INICIO
+0547   100C           01439     BCF     PIR1, TMR1IF
+0548   108C           01440     BCF     PIR1, TMR2IF
+                      01441 
+0549   1283 1303      01442     BANKSEL PORTA  ; REGRESO AL BANCO 0
+054B   0187           01443     CLRF    PORTC
+054C   0185           01444     CLRF    PORTA
+054D   0186           01445     CLRF    PORTB 
+054E   0188           01446     CLRF    PORTD
+054F   0189           01447     CLRF    PORTE
+                      01448   ;****************SE DECLARAN LOS VALORES INICIALES DE LAS VARIABLES *********  
+0550   01??           01449     CLRF    SEGUNDOS 
+0551   01??           01450     CLRF    DECENAS 
+0552   01??           01451     CLRF    UNIDADES 
+0553   01??           01452     CLRF    CONT3
+0554   01??           01453     CLRF    CONT4
+0555   01??           01454     CLRF    CONT6
+0556   01??           01455     CLRF    CONT7
+0557   01??           01456     CLRF    CONT8
+0558   3001           01457     MOVLW   .1
+0559   00??           01458     MOVWF   CONT8
+055A   01??           01459     CLRF    CONT9
+055B   01??           01460     CLRF    CONT10
+055C   01??           01461     CLRF    CONT11
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 33
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+055D   01??           01462     CLRF    CONT12
+055E   01??           01463     CLRF    CONT13
+055F   01??           01464     CLRF    NIBBLE_H
+0560   01??           01465     CLRF    NIBBLE_L
+0561   01??           01466     CLRF    INDICADOR 
+0562   01??           01467     CLRF    HORAS1
+0563   01??           01468     CLRF    HORAS2
+0564   01??           01469     CLRF    DIAS2
+0565   01??           01470     CLRF    DIAS1 
+0566   3001           01471     MOVLW   .1
+0567   00??           01472     MOVWF   DIAS1
+0568   01??           01473     CLRF    MESES2
+0569   01??           01474     CLRF    MESES1 
+056A   3001           01475     MOVLW   .1
+056B   00??           01476     MOVWF   MESES1 
+056C   01??           01477     CLRF    ESPECIAL 
+056D   01??           01478     CLRF    ESTADO 
+056E   01??           01479     CLRF    DISPLAY0
+056F   01??           01480     CLRF    DISPLAY1
+0570   01??           01481     CLRF    DISPLAY2
+0571   01??           01482     CLRF    DISPLAY3
+0572   01??           01483     CLRF    PUSH_BOTTON
+0573   01??           01484     CLRF    CONTIMERS
+0574   01??           01485     CLRF    CONTIMERM
+0575   01??           01486     CLRF    TIMER1
+0576   3001           01487     MOVLW   .1
+0577   00??           01488     MOVWF   TIMER1
+0578   01??           01489     CLRF    TIMER2
+0579   01??           01490     CLRF    TIMER3
+057A   01??           01491     CLRF    TIMER4
+057B   01??           01492     CLRF    ALARMA 
+057C   303C           01493     MOVLW   .60
+057D   00??           01494     MOVWF   ALARMA 
+057E   01??           01495     CLRF    CONT1
+057F   0008           01496     RETURN 
+                      01497 ;*******************************************************************************
+                      01498 
+20D4 3FFF             01499   END
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 34
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ABDEN                             00000000
+ABDOVF                            00000007
+ACCIONALARMA                      00000455
+ACCIOND                           00000423
+ACCIONDD                          00000446
+ACCIONDH                          0000043C
+ACCIONDI                          0000042D
+ACCIONDM                          00000437
+ACCIONDMS                         00000441
+ACCIONI                           00000418
+ACCIONM                           00000432
+ACCIONT1                          0000044B
+ACCIONT2                          00000450
+ACCIONU                           00000428
+ACKDT                             00000005
+ACKEN                             00000004
+ACKSTAT                           00000006
+ADCON0                            0000001F
+ADCON1                            0000009F
+ADCS0                             00000006
+ADCS1                             00000007
+ADDEN                             00000003
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+ALARMA                            00000028
+ALARMAT                           00000401
+ANS0                              00000000
+ANS1                              00000001
+ANS10                             00000002
+ANS11                             00000003
+ANS12                             00000004
+ANS13                             00000005
+ANS2                              00000002
+ANS3                              00000003
+ANS4                              00000004
+ANS5                              00000005
+ANS6                              00000006
+ANS7                              00000007
+ANS8                              00000000
+ANS9                              00000001
+ANSEL                             00000188
+ANSELH                            00000189
+BAUDCTL                           00000187
+BCLIE                             00000003
+BCLIF                             00000003
+BF                                00000000
+BRG0                              00000000
+BRG1                              00000001
+BRG10                             00000002
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 35
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+BRG11                             00000003
+BRG12                             00000004
+BRG13                             00000005
+BRG14                             00000006
+BRG15                             00000007
+BRG16                             00000003
+BRG2                              00000002
+BRG3                              00000003
+BRG4                              00000004
+BRG5                              00000005
+BRG6                              00000006
+BRG7                              00000007
+BRG8                              00000000
+BRG9                              00000001
+BRGH                              00000002
+C                                 00000000
+C1CH0                             00000000
+C1CH1                             00000001
+C1IE                              00000005
+C1IF                              00000005
+C1OE                              00000005
+C1ON                              00000007
+C1OUT                             00000006
+C1POL                             00000004
+C1R                               00000002
+C1RSEL                            00000005
+C1SEN                             00000005
+C2CH0                             00000000
+C2CH1                             00000001
+C2IE                              00000006
+C2IF                              00000006
+C2OE                              00000005
+C2ON                              00000007
+C2OUT                             00000006
+C2POL                             00000004
+C2R                               00000002
+C2REN                             00000004
+C2RSEL                            00000004
+C2SYNC                            00000000
+CASO1                             000001AE
+CASO1_1                           0000023E
+CASO1_2                           00000332
+CASO2                             000001C5
+CASO2_1                           00000256
+CASO2_2                           0000035E
+CASO3                             000001DC
+CASO3_1                           0000026B
+CASO3_2                           0000038A
+CASO_DIAS_N                       0000020E
+CASO_MESES                        0000017E
+CASO_MESES_N                      0000027B
+CCP1CON                           00000017
+CCP1IE                            00000002
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 36
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+CCP1IF                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCP1X                             00000005
+CCP1Y                             00000004
+CCP2CON                           0000001D
+CCP2IE                            00000000
+CCP2IF                            00000000
+CCP2M0                            00000000
+CCP2M1                            00000001
+CCP2M2                            00000002
+CCP2M3                            00000003
+CCP2X                             00000005
+CCP2Y                             00000004
+CCPR1                             00000015
+CCPR1H                            00000016
+CCPR1L                            00000015
+CCPR2                             0000001B
+CCPR2H                            0000001C
+CCPR2L                            0000001B
+CHS0                              00000002
+CHS1                              00000003
+CHS2                              00000004
+CHS3                              00000005
+CKE                               00000006
+CKP                               00000004
+CM1CON0                           00000107
+CM2CON0                           00000108
+CM2CON1                           00000109
+CONFIGURACION_INTERRUPCION        0000053B
+CONFIGURACION_TIMER0              00000538
+CONFIGURACION_TIMER2              0000051D
+CONFIGURACION_TIMER_1             000003B6
+CONFIGURACION_TIMER_2             000003C7
+CONT1                             00000029
+CONT10                            00000009
+CONT11                            0000000A
+CONT12                            0000000B
+CONT13                            0000000C
+CONT2                             00000001
+CONT3                             00000002
+CONT4                             00000003
+CONT6                             00000005
+CONT7                             00000006
+CONT8                             00000007
+CONT9                             00000008
+CONTADORMESES                     00000303
+CONTIMERM                         00000027
+CONTIMERS                         00000026
+CREN                              00000004
+CSRC                              00000007
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 37
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+D                                 00000005
+DATA_ADDRESS                      00000005
+DC                                00000001
+DC1B0                             00000004
+DC1B1                             00000005
+DC2B0                             00000004
+DC2B1                             00000005
+DECENAS                           00000004
+DECREMENTAR_DIAS                  00000306
+DECREMENTAR_HORAS                 000002A5
+DECREMENTAR_MESES                 000002D1
+DECREMENTAR_MINUTOS               00000294
+DECREMENTAR_TIMER                 000003D6
+DIAMAX1                           000001BD
+DIAMAX1_1                         0000024B
+DIAMAX2                           000001D4
+DIAMAX2_1                         00000263
+DIAMAX3                           000001E6
+DIAMAX3_1                         00000273
+DIAMIN                            000001E0
+DIAMIN1                           000001B2
+DIAMIN1_1                         00000242
+DIAMIN2                           000001C9
+DIAMIN2_1                         0000025A
+DIAMIN3_1                         0000026F
+DIAS1                             00000017
+DIAS2                             00000018
+DISPLAY0                          0000001C
+DISPLAY1                          0000001D
+DISPLAY2                          0000001E
+DISPLAY3                          0000001F
+DISPLAY_0                         0000012F
+DISPLAY_0Y1                       0000012C
+DISPLAY_1                         00000135
+DISPLAY_2                         0000013E
+DISPLAY_2Y3                       0000013B
+DISPLAY_3                         00000144
+DISPLAY_HORAS_N                   000001FA
+DISPLAY_MINUTOS_N                 000001EE
+DISPLAY_UNIDADES                  0000014A
+DISPLAY_VAR                       00000126
+D_A                               00000005
+D_NOT_A                           00000005
+ECCPAS                            0000009C
+ECCPAS0                           00000004
+ECCPAS1                           00000005
+ECCPAS2                           00000006
+ECCPASE                           00000007
+EEADR                             0000010D
+EEADRH                            0000010F
+EECON1                            0000018C
+EECON2                            0000018D
+EEDAT                             0000010C
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 38
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+EEDATA                            0000010C
+EEDATH                            0000010E
+EEIE                              00000004
+EEIF                              00000004
+EEPGD                             00000007
+ESPECIAL                          00000020
+ESTADO                            0000001B
+ESTADO1                           0000045A
+ESTADO2                           00000465
+ESTADO3                           00000470
+ESTADO3_1                         00000480
+ESTADO3_2                         00000489
+ESTADO4                           0000048C
+ESTADO4_1                         0000049C
+ESTADO4_2                         000004A5
+ESTADO5                           000004A8
+ESTADO5_1                         000004B8
+ESTADO5_2                         000004C1
+ESTADO6                           000004C4
+ESTADO6_1                         000004D4
+ESTADO6_2                         000004DD
+ESTADO7                           000004E0
+ESTADO7_1                         000004FF
+ESTADO7_2                         000004F6
+ESTADO8                           00000502
+ESTADO8_1                         00000512
+ESTADOS                           00000109
+F                                 00000001
+FERR                              00000002
+FINAL_1                           00000253
+FSR                               00000004
+FVREN                             00000000
+GCEN                              00000007
+GIE                               00000007
+GO                                00000001
+GO_DONE                           00000001
+GO_NOT_DONE                       00000001
+HORAS                             00000014
+HORAS1                            00000015
+HORAS2                            00000016
+HTS                               00000002
+I2C_DATA                          00000005
+I2C_READ                          00000002
+I2C_START                         00000003
+I2C_STOP                          00000004
+INDF                              00000000
+INDICADOR                         0000000F
+INDICADOR2                        00000010
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTERRUPCION_TMR1                 00000018
+INTERRUPCION_TMR2                 00000028
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 39
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+INTERRUPCION_TMRO                 00000013
+INTF                              00000001
+IOCB                              00000096
+IOCB0                             00000000
+IOCB1                             00000001
+IOCB2                             00000002
+IOCB3                             00000003
+IOCB4                             00000004
+IOCB5                             00000005
+IOCB6                             00000006
+IOCB7                             00000007
+IRCF0                             00000004
+IRCF1                             00000005
+IRCF2                             00000006
+IRP                               00000007
+ISR                               00000008
+LEDS_ALARMA                       00000408
+LEDS_INTERMITENTES                00000410
+LED_0                             00000415
+LED_0_A                           0000040D
+LED_1                             00000412
+LED_1_A                           0000040A
+LIMPIAR                           0000041F
+LOOP                              00000101
+LOOP1                             00000107
+LTS                               00000001
+MC1OUT                            00000007
+MC2OUT                            00000006
+MESES1                            00000019
+MESES2                            0000001A
+MESES_DIAS                        0000016A
+MESES_FINAL                       00000177
+MESES_FINAL_1                     0000028B
+MESES_NORMAL                      0000016E
+MESES_NORMAL_1                    0000027F
+MSK                               00000093
+MSK0                              00000000
+MSK1                              00000001
+MSK2                              00000002
+MSK3                              00000003
+MSK4                              00000004
+MSK5                              00000005
+MSK6                              00000006
+MSK7                              00000007
+NIBBLE_H                          00000011
+NIBBLE_L                          00000012
+NOLIMPIAR                         00000421
+NOT_A                             00000005
+NOT_ADDRESS                       00000005
+NOT_BO                            00000000
+NOT_BOR                           00000000
+NOT_DONE                          00000001
+NOT_PD                            00000003
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 40
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+NOT_POR                           00000001
+NOT_RBPU                          00000007
+NOT_RC8                           00000006
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+NOT_TX8                           00000006
+NOT_W                             00000002
+NOT_WRITE                         00000002
+OERR                              00000001
+OPTION_REG                        00000081
+OSCCON                            0000008F
+OSCTUNE                           00000090
+OSFIE                             00000007
+OSFIF                             00000007
+OSTS                              00000003
+P                                 00000004
+P1M0                              00000006
+P1M1                              00000007
+PCL                               00000002
+PCLATH                            0000000A
+PCON                              0000008E
+PDC0                              00000000
+PDC1                              00000001
+PDC2                              00000002
+PDC3                              00000003
+PDC4                              00000004
+PDC5                              00000005
+PDC6                              00000006
+PEIE                              00000006
+PEN                               00000002
+PIE1                              0000008C
+PIE2                              0000008D
+PIR1                              0000000C
+PIR2                              0000000D
+POP                               0000000E
+PORTA                             00000005
+PORTB                             00000006
+PORTC                             00000007
+PORTD                             00000008
+PORTE                             00000009
+PR2                               00000092
+PRSEN                             00000007
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+PSSAC0                            00000002
+PSSAC1                            00000003
+PSSBD0                            00000000
+PSSBD1                            00000001
+PSTRCON                           0000009D
+PT1                               000002D5
+PULSR                             00000002
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 41
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+PULSS                             00000003
+PUSH                              00000004
+PUSH_2                            00000483
+PUSH_2_1                          0000049F
+PUSH_2_2                          000004BB
+PUSH_3_1                          000004D7
+PUSH_3_2                          000004F9
+PUSH_BOTTON                       00000021
+PWM1CON                           0000009B
+R                                 00000002
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RA5                               00000005
+RA6                               00000006
+RA7                               00000007
+RB0                               00000000
+RB1                               00000001
+RB2                               00000002
+RB3                               00000003
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RBIE                              00000003
+RBIF                              00000000
+RC0                               00000000
+RC1                               00000001
+RC2                               00000002
+RC3                               00000003
+RC4                               00000004
+RC5                               00000005
+RC6                               00000006
+RC7                               00000007
+RC8_9                             00000006
+RC9                               00000006
+RCD8                              00000000
+RCEN                              00000003
+RCIDL                             00000006
+RCIE                              00000005
+RCIF                              00000005
+RCREG                             0000001A
+RCSTA                             00000018
+RD                                00000000
+RD0                               00000000
+RD1                               00000001
+RD2                               00000002
+RD3                               00000003
+RD4                               00000004
+RD5                               00000005
+RD6                               00000006
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 42
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RD7                               00000007
+RE0                               00000000
+RE1                               00000001
+RE2                               00000002
+RE3                               00000003
+READ_WRITE                        00000002
+RP0                               00000005
+RP1                               00000006
+RSEN                              00000001
+RX9                               00000006
+RX9D                              00000000
+R_NOT_W                           00000002
+R_W                               00000002
+S                                 00000003
+SBOREN                            00000004
+SCKP                              00000004
+SCS                               00000000
+SEGUNDOS                          00000013
+SEN                               00000000
+SENDB                             00000003
+SETUP                             00000515
+SMP                               00000007
+SPBRG                             00000099
+SPBRGH                            0000009A
+SPEN                              00000007
+SR0                               00000006
+SR1                               00000007
+SRCON                             00000185
+SREN                              00000005
+SSPADD                            00000093
+SSPBUF                            00000013
+SSPCON                            00000014
+SSPCON2                           00000091
+SSPEN                             00000005
+SSPIE                             00000003
+SSPIF                             00000003
+SSPM0                             00000000
+SSPM1                             00000001
+SSPM2                             00000002
+SSPM3                             00000003
+SSPMSK                            00000093
+SSPOV                             00000006
+SSPSTAT                           00000094
+START                             00000100
+STATUS                            00000003
+STATUS_TEMP                       0000000E
+STRA                              00000000
+STRB                              00000001
+STRC                              00000002
+STRD                              00000003
+STRSYNC                           00000004
+SWDTEN                            00000000
+SYNC                              00000004
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 43
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1GINV                            00000007
+T1GIV                             00000007
+T1GSS                             00000001
+T1INSYNC                          00000002
+T1OSCEN                           00000003
+T1SYNC                            00000002
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000012
+TABLA                             00000035
+TFHORAS                           00000162
+TFHORAS_1                         00000206
+THORAS                            0000015A
+TIMER1                            00000022
+TIMER2                            00000023
+TIMER3                            00000024
+TIMER4                            00000025
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TMR1                              0000000E
+TMR1CS                            00000001
+TMR1GE                            00000006
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TMR2                              00000011
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISA5                            00000005
+TRISA6                            00000006
+TRISA7                            00000007
+TRISB                             00000086
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 44
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TRISB0                            00000000
+TRISB1                            00000001
+TRISB2                            00000002
+TRISB3                            00000003
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+TRISC                             00000087
+TRISC0                            00000000
+TRISC1                            00000001
+TRISC2                            00000002
+TRISC3                            00000003
+TRISC4                            00000004
+TRISC5                            00000005
+TRISC6                            00000006
+TRISC7                            00000007
+TRISD                             00000088
+TRISD0                            00000000
+TRISD1                            00000001
+TRISD2                            00000002
+TRISD3                            00000003
+TRISD4                            00000004
+TRISD5                            00000005
+TRISD6                            00000006
+TRISD7                            00000007
+TRISE                             00000089
+TRISE0                            00000000
+TRISE1                            00000001
+TRISE2                            00000002
+TRISE3                            00000003
+TRMT                              00000001
+TUN0                              00000000
+TUN1                              00000001
+TUN2                              00000002
+TUN3                              00000003
+TUN4                              00000004
+TX8_9                             00000006
+TX9                               00000006
+TX9D                              00000000
+TXD8                              00000000
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXREG                             00000019
+TXSTA                             00000098
+UA                                00000001
+ULPWUE                            00000005
+ULPWUIE                           00000002
+ULPWUIF                           00000002
+UNIDADES                          00000000
+VCFG0                             00000004
+VCFG1                             00000005
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 45
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+VR0                               00000000
+VR1                               00000001
+VR2                               00000002
+VR3                               00000003
+VRCON                             00000097
+VREN                              00000007
+VROE                              00000006
+VRR                               00000005
+VRSS                              00000004
+W                                 00000000
+WCOL                              00000007
+WDTCON                            00000105
+WDTPS0                            00000001
+WDTPS1                            00000002
+WDTPS2                            00000003
+WDTPS3                            00000004
+WPUB                              00000095
+WPUB0                             00000000
+WPUB1                             00000001
+WPUB2                             00000002
+WPUB3                             00000003
+WPUB4                             00000004
+WPUB5                             00000005
+WPUB6                             00000006
+WPUB7                             00000007
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+WUE                               00000001
+W_TEMP                            0000000D
+Z                                 00000002
+_BOR21V                           00003EFF
+_BOR40V                           00003FFF
+_BOR4V_BOR21V                     00003EFF
+_BOR4V_BOR40V                     00003FFF
+_BOREN_NSLEEP                     00003EFF
+_BOREN_OFF                        00003CFF
+_BOREN_ON                         00003FFF
+_BOREN_SBODEN                     00003DFF
+_BOR_NSLEEP                       00003EFF
+_BOR_OFF                          00003CFF
+_BOR_ON                           00003FFF
+_BOR_SBODEN                       00003DFF
+_CONFIG1                          00002007
+_CONFIG2                          00002008
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003F7F
+_CP_OFF                           00003FFF
+_CP_ON                            00003FBF
+_DEBUG_OFF                        00003FFF
+_DEBUG_ON                         00001FFF
+_DEVID1                           00002006
+_EC_OSC                           00003FFB
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 46
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_EXTRC                            00003FFF
+_EXTRCIO                          00003FFE
+_EXTRC_OSC_CLKOUT                 00003FFF
+_EXTRC_OSC_NOCLKOUT               00003FFE
+_FCMEN_OFF                        000037FF
+_FCMEN_ON                         00003FFF
+_FOSC_EC                          00003FFB
+_FOSC_EXTRC_CLKOUT                00003FFF
+_FOSC_EXTRC_NOCLKOUT              00003FFE
+_FOSC_HS                          00003FFA
+_FOSC_INTRC_CLKOUT                00003FFD
+_FOSC_INTRC_NOCLKOUT              00003FFC
+_FOSC_LP                          00003FF8
+_FOSC_XT                          00003FF9
+_HS_OSC                           00003FFA
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_IESO_OFF                         00003BFF
+_IESO_ON                          00003FFF
+_INTOSC                           00003FFD
+_INTOSCIO                         00003FFC
+_INTRC_OSC_CLKOUT                 00003FFD
+_INTRC_OSC_NOCLKOUT               00003FFC
+_LP_OSC                           00003FF8
+_LVP_OFF                          00002FFF
+_LVP_ON                           00003FFF
+_MAIN_PROG_0297                   00000297
+_MAIN_PROG_029F                   0000029F
+_MAIN_PROG_02A8                   000002A8
+_MAIN_PROG_02AC                   000002AC
+_MAIN_PROG_02B4                   000002B4
+_MAIN_PROG_02BE                   000002BE
+_MAIN_PROG_02C2                   000002C2
+_MAIN_PROG_02CA                   000002CA
+_MAIN_PROG_02D8                   000002D8
+_MAIN_PROG_02DC                   000002DC
+_MAIN_PROG_02E5                   000002E5
+_MAIN_PROG_02EF                   000002EF
+_MAIN_PROG_02F3                   000002F3
+_MAIN_PROG_02FC                   000002FC
+_MAIN_PROG_0335                   00000335
+_MAIN_PROG_0339                   00000339
+_MAIN_PROG_0341                   00000341
+_MAIN_PROG_034B                   0000034B
+_MAIN_PROG_034F                   0000034F
+_MAIN_PROG_0357                   00000357
+_MAIN_PROG_0361                   00000361
+_MAIN_PROG_0365                   00000365
+_MAIN_PROG_036D                   0000036D
+_MAIN_PROG_0377                   00000377
+_MAIN_PROG_037B                   0000037B
+MPASM 5.77                    PROYECTO_1.ASM   10-6-2020  16:57:13         PAGE 47
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_MAIN_PROG_0383                   00000383
+_MAIN_PROG_038D                   0000038D
+_MAIN_PROG_0391                   00000391
+_MAIN_PROG_0399                   00000399
+_MAIN_PROG_03A3                   000003A3
+_MAIN_PROG_03A7                   000003A7
+_MAIN_PROG_03AF                   000003AF
+_MAIN_PROG_03E3                   000003E3
+_MAIN_PROG_03EB                   000003EB
+_MAIN_PROG_03F3                   000003F3
+_MAIN_PROG_03FB                   000003FB
+_MAIN_PROG_0404                   00000404
+_MAIN_PROG_04ED                   000004ED
+_MCLRE_OFF                        00003FDF
+_MCLRE_ON                         00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FEF
+_WDTE_OFF                         00003FF7
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FF7
+_WDT_ON                           00003FFF
+_WRT_1FOURTH                      00003BFF
+_WRT_256                          00003DFF
+_WRT_HALF                         000039FF
+_WRT_OFF                          00003FFF
+_XT_OSC                           00003FF9
+__16F887                          00000001
+
+Errors   :     0
+Warnings :    53 reported,     0 suppressed
+Messages :   101 reported,     0 suppressed
+
+

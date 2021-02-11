@@ -1,0 +1,90 @@
+MPLINK 5.08, LINKER
+Linker Map File - Created Thu Aug 13 17:25:15 2020
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                 RES_VECT       code   0x000000    program   0x000026
+                   .cinit    romdata   0x000013    program   0x000004
+                MAIN_PROG       code   0x000100    program   0x0000f4
+.config_2007_BUILD/DEFAULT/PRODUCTION/LABORAT       code   0x002007    program   0x000002
+.config_2008_BUILD/DEFAULT/PRODUCTION/LABORAT       code   0x002008    program   0x000002
+                  GPR_VAR      udata   0x000020       data   0x000004
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000014      
+                            0x000100    0x000179      
+                            0x002007    0x002008      
+            145 out of 8455 program addresses used, program memory utilization is 1%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                   ALARMA   0x000103    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                   BOTTON   0x00010e    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                    CASO0   0x00011f    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                  CONFIG1   0x000171    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                  CONFIG2   0x00016b    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+          CONTADOR_TIMER0   0x000137    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                DEC_PORTB   0x000113    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                DELAY_BIG   0x00016f    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+              DELAY_FINAL   0x000169    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+              DELAY_SMALL   0x000175    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                  DISPLAY   0x00011b    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                    FASE0   0x000124    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                    FASE1   0x000127    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                    FASE2   0x00012f    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                INC_PORTB   0x000117    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+             LED_ENCENDER   0x000108    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                     LOOP   0x000101    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                    SETUP   0x000141    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                    START   0x000100    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                    TABLA   0x000001    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                  TIEMPO1   0x000139    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                  TIEMPO2   0x00013c    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+          _MAIN_PROG_0178   0x000178    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                    CONT1   0x000020       data     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                    CONT2   0x000021       data     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                    CONT3   0x000023       data     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                    CONTA   0x000022       data     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                    TABLA   0x000001    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                    START   0x000100    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                     LOOP   0x000101    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                   ALARMA   0x000103    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+             LED_ENCENDER   0x000108    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                   BOTTON   0x00010e    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                DEC_PORTB   0x000113    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                INC_PORTB   0x000117    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                  DISPLAY   0x00011b    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                    CASO0   0x00011f    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                    FASE0   0x000124    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                    FASE1   0x000127    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                    FASE2   0x00012f    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+          CONTADOR_TIMER0   0x000137    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                  TIEMPO1   0x000139    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                  TIEMPO2   0x00013c    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                    SETUP   0x000141    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+              DELAY_FINAL   0x000169    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                  CONFIG2   0x00016b    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                DELAY_BIG   0x00016f    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                  CONFIG1   0x000171    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+              DELAY_SMALL   0x000175    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+          _MAIN_PROG_0178   0x000178    program     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                    CONT1   0x000020       data     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                    CONT2   0x000021       data     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                    CONTA   0x000022       data     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+                    CONT3   0x000023       data     static C:\Users\Carlos Gil\MPLABXProjects\Laboratorio_3.X\Laboratorio_3.asm
+
+
